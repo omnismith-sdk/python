@@ -18,6 +18,7 @@ if __import__("typing").TYPE_CHECKING:
     from omnismith_sdk.api.projects_api import ProjectsApi
     from omnismith_sdk.api.roles_api import RolesApi
     from omnismith_sdk.api.saved_queries_api import SavedQueriesApi
+    from omnismith_sdk.api.schema_api import SchemaApi
     from omnismith_sdk.api.templates_api import TemplatesApi
     from omnismith_sdk.api.user_api import UserApi
     
@@ -44,6 +45,7 @@ from omnismith_sdk.api.marketplace_api import MarketplaceApi
 from omnismith_sdk.api.projects_api import ProjectsApi
 from omnismith_sdk.api.roles_api import RolesApi
 from omnismith_sdk.api.saved_queries_api import SavedQueriesApi
+from omnismith_sdk.api.schema_api import SchemaApi
 from omnismith_sdk.api.templates_api import TemplatesApi
 from omnismith_sdk.api.user_api import UserApi
 

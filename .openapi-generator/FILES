@@ -127,6 +127,7 @@ docs/RoleResourceAccessResponse.md
 docs/RoleResponse.md
 docs/RolesApi.md
 docs/SavedQueriesApi.md
+docs/SchemaApi.md
 docs/SearchEntities200Response.md
 docs/SearchEntitiesRequest.md
 docs/SearchMarketplaceBlueprints200Response.md
@@ -188,6 +189,7 @@ omnismith_sdk/api/marketplace_api.py
 omnismith_sdk/api/projects_api.py
 omnismith_sdk/api/roles_api.py
 omnismith_sdk/api/saved_queries_api.py
+omnismith_sdk/api/schema_api.py
 omnismith_sdk/api/templates_api.py
 omnismith_sdk/api/user_api.py
 omnismith_sdk/api_client.py
@@ -473,6 +475,7 @@ test/test_role_resource_access_response.py
 test/test_role_response.py
 test/test_roles_api.py
 test/test_saved_queries_api.py
+test/test_schema_api.py
 test/test_search_entities200_response.py
 test/test_search_entities_request.py
 test/test_search_marketplace_blueprints200_response.py
