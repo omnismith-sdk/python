@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **title** | **str** |  | 
 **status** | **int** |  | 
 **errors** | **Dict[str, List[str]]** | Map of field names to array of error messages | 
+**detail** | **str** |  | [optional] 
 
 ## Example
 

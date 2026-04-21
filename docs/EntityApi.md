@@ -252,8 +252,8 @@ Name | Type | Description  | Notes
 **200** | CSV file download |  * Content-Disposition - Attachment filename <br>  |
 **422** | Validation Error |  -  |
 **401** | Unauthorized |  -  |
-**403** | Access denied |  -  |
-**404** | Template not found |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -571,11 +571,11 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Import completed |  -  |
-**400** | Bad request (invalid CSV format) |  -  |
+**400** | Bad Request |  -  |
 **422** | Validation Error |  -  |
 **401** | Unauthorized |  -  |
-**403** | Access denied |  -  |
-**404** | Template not found |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -742,7 +742,7 @@ void (empty response body)
 **204** | Entity updated |  -  |
 **402** | Tier quota exceeded |  -  |
 **422** | Validation Error |  -  |
-**404** | Entity not found |  -  |
+**404** | Not Found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

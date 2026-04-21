@@ -141,9 +141,9 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **201** | User registered successfully |  -  |
-**400** | Invalid input |  -  |
+**400** | Bad Request |  -  |
 **422** | Validation Error |  -  |
-**409** | User already exists |  -  |
+**409** | Conflict |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -212,7 +212,7 @@ No authorization required
 |-------------|-------------|------------------|
 **200** | Confirmation email sent (or silently ignored if user not found) |  -  |
 **422** | Validation Error |  -  |
-**429** | Confirmation email already sent recently |  -  |
+**429** | Too Many Requests |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

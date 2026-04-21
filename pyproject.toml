@@ -1,6 +1,6 @@
 [project]
 name = "omnismith_sdk"
-version = "1.0.8"
+version = "1.0.10"
 description = "Omnismith API"
 authors = [
   {name = "OpenAPI Generator Community",email = "team@openapitools.org"},
