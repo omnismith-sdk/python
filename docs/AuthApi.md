@@ -154,7 +154,7 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Login successful |  -  |
-**422** | Validation Failed |  -  |
+**422** | Validation Error |  -  |
 **401** | Invalid Google token |  -  |
 **500** | Internal Server Error |  -  |
 
@@ -297,7 +297,7 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Login successful |  -  |
-**422** | Validation Failed |  -  |
+**422** | Validation Error |  -  |
 **401** | Invalid credentials |  -  |
 **500** | Internal Server Error |  -  |
 
@@ -370,7 +370,7 @@ No authorization required
 |-------------|-------------|------------------|
 **200** | Token refresh successful |  -  |
 **401** | Invalid, expired, or revoked refresh token |  -  |
-**422** | Validation Failed |  -  |
+**422** | Validation Error |  -  |
 **500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -525,7 +525,7 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Project switched successfully |  -  |
-**422** | Validation Failed |  -  |
+**422** | Validation Error |  -  |
 **401** | Unauthorized |  -  |
 **403** | Access Denied to Project |  -  |
 **500** | Internal Server Error |  -  |
