@@ -138,7 +138,6 @@ docs/ListWorkspaces200Response.md
 docs/LogAiUsage200Response.md
 docs/LogAiUsageRequest.md
 docs/LoginRequest.md
-docs/MCPApi.md
 docs/MarketplaceApi.md
 docs/MarketplaceBlueprintDetailResponse.md
 docs/MarketplaceBlueprintDetailResponseMetadata.md
@@ -268,7 +267,6 @@ omnismith_sdk/api/entity_api.py
 omnismith_sdk/api/feedback_api.py
 omnismith_sdk/api/file_attachment_api.py
 omnismith_sdk/api/marketplace_api.py
-omnismith_sdk/api/mcp_api.py
 omnismith_sdk/api/o_auth_api.py
 omnismith_sdk/api/projects_api.py
 omnismith_sdk/api/roles_api.py
@@ -650,7 +648,6 @@ test/test_marketplace_api.py
 test/test_marketplace_blueprint_detail_response.py
 test/test_marketplace_blueprint_detail_response_metadata.py
 test/test_marketplace_blueprint_summary_response.py
-test/test_mcp_api.py
 test/test_notification_channel_response.py
 test/test_o_auth_api.py
 test/test_o_auth_token_request.py

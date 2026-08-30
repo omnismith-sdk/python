@@ -16,7 +16,6 @@ if __import__("typing").TYPE_CHECKING:
     from omnismith_sdk.api.entity_api import EntityApi
     from omnismith_sdk.api.feedback_api import FeedbackApi
     from omnismith_sdk.api.file_attachment_api import FileAttachmentApi
-    from omnismith_sdk.api.mcp_api import MCPApi
     from omnismith_sdk.api.marketplace_api import MarketplaceApi
     from omnismith_sdk.api.o_auth_api import OAuthApi
     from omnismith_sdk.api.projects_api import ProjectsApi
@@ -47,7 +46,6 @@ from omnismith_sdk.api.dashboards_api import DashboardsApi
 from omnismith_sdk.api.entity_api import EntityApi
 from omnismith_sdk.api.feedback_api import FeedbackApi
 from omnismith_sdk.api.file_attachment_api import FileAttachmentApi
-from omnismith_sdk.api.mcp_api import MCPApi
 from omnismith_sdk.api.marketplace_api import MarketplaceApi
 from omnismith_sdk.api.o_auth_api import OAuthApi
 from omnismith_sdk.api.projects_api import ProjectsApi
