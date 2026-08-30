@@ -1,15 +1,20 @@
 # CreateTemplateRequest
 
+Payload for creating a new dynamic schema template (content type).
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** |  | 
-**description** | **str** |  | [optional] 
-**category** | **str** |  | [optional] 
-**attribute_ids** | **List[UUID]** |  | [optional] 
-**id** | **UUID** |  | [optional] 
+**attributes** | [**List[TemplateAttributeInput]**](TemplateAttributeInput.md) | Structured list of template attributes with optional per-template default values. Preferred over flat attribute_ids. | [optional] 
+**groups** | [**List[TemplateGroupInput]**](TemplateGroupInput.md) | Optional ordered attribute groups for organizing template fields into visual UI sections (1 or 2 columns). | [optional] 
+**name** | **str** | Human-readable name of the template. | 
+**description** | **str** | Optional description of what entities conforming to this template represent. | [optional] 
+**category** | **str** | Optional category tag for grouping templates in navigation. | [optional] 
+**attribute_ids** | **List[UUID]** | Flat list of attribute UUIDs to associate with this template without custom default values. | [optional] 
+**attribute_slugs** | **List[str]** | Flat list of attribute slugs to associate with this template by slug resolution. | [optional] 
+**id** | **UUID** | Optional explicit client-generated UUIDv7. Generated automatically if omitted. | [optional] 
+**slug** | **str** | Unique template slug identifier (letters, numbers, underscores). Auto-generated from name if omitted. | [optional] 
 
 ## Example
 

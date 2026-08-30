@@ -9,17 +9,21 @@ Method | HTTP request | Description
 [**get_role**](RolesApi.md#get_role) | **GET** /roles/{id} | Get a role
 [**get_role_permissions**](RolesApi.md#get_role_permissions) | **GET** /roles/{id}/permissions | Get role permissions
 [**get_role_resources**](RolesApi.md#get_role_resources) | **GET** /roles/{id}/resources | Get role resource restrictions
+[**get_role_scopes**](RolesApi.md#get_role_scopes) | **GET** /roles/{id}/scopes | Get role entity-access scopes
 [**list_available_permissions**](RolesApi.md#list_available_permissions) | **GET** /roles/permissions/available | List available permissions for role assignment
 [**list_roles**](RolesApi.md#list_roles) | **GET** /roles | List roles
 [**set_role_permissions**](RolesApi.md#set_role_permissions) | **PUT** /roles/{id}/permissions | Set role permissions
 [**set_role_resources**](RolesApi.md#set_role_resources) | **PUT** /roles/{id}/resources | Set role resource restrictions
+[**set_role_scopes**](RolesApi.md#set_role_scopes) | **PUT** /roles/{id}/scopes | Set role entity-access scopes
 [**update_role**](RolesApi.md#update_role) | **PUT** /roles/{id} | Update a role
 
 
 # **create_role**
-> CreateAttributeItem201Response create_role(create_role_request)
+> CreateProject201Response create_role(create_role_request)
 
 Create a new role
+
+Creates a new custom role within the project. Role permissions, resource restrictions, and entity scopes can be configured subsequently.
 
 ### Example
 
@@ -27,7 +31,7 @@ Create a new role
 
 ```python
 import omnismith_sdk
-from omnismith_sdk.models.create_attribute_item201_response import CreateAttributeItem201Response
+from omnismith_sdk.models.create_project201_response import CreateProject201Response
 from omnismith_sdk.models.create_role_request import CreateRoleRequest
 from omnismith_sdk.rest import ApiException
 from pprint import pprint
@@ -74,7 +78,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateAttributeItem201Response**](CreateAttributeItem201Response.md)
+[**CreateProject201Response**](CreateProject201Response.md)
 
 ### Authorization
 
@@ -101,6 +105,8 @@ Name | Type | Description  | Notes
 > delete_role(id)
 
 Delete a role
+
+Permanently deletes a custom role. System owner roles cannot be deleted. Any users assigned to this role must be reassigned.
 
 ### Example
 
@@ -131,7 +137,7 @@ configuration = omnismith_sdk.Configuration(
 with omnismith_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = omnismith_sdk.RolesApi(api_client)
-    id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Role ID
+    id = UUID('018b2f1b-7c3a-7d2e-8f1a-2b3c4d5e6f7a') # UUID | Unique UUID of the role to delete
 
     try:
         # Delete a role
@@ -147,7 +153,7 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **UUID**| Role ID | 
+ **id** | **UUID**| Unique UUID of the role to delete | 
 
 ### Return type
 
@@ -177,6 +183,8 @@ void (empty response body)
 > RoleResponse get_role(id)
 
 Get a role
+
+Retrieves role metadata (name, is_owner status, creation timestamp) by role UUID.
 
 ### Example
 
@@ -208,7 +216,7 @@ configuration = omnismith_sdk.Configuration(
 with omnismith_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = omnismith_sdk.RolesApi(api_client)
-    id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Role ID
+    id = UUID('018b2f1b-7c3a-7d2e-8f1a-2b3c4d5e6f7a') # UUID | Unique UUID of the role
 
     try:
         # Get a role
@@ -226,7 +234,7 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **UUID**| Role ID | 
+ **id** | **UUID**| Unique UUID of the role | 
 
 ### Return type
 
@@ -255,6 +263,8 @@ Name | Type | Description  | Notes
 > GetRolePermissions200Response get_role_permissions(id)
 
 Get role permissions
+
+Returns the array of permission keys (e.g. "template.view", "entity.create", "attribute.manage") explicitly granted to the specified role.
 
 ### Example
 
@@ -286,7 +296,7 @@ configuration = omnismith_sdk.Configuration(
 with omnismith_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = omnismith_sdk.RolesApi(api_client)
-    id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Role ID
+    id = UUID('018b2f1b-7c3a-7d2e-8f1a-2b3c4d5e6f7a') # UUID | Unique UUID of the role
 
     try:
         # Get role permissions
@@ -304,7 +314,7 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **UUID**| Role ID | 
+ **id** | **UUID**| Unique UUID of the role | 
 
 ### Return type
 
@@ -333,6 +343,8 @@ Name | Type | Description  | Notes
 > GetRoleResources200Response get_role_resources(id)
 
 Get role resource restrictions
+
+Retrieves granular resource-level access restrictions configured for the role, specifying access levels (deny, view, edit, full) for particular templates or attributes.
 
 ### Example
 
@@ -364,7 +376,7 @@ configuration = omnismith_sdk.Configuration(
 with omnismith_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = omnismith_sdk.RolesApi(api_client)
-    id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Role ID
+    id = UUID('018b2f1b-7c3a-7d2e-8f1a-2b3c4d5e6f7a') # UUID | Unique UUID of the role
 
     try:
         # Get role resource restrictions
@@ -382,7 +394,7 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **UUID**| Role ID | 
+ **id** | **UUID**| Unique UUID of the role | 
 
 ### Return type
 
@@ -402,6 +414,86 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Role resource restrictions |  -  |
+**401** | Unauthorized |  -  |
+**404** | Not Found |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_role_scopes**
+> GetRoleScopes200Response get_role_scopes(id)
+
+Get role entity-access scopes
+
+Retrieves row-level entity access scopes for the role, which restrict what entity records matching specific attribute conditions the role can access within given templates.
+
+### Example
+
+* Bearer (JWT) Authentication (bearerAuth):
+
+```python
+import omnismith_sdk
+from omnismith_sdk.models.get_role_scopes200_response import GetRoleScopes200Response
+from omnismith_sdk.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.omnismith.io/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = omnismith_sdk.Configuration(
+    host = "https://api.omnismith.io/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = omnismith_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with omnismith_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = omnismith_sdk.RolesApi(api_client)
+    id = UUID('018b2f1b-7c3a-7d2e-8f1a-2b3c4d5e6f7a') # UUID | Unique UUID of the role
+
+    try:
+        # Get role entity-access scopes
+        api_response = api_instance.get_role_scopes(id)
+        print("The response of RolesApi->get_role_scopes:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling RolesApi->get_role_scopes: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **UUID**| Unique UUID of the role | 
+
+### Return type
+
+[**GetRoleScopes200Response**](GetRoleScopes200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Role entity-access scopes |  -  |
 **401** | Unauthorized |  -  |
 **404** | Not Found |  -  |
 
@@ -487,6 +579,8 @@ This endpoint does not need any parameter.
 
 List roles
 
+Lists all custom and predefined roles defined within the current project, including the project owner role.
+
 ### Example
 
 * Bearer (JWT) Authentication (bearerAuth):
@@ -560,6 +654,8 @@ This endpoint does not need any parameter.
 
 Set role permissions
 
+Replaces the entire set of permission keys assigned to the role with the provided list. Use GET /roles/permissions/available to inspect valid keys.
+
 ### Example
 
 * Bearer (JWT) Authentication (bearerAuth):
@@ -590,7 +686,7 @@ configuration = omnismith_sdk.Configuration(
 with omnismith_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = omnismith_sdk.RolesApi(api_client)
-    id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Role ID
+    id = UUID('018b2f1b-7c3a-7d2e-8f1a-2b3c4d5e6f7a') # UUID | Unique UUID of the role
     set_role_permissions_request = omnismith_sdk.SetRolePermissionsRequest() # SetRolePermissionsRequest | 
 
     try:
@@ -607,7 +703,7 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **UUID**| Role ID | 
+ **id** | **UUID**| Unique UUID of the role | 
  **set_role_permissions_request** | [**SetRolePermissionsRequest**](SetRolePermissionsRequest.md)|  | 
 
 ### Return type
@@ -641,6 +737,8 @@ void (empty response body)
 
 Set role resource restrictions
 
+Replaces all resource-level access restrictions for the role. Each item defines a resource type ("template" or "attribute"), target resource UUID, and granted access level ("deny", "view", "edit", "full").
+
 ### Example
 
 * Bearer (JWT) Authentication (bearerAuth):
@@ -671,7 +769,7 @@ configuration = omnismith_sdk.Configuration(
 with omnismith_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = omnismith_sdk.RolesApi(api_client)
-    id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Role ID
+    id = UUID('018b2f1b-7c3a-7d2e-8f1a-2b3c4d5e6f7a') # UUID | Unique UUID of the role
     set_role_resources_request = omnismith_sdk.SetRoleResourcesRequest() # SetRoleResourcesRequest | 
 
     try:
@@ -688,7 +786,7 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **UUID**| Role ID | 
+ **id** | **UUID**| Unique UUID of the role | 
  **set_role_resources_request** | [**SetRoleResourcesRequest**](SetRoleResourcesRequest.md)|  | 
 
 ### Return type
@@ -717,10 +815,95 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **set_role_scopes**
+> set_role_scopes(id, set_role_scopes_request)
+
+Set role entity-access scopes
+
+Replaces row-level entity access scopes for the role. Conditions filter entity visibility based on field/attribute comparisons (operators: eq, neq, gt, lt, like, not-like, empty, not-empty).
+
+### Example
+
+* Bearer (JWT) Authentication (bearerAuth):
+
+```python
+import omnismith_sdk
+from omnismith_sdk.models.set_role_scopes_request import SetRoleScopesRequest
+from omnismith_sdk.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.omnismith.io/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = omnismith_sdk.Configuration(
+    host = "https://api.omnismith.io/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = omnismith_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with omnismith_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = omnismith_sdk.RolesApi(api_client)
+    id = UUID('018b2f1b-7c3a-7d2e-8f1a-2b3c4d5e6f7a') # UUID | Unique UUID of the role
+    set_role_scopes_request = omnismith_sdk.SetRoleScopesRequest() # SetRoleScopesRequest | 
+
+    try:
+        # Set role entity-access scopes
+        api_instance.set_role_scopes(id, set_role_scopes_request)
+    except Exception as e:
+        print("Exception when calling RolesApi->set_role_scopes: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **UUID**| Unique UUID of the role | 
+ **set_role_scopes_request** | [**SetRoleScopesRequest**](SetRoleScopesRequest.md)|  | 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Entity-access scopes updated |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **update_role**
 > update_role(id, update_role_request)
 
 Update a role
+
+Updates the display name of an existing custom role. System owner roles cannot be modified.
 
 ### Example
 
@@ -752,7 +935,7 @@ configuration = omnismith_sdk.Configuration(
 with omnismith_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = omnismith_sdk.RolesApi(api_client)
-    id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Role ID
+    id = UUID('018b2f1b-7c3a-7d2e-8f1a-2b3c4d5e6f7a') # UUID | Unique UUID of the role
     update_role_request = omnismith_sdk.UpdateRoleRequest() # UpdateRoleRequest | 
 
     try:
@@ -769,7 +952,7 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **UUID**| Role ID | 
+ **id** | **UUID**| Unique UUID of the role | 
  **update_role_request** | [**UpdateRoleRequest**](UpdateRoleRequest.md)|  | 
 
 ### Return type

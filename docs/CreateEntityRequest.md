@@ -1,13 +1,15 @@
 # CreateEntityRequest
 
+Payload for creating a new dynamic entity conforming to a template schema
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**template_id** | **str** |  | [optional] 
-**attribute_values** | [**List[CreateEntityRequestAttributeValuesInner]**](CreateEntityRequestAttributeValuesInner.md) |  | [optional] 
-**id** | **UUID** |  | [optional] 
+**template_id** | **UUID** | Template UUID to instantiate (mutually exclusive with template_slug) | [optional] 
+**attribute_values** | [**List[CreateEntityRequestAttributeValuesInner]**](CreateEntityRequestAttributeValuesInner.md) | Initial attribute values for dimensions, lists, references, and initial metrics | [optional] 
+**id** | **UUID** | Optional client-assigned UUIDv7 identifier for the entity record. If omitted, a UUIDv7 is automatically generated. | [optional] 
+**template_slug** | **str** | Template slug identifier to instantiate (mutually exclusive with template_id) | [optional] 
 
 ## Example
 

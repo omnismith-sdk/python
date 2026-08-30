@@ -1,12 +1,12 @@
 # GoogleLoginRequest
 
-Payload for Google Sign-In authentication
+Payload for authenticating or signing up via Google Identity Services
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**credential** | **str** | Google ID token credential from Google Sign-In | 
+**credential** | **str** | Cryptographically signed Google ID token (JWT) issued by Google Identity Services SDK | 
 
 ## Example
 

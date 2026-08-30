@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**data** | [**List[PushDeviceResponse]**](PushDeviceResponse.md) |  | [optional] 
+**data** | [**List[PushDeviceResponse]**](PushDeviceResponse.md) | Array of registered push devices | [optional] 
 
 ## Example
 

@@ -1,13 +1,14 @@
 # CreateDashboardRequest
 
+Payload for creating a new analytics and telemetry dashboard canvas. Omnismith dashboards utilize a 12-column grid layout.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** |  | 
-**description** | **str** |  | [optional] 
-**config** | **object** |  | [optional] 
+**name** | **str** | Display name of the dashboard | 
+**description** | **str** | Detailed description of the dashboard purpose and telemetry scope | [optional] 
+**config** | [**CreateDashboardRequestConfig**](CreateDashboardRequestConfig.md) |  | [optional] 
 
 ## Example
 

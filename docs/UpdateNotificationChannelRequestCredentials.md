@@ -1,12 +1,18 @@
 # UpdateNotificationChannelRequestCredentials
 
-Type-specific credentials
+Updated type-specific credentials payload (e.g. `bot_token` for Telegram; `url`, `auth_type`, `token`, `username`, `password`, `headers` for webhook)
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**bot_token** | **str** |  | [optional] 
+**bot_token** | **str** | New Telegram bot token | [optional] 
+**url** | **str** | Updated webhook destination URL | [optional] 
+**auth_type** | **str** | Updated authorization scheme | [optional] 
+**token** | **str** | Updated bearer token | [optional] 
+**username** | **str** | Updated basic auth username | [optional] 
+**password** | **str** | Updated basic auth password | [optional] 
+**headers** | **Dict[str, str]** | Updated custom HTTP headers | [optional] 
 
 ## Example
 

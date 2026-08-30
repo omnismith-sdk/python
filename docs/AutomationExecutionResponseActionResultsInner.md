@@ -5,10 +5,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**action_index** | **int** |  | [optional] 
-**success** | **bool** |  | [optional] 
-**error_message** | **str** |  | [optional] 
-**executed_at** | **datetime** |  | [optional] 
+**action_index** | **int** | Zero-based index of the action in the automation definition | [optional] 
+**success** | **bool** | Whether this specific action executed successfully | [optional] 
+**error_message** | **str** | Error message if action execution failed | [optional] 
+**executed_at** | **datetime** | Timestamp of action dispatch | [optional] 
 
 ## Example
 

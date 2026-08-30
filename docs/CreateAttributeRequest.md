@@ -1,17 +1,19 @@
 # CreateAttributeRequest
 
+Payload for creating a new schema attribute definition.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** |  | 
-**attribute_type** | **int** | 0: Dimension, 1: Metric, 2: List, 3: Reference | 
-**data_type** | **int** | 0: String, 1: Number, 2: Boolean, 3: Datetime, 4: Date, 5: File, 6: Image | 
-**template_ids** | **List[UUID]** |  | [optional] 
-**description** | **str** |  | [optional] 
+**name** | **str** | Human-readable name of the attribute. | 
+**attribute_type** | **int** | Attribute kind. 0: Dimension (standard field), 1: Metric (time-series observation), 2: List (enumerated choice option), 3: Reference (foreign entity pointer). | 
+**data_type** | **int** | Storage data type. 0: String, 1: Number, 2: Boolean, 3: Datetime, 4: Date, 5: File, 6: Image, 7: Markdown. | 
+**template_ids** | **List[UUID]** | Optional array of template UUIDs to immediately associate this attribute with. | [optional] 
+**description** | **str** | Optional descriptive summary of the attribute and its business purpose. | [optional] 
 **reference_config** | [**CreateAttributeRequestReferenceConfig**](CreateAttributeRequestReferenceConfig.md) |  | [optional] 
-**id** | **UUID** |  | [optional] 
+**id** | **UUID** | Optional explicit client-generated UUIDv7. If omitted, a UUIDv7 is automatically generated. | [optional] 
+**slug** | **str** | Unique slug identifier within the project (letters, numbers, underscores). If omitted, generated automatically from name. | [optional] 
 
 ## Example
 

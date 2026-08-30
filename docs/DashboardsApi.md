@@ -12,9 +12,11 @@ Method | HTTP request | Description
 
 
 # **create_dashboard**
-> CreateAttributeItem201Response create_dashboard(create_dashboard_request)
+> CreateDashboard201Response create_dashboard(create_dashboard_request)
 
 Create a new dashboard
+
+Creates a new analytics and telemetry dashboard canvas for organizing metric KPIs, charts, gauges, and entity tables within a customizable grid layout.
 
 ### Example
 
@@ -22,7 +24,7 @@ Create a new dashboard
 
 ```python
 import omnismith_sdk
-from omnismith_sdk.models.create_attribute_item201_response import CreateAttributeItem201Response
+from omnismith_sdk.models.create_dashboard201_response import CreateDashboard201Response
 from omnismith_sdk.models.create_dashboard_request import CreateDashboardRequest
 from omnismith_sdk.rest import ApiException
 from pprint import pprint
@@ -47,7 +49,7 @@ configuration = omnismith_sdk.Configuration(
 with omnismith_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = omnismith_sdk.DashboardsApi(api_client)
-    create_dashboard_request = omnismith_sdk.CreateDashboardRequest() # CreateDashboardRequest | 
+    create_dashboard_request = omnismith_sdk.CreateDashboardRequest() # CreateDashboardRequest | Dashboard creation payload
 
     try:
         # Create a new dashboard
@@ -65,11 +67,11 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **create_dashboard_request** | [**CreateDashboardRequest**](CreateDashboardRequest.md)|  | 
+ **create_dashboard_request** | [**CreateDashboardRequest**](CreateDashboardRequest.md)| Dashboard creation payload | 
 
 ### Return type
 
-[**CreateAttributeItem201Response**](CreateAttributeItem201Response.md)
+[**CreateDashboard201Response**](CreateDashboard201Response.md)
 
 ### Authorization
 
@@ -84,7 +86,8 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**201** | Dashboard created |  -  |
+**201** | Dashboard created successfully |  -  |
+**401** | Unauthorized |  -  |
 **402** | Tier quota exceeded |  -  |
 **422** | Validation Error |  -  |
 **500** | Internal Server Error |  -  |
@@ -95,6 +98,8 @@ Name | Type | Description  | Notes
 > delete_dashboard(id)
 
 Delete a dashboard
+
+Permanently removes a dashboard and all attached visualization blocks, metric widgets, and configurations.
 
 ### Example
 
@@ -125,7 +130,7 @@ configuration = omnismith_sdk.Configuration(
 with omnismith_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = omnismith_sdk.DashboardsApi(api_client)
-    id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Dashboard ID
+    id = UUID('0190a1b2-c3d4-7e8f-9a0b-1c2d3e4f5a6b') # UUID | Dashboard unique identifier (UUID) to delete
 
     try:
         # Delete a dashboard
@@ -141,7 +146,7 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **UUID**| Dashboard ID | 
+ **id** | **UUID**| Dashboard unique identifier (UUID) to delete | 
 
 ### Return type
 
@@ -154,14 +159,16 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**204** | Dashboard deleted |  -  |
-**404** | Dashboard not found |  -  |
+**204** | Dashboard deleted successfully |  -  |
+**401** | Unauthorized |  -  |
+**404** | Not Found |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -169,6 +176,8 @@ void (empty response body)
 > DashboardResponse get_dashboard(id)
 
 Get a dashboard by ID
+
+Retrieves metadata and top-level configuration for a specific dashboard by its unique identifier.
 
 ### Example
 
@@ -200,7 +209,7 @@ configuration = omnismith_sdk.Configuration(
 with omnismith_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = omnismith_sdk.DashboardsApi(api_client)
-    id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Dashboard ID
+    id = UUID('0190a1b2-c3d4-7e8f-9a0b-1c2d3e4f5a6b') # UUID | Dashboard unique identifier (UUID)
 
     try:
         # Get a dashboard by ID
@@ -218,7 +227,7 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **UUID**| Dashboard ID | 
+ **id** | **UUID**| Dashboard unique identifier (UUID) | 
 
 ### Return type
 
@@ -238,7 +247,9 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Dashboard details |  -  |
-**404** | Dashboard not found |  -  |
+**401** | Unauthorized |  -  |
+**404** | Not Found |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -246,6 +257,8 @@ Name | Type | Description  | Notes
 > ListDashboards200Response list_dashboards()
 
 List all dashboards
+
+Retrieves all analytics dashboards configured within the authenticated project context, including dashboard metadata, layout settings, and visualization configurations.
 
 ### Example
 
@@ -311,6 +324,8 @@ This endpoint does not need any parameter.
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | List of dashboards |  -  |
+**401** | Unauthorized |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -318,6 +333,8 @@ This endpoint does not need any parameter.
 > update_dashboard(id, update_dashboard_request)
 
 Update a dashboard
+
+Updates dashboard metadata including its display name, description, and canvas layout settings.
 
 ### Example
 
@@ -349,8 +366,8 @@ configuration = omnismith_sdk.Configuration(
 with omnismith_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = omnismith_sdk.DashboardsApi(api_client)
-    id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Dashboard ID
-    update_dashboard_request = omnismith_sdk.UpdateDashboardRequest() # UpdateDashboardRequest | 
+    id = UUID('0190a1b2-c3d4-7e8f-9a0b-1c2d3e4f5a6b') # UUID | Dashboard unique identifier (UUID) to update
+    update_dashboard_request = omnismith_sdk.UpdateDashboardRequest() # UpdateDashboardRequest | Dashboard update payload
 
     try:
         # Update a dashboard
@@ -366,8 +383,8 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **UUID**| Dashboard ID | 
- **update_dashboard_request** | [**UpdateDashboardRequest**](UpdateDashboardRequest.md)|  | 
+ **id** | **UUID**| Dashboard unique identifier (UUID) to update | 
+ **update_dashboard_request** | [**UpdateDashboardRequest**](UpdateDashboardRequest.md)| Dashboard update payload | 
 
 ### Return type
 
@@ -386,9 +403,11 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Dashboard updated |  -  |
-**404** | Dashboard not found |  -  |
+**204** | Dashboard updated successfully |  -  |
+**401** | Unauthorized |  -  |
+**404** | Not Found |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

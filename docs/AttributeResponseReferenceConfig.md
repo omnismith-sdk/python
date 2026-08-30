@@ -1,13 +1,13 @@
 # AttributeResponseReferenceConfig
 
-Configuration for Reference attributes
+Relational target configuration for Reference (3) attributes (null for non-reference attributes)
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**target_template_id** | **UUID** |  | [optional] 
-**target_attribute_id** | **UUID** |  | [optional] 
+**target_template_id** | **UUID** | UUID of target template | [optional] 
+**target_attribute_id** | **UUID** | UUID of target display attribute | [optional] 
 
 ## Example
 

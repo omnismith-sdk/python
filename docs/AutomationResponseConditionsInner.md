@@ -5,10 +5,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**attribute_id** | **UUID** |  | [optional] 
-**operator** | **str** |  | [optional] 
-**value** | **object** |  | [optional] 
-**mode** | **str** |  | [optional] 
+**attribute_id** | **UUID** | Attribute UUID to evaluate | [optional] 
+**operator** | **str** | Comparison operator | [optional] 
+**value** | **object** | Expected comparison value | [optional] 
+**mode** | **str** | Evaluation mode: current value, absolute numeric change, or percentage change | [optional] 
 
 ## Example
 

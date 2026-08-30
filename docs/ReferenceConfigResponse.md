@@ -1,14 +1,14 @@
 # ReferenceConfigResponse
 
-Reference configuration for a Reference-type attribute
+Reference configuration mapping for a Reference-type attribute
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**attribute_id** | **UUID** |  | [optional] 
-**target_template_id** | **UUID** |  | [optional] 
-**target_attribute_id** | **UUID** |  | [optional] 
+**attribute_id** | **UUID** | Source attribute UUID | [optional] 
+**target_template_id** | **UUID** | Target template UUID | [optional] 
+**target_attribute_id** | **UUID** | Target display attribute UUID | [optional] 
 
 ## Example
 

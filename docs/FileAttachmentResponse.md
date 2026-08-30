@@ -10,6 +10,8 @@ Name | Type | Description | Notes
 **original_filename** | **str** |  | [optional] 
 **mime_type** | **str** |  | [optional] 
 **size** | **int** |  | [optional] 
+**context** | **str** |  | [optional] 
+**expires_at** | **datetime** |  | [optional] 
 
 ## Example
 

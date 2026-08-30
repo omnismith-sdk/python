@@ -1,12 +1,12 @@
 # SwitchProjectRequest
 
-Payload for switching the active project context
+Payload for switching the active multi-tenancy project context
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**project_id** | **UUID** | The ID of the project to switch to | 
+**project_id** | **UUID** | Unique UUID identifier of the workspace project to switch into | 
 
 ## Example
 

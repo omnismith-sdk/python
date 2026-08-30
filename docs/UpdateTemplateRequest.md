@@ -1,14 +1,19 @@
 # UpdateTemplateRequest
 
+Payload for full template update.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** |  | 
-**description** | **str** |  | [optional] 
-**category** | **str** |  | [optional] 
-**attribute_ids** | **List[UUID]** |  | [optional] 
+**attributes** | [**List[TemplateAttributeInput]**](TemplateAttributeInput.md) | Structured template attributes with optional per-template default values. Preferred over flat attribute_ids. | [optional] 
+**groups** | [**List[TemplateGroupInput]**](TemplateGroupInput.md) | Ordered attribute groups for organizing template fields into visual UI sections. | [optional] 
+**name** | **str** | Updated human-readable name of the template. | 
+**description** | **str** | Updated description of the template. | [optional] 
+**category** | **str** | Updated category tag for grouping in navigation. | [optional] 
+**attribute_ids** | **List[UUID]** | Flat list of attribute UUIDs to associate without custom defaults. | [optional] 
+**attribute_slugs** | **List[str]** | Flat list of attribute slugs to associate with this template. | [optional] 
+**slug** | **str** | Updated unique slug identifier within the project. | [optional] 
 
 ## Example
 

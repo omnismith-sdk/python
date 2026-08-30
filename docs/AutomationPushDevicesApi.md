@@ -4,15 +4,17 @@ All URIs are relative to *https://api.omnismith.io/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**list_push_devices**](AutomationPushDevicesApi.md#list_push_devices) | **GET** /automation/push-devices | List the current user&#39;s registered push devices
-[**register_push_device**](AutomationPushDevicesApi.md#register_push_device) | **POST** /automation/push-devices | Register a push notification device token
-[**unregister_push_device**](AutomationPushDevicesApi.md#unregister_push_device) | **DELETE** /automation/push-devices | Unregister a push notification device token
+[**list_push_devices**](AutomationPushDevicesApi.md#list_push_devices) | **GET** /automation/push-devices | List registered push devices
+[**register_push_device**](AutomationPushDevicesApi.md#register_push_device) | **POST** /automation/push-devices | Register a mobile push notification device
+[**unregister_push_device**](AutomationPushDevicesApi.md#unregister_push_device) | **DELETE** /automation/push-devices | Unregister a mobile push notification device
 
 
 # **list_push_devices**
 > ListPushDevices200Response list_push_devices()
 
-List the current user's registered push devices
+List registered push devices
+
+Retrieves all Firebase Cloud Messaging (FCM) mobile push devices registered under the authenticated user account for receiving automated push alerts. Device registration tokens are masked in the output for security.
 
 ### Example
 
@@ -46,7 +48,7 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
     api_instance = omnismith_sdk.AutomationPushDevicesApi(api_client)
 
     try:
-        # List the current user's registered push devices
+        # List registered push devices
         api_response = api_instance.list_push_devices()
         print("The response of AutomationPushDevicesApi->list_push_devices:\n")
         pprint(api_response)
@@ -77,15 +79,17 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | List of push devices |  -  |
+**200** | List of registered push notification devices |  -  |
 **401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **register_push_device**
-> CreateAttributeItem201Response register_push_device(register_push_device_request)
+> RegisterPushDevice201Response register_push_device(register_push_device_request)
 
-Register a push notification device token
+Register a mobile push notification device
+
+Registers an FCM device token under the authenticated user account to receive real-time push notifications from automation action triggers. If the token is already registered, its device name and activity timestamp are updated.
 
 ### Example
 
@@ -93,7 +97,7 @@ Register a push notification device token
 
 ```python
 import omnismith_sdk
-from omnismith_sdk.models.create_attribute_item201_response import CreateAttributeItem201Response
+from omnismith_sdk.models.register_push_device201_response import RegisterPushDevice201Response
 from omnismith_sdk.models.register_push_device_request import RegisterPushDeviceRequest
 from omnismith_sdk.rest import ApiException
 from pprint import pprint
@@ -121,7 +125,7 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
     register_push_device_request = omnismith_sdk.RegisterPushDeviceRequest() # RegisterPushDeviceRequest | 
 
     try:
-        # Register a push notification device token
+        # Register a mobile push notification device
         api_response = api_instance.register_push_device(register_push_device_request)
         print("The response of AutomationPushDevicesApi->register_push_device:\n")
         pprint(api_response)
@@ -140,7 +144,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateAttributeItem201Response**](CreateAttributeItem201Response.md)
+[**RegisterPushDevice201Response**](RegisterPushDevice201Response.md)
 
 ### Authorization
 
@@ -155,7 +159,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**201** | Device registered |  -  |
+**201** | Push device successfully registered |  -  |
 **401** | Unauthorized |  -  |
 **422** | Validation Error |  -  |
 
@@ -164,7 +168,9 @@ Name | Type | Description  | Notes
 # **unregister_push_device**
 > unregister_push_device(unregister_push_device_request)
 
-Unregister a push notification device token
+Unregister a mobile push notification device
+
+Removes an FCM push notification device token from the authenticated user profile, stopping all future automation push notifications directed to that device.
 
 ### Example
 
@@ -199,7 +205,7 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
     unregister_push_device_request = omnismith_sdk.UnregisterPushDeviceRequest() # UnregisterPushDeviceRequest | 
 
     try:
-        # Unregister a push notification device token
+        # Unregister a mobile push notification device
         api_instance.unregister_push_device(unregister_push_device_request)
     except Exception as e:
         print("Exception when calling AutomationPushDevicesApi->unregister_push_device: %s\n" % e)
@@ -231,7 +237,7 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**204** | Device unregistered |  -  |
+**204** | Push device successfully unregistered |  -  |
 **401** | Unauthorized |  -  |
 **422** | Validation Error |  -  |
 

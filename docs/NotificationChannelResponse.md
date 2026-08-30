@@ -1,16 +1,17 @@
 # NotificationChannelResponse
 
+Notification delivery channel configuration
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** |  | [optional] 
-**type** | **str** |  | [optional] 
-**name** | **str** |  | [optional] 
-**credentials** | **Dict[str, str]** |  | [optional] 
-**created_at** | **datetime** |  | [optional] 
-**updated_at** | **datetime** |  | [optional] 
+**id** | **UUID** | Unique notification channel UUID | [optional] 
+**type** | **str** | Channel delivery type (telegram, webhook, push) | [optional] 
+**name** | **str** | User-friendly display name of the notification channel | [optional] 
+**credentials** | **Dict[str, str]** | Sanitized or configured integration credentials for the channel | [optional] 
+**created_at** | **datetime** | Creation timestamp | [optional] 
+**updated_at** | **datetime** | Last update timestamp | [optional] 
 
 ## Example
 

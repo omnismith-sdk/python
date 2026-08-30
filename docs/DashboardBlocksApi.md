@@ -13,9 +13,11 @@ Method | HTTP request | Description
 
 
 # **create_dashboard_block**
-> CreateAttributeItem201Response create_dashboard_block(dashboard_id, create_dashboard_block_request)
+> CreateDashboardBlock201Response create_dashboard_block(dashboard_id, create_dashboard_block_request)
 
 Create a new block in a dashboard
+
+Creates a new visualization block widget on a dashboard canvas. Supports four block types: stat (single KPI counter of matching entities), chart (time-series telemetry multi-line/bar graph aggregating metric data), gauge (metric threshold gauge with min/max bounds and percentage progress), and list (filtered and sorted entity table). Grid placement is defined via x, y, cols, rows layout parameters.
 
 ### Example
 
@@ -23,7 +25,7 @@ Create a new block in a dashboard
 
 ```python
 import omnismith_sdk
-from omnismith_sdk.models.create_attribute_item201_response import CreateAttributeItem201Response
+from omnismith_sdk.models.create_dashboard_block201_response import CreateDashboardBlock201Response
 from omnismith_sdk.models.create_dashboard_block_request import CreateDashboardBlockRequest
 from omnismith_sdk.rest import ApiException
 from pprint import pprint
@@ -48,8 +50,8 @@ configuration = omnismith_sdk.Configuration(
 with omnismith_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = omnismith_sdk.DashboardBlocksApi(api_client)
-    dashboard_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Dashboard ID
-    create_dashboard_block_request = omnismith_sdk.CreateDashboardBlockRequest() # CreateDashboardBlockRequest | 
+    dashboard_id = UUID('0190a1b2-c3d4-7e8f-9a0b-1c2d3e4f5a6b') # UUID | Target dashboard unique identifier (UUID)
+    create_dashboard_block_request = omnismith_sdk.CreateDashboardBlockRequest() # CreateDashboardBlockRequest | Dashboard block creation payload
 
     try:
         # Create a new block in a dashboard
@@ -67,12 +69,12 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **dashboard_id** | **UUID**| Dashboard ID | 
- **create_dashboard_block_request** | [**CreateDashboardBlockRequest**](CreateDashboardBlockRequest.md)|  | 
+ **dashboard_id** | **UUID**| Target dashboard unique identifier (UUID) | 
+ **create_dashboard_block_request** | [**CreateDashboardBlockRequest**](CreateDashboardBlockRequest.md)| Dashboard block creation payload | 
 
 ### Return type
 
-[**CreateAttributeItem201Response**](CreateAttributeItem201Response.md)
+[**CreateDashboardBlock201Response**](CreateDashboardBlock201Response.md)
 
 ### Authorization
 
@@ -87,8 +89,9 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**201** | Block created |  -  |
-**404** | Dashboard not found |  -  |
+**201** | Dashboard block created successfully |  -  |
+**401** | Unauthorized |  -  |
+**404** | Not Found |  -  |
 **422** | Validation Error |  -  |
 **500** | Internal Server Error |  -  |
 
@@ -98,6 +101,8 @@ Name | Type | Description  | Notes
 > delete_dashboard_block(dashboard_id, block_id)
 
 Delete a dashboard block
+
+Permanently removes a visualization block widget from the specified dashboard canvas.
 
 ### Example
 
@@ -128,8 +133,8 @@ configuration = omnismith_sdk.Configuration(
 with omnismith_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = omnismith_sdk.DashboardBlocksApi(api_client)
-    dashboard_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Dashboard ID
-    block_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Block ID
+    dashboard_id = UUID('0190a1b2-c3d4-7e8f-9a0b-1c2d3e4f5a6b') # UUID | Parent dashboard unique identifier (UUID)
+    block_id = UUID('0190a1b2-c3d4-7e8f-9a0b-1c2d3e4f5a6c') # UUID | Dashboard block unique identifier (UUID) to delete
 
     try:
         # Delete a dashboard block
@@ -145,8 +150,8 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **dashboard_id** | **UUID**| Dashboard ID | 
- **block_id** | **UUID**| Block ID | 
+ **dashboard_id** | **UUID**| Parent dashboard unique identifier (UUID) | 
+ **block_id** | **UUID**| Dashboard block unique identifier (UUID) to delete | 
 
 ### Return type
 
@@ -159,14 +164,16 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**204** | Block deleted |  -  |
-**404** | Block not found |  -  |
+**204** | Dashboard block deleted successfully |  -  |
+**401** | Unauthorized |  -  |
+**404** | Not Found |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -174,6 +181,8 @@ void (empty response body)
 > DashboardBlockResponse get_dashboard_block(dashboard_id, block_id)
 
 Get a dashboard block by ID
+
+Retrieves the configuration details, grid coordinates, and data query definitions for an individual visualization block.
 
 ### Example
 
@@ -205,8 +214,8 @@ configuration = omnismith_sdk.Configuration(
 with omnismith_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = omnismith_sdk.DashboardBlocksApi(api_client)
-    dashboard_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Dashboard ID
-    block_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Block ID
+    dashboard_id = UUID('0190a1b2-c3d4-7e8f-9a0b-1c2d3e4f5a6b') # UUID | Parent dashboard unique identifier (UUID)
+    block_id = UUID('0190a1b2-c3d4-7e8f-9a0b-1c2d3e4f5a6c') # UUID | Dashboard block unique identifier (UUID)
 
     try:
         # Get a dashboard block by ID
@@ -224,8 +233,8 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **dashboard_id** | **UUID**| Dashboard ID | 
- **block_id** | **UUID**| Block ID | 
+ **dashboard_id** | **UUID**| Parent dashboard unique identifier (UUID) | 
+ **block_id** | **UUID**| Dashboard block unique identifier (UUID) | 
 
 ### Return type
 
@@ -244,8 +253,10 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Block details |  -  |
-**404** | Block not found |  -  |
+**200** | Dashboard block details |  -  |
+**401** | Unauthorized |  -  |
+**404** | Not Found |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -253,6 +264,8 @@ Name | Type | Description  | Notes
 > ListDashboardBlocks200Response list_dashboard_blocks(dashboard_id)
 
 List all blocks in a dashboard
+
+Retrieves all visualization blocks mounted on a dashboard canvas, including widget types (stat KPI card, time-series chart, gauge meter, entity list), grid position coordinates (x, y, cols, rows), template filters, and aggregation configs.
 
 ### Example
 
@@ -284,7 +297,7 @@ configuration = omnismith_sdk.Configuration(
 with omnismith_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = omnismith_sdk.DashboardBlocksApi(api_client)
-    dashboard_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Dashboard ID
+    dashboard_id = UUID('0190a1b2-c3d4-7e8f-9a0b-1c2d3e4f5a6b') # UUID | Parent dashboard unique identifier (UUID)
 
     try:
         # List all blocks in a dashboard
@@ -302,7 +315,7 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **dashboard_id** | **UUID**| Dashboard ID | 
+ **dashboard_id** | **UUID**| Parent dashboard unique identifier (UUID) | 
 
 ### Return type
 
@@ -321,7 +334,10 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | List of blocks |  -  |
+**200** | List of dashboard blocks |  -  |
+**401** | Unauthorized |  -  |
+**404** | Not Found |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -330,7 +346,7 @@ Name | Type | Description  | Notes
 
 Resolve a dashboard block to its computed data
 
-Executes the block configuration and returns computed values based on block type (stat count, gauge value, chart series, or list items)
+Executes the underlying data query for a dashboard block and returns computed real-time aggregated metrics and time-series telemetry. Returns a typed payload matching the block type: stat (matching entity count), gauge (current metric value, min/max bounds, progress percentage), chart (time-series data point series bucketed by time intervals with aggregation functions), or list (hydrated entity items with dynamic attributes).
 
 ### Example
 
@@ -362,8 +378,8 @@ configuration = omnismith_sdk.Configuration(
 with omnismith_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = omnismith_sdk.DashboardBlocksApi(api_client)
-    dashboard_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Dashboard ID
-    block_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Block ID
+    dashboard_id = UUID('0190a1b2-c3d4-7e8f-9a0b-1c2d3e4f5a6b') # UUID | Parent dashboard unique identifier (UUID)
+    block_id = UUID('0190a1b2-c3d4-7e8f-9a0b-1c2d3e4f5a6c') # UUID | Dashboard block unique identifier (UUID) to resolve and compute
 
     try:
         # Resolve a dashboard block to its computed data
@@ -381,8 +397,8 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **dashboard_id** | **UUID**| Dashboard ID | 
- **block_id** | **UUID**| Block ID | 
+ **dashboard_id** | **UUID**| Parent dashboard unique identifier (UUID) | 
+ **block_id** | **UUID**| Dashboard block unique identifier (UUID) to resolve and compute | 
 
 ### Return type
 
@@ -401,8 +417,10 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Resolved block data |  -  |
-**404** | Block not found |  -  |
+**200** | Resolved block computed data payload |  -  |
+**401** | Unauthorized |  -  |
+**404** | Not Found |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -410,6 +428,8 @@ Name | Type | Description  | Notes
 > update_dashboard_block(dashboard_id, block_id, update_dashboard_block_request)
 
 Update a dashboard block
+
+Updates the display title, grid placement (x, y, cols, rows), metric queries, time-series aggregation buckets, gauge bounds, or filtering rules of an existing visualization block.
 
 ### Example
 
@@ -441,9 +461,9 @@ configuration = omnismith_sdk.Configuration(
 with omnismith_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = omnismith_sdk.DashboardBlocksApi(api_client)
-    dashboard_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Dashboard ID
-    block_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Block ID
-    update_dashboard_block_request = omnismith_sdk.UpdateDashboardBlockRequest() # UpdateDashboardBlockRequest | 
+    dashboard_id = UUID('0190a1b2-c3d4-7e8f-9a0b-1c2d3e4f5a6b') # UUID | Parent dashboard unique identifier (UUID)
+    block_id = UUID('0190a1b2-c3d4-7e8f-9a0b-1c2d3e4f5a6c') # UUID | Dashboard block unique identifier (UUID) to update
+    update_dashboard_block_request = omnismith_sdk.UpdateDashboardBlockRequest() # UpdateDashboardBlockRequest | Dashboard block update payload
 
     try:
         # Update a dashboard block
@@ -459,9 +479,9 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **dashboard_id** | **UUID**| Dashboard ID | 
- **block_id** | **UUID**| Block ID | 
- **update_dashboard_block_request** | [**UpdateDashboardBlockRequest**](UpdateDashboardBlockRequest.md)|  | 
+ **dashboard_id** | **UUID**| Parent dashboard unique identifier (UUID) | 
+ **block_id** | **UUID**| Dashboard block unique identifier (UUID) to update | 
+ **update_dashboard_block_request** | [**UpdateDashboardBlockRequest**](UpdateDashboardBlockRequest.md)| Dashboard block update payload | 
 
 ### Return type
 
@@ -480,9 +500,11 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Block updated |  -  |
-**404** | Block not found |  -  |
+**204** | Dashboard block updated successfully |  -  |
+**401** | Unauthorized |  -  |
+**404** | Not Found |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

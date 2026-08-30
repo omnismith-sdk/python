@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**data** | **List[object]** |  | [optional] 
+**data** | [**List[MarketplaceBlueprintSummaryResponse]**](MarketplaceBlueprintSummaryResponse.md) | Array of blueprint summaries | [optional] 
 **meta** | [**SearchMarketplaceBlueprints200ResponseMeta**](SearchMarketplaceBlueprints200ResponseMeta.md) |  | [optional] 
 
 ## Example

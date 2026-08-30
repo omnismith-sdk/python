@@ -1,19 +1,22 @@
 # TemplateResponse
 
-Template details
+Template schema details including attribute bindings, default values, and visual groups.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** |  | [optional] 
-**name** | **str** |  | [optional] 
-**description** | **str** |  | [optional] 
-**category** | **str** |  | [optional] 
-**attribute_ids** | **List[UUID]** |  | [optional] 
-**created_at** | **datetime** |  | [optional] 
-**updated_at** | **datetime** |  | [optional] 
-**deleted_at** | **datetime** |  | [optional] 
+**id** | **UUID** | Template UUID | [optional] 
+**slug** | **str** | Unique template slug identifier | [optional] 
+**name** | **str** | Human-readable template name | [optional] 
+**description** | **str** | Template description | [optional] 
+**category** | **str** | Template category for UI grouping | [optional] 
+**attribute_ids** | **List[UUID]** | Flat list of associated attribute UUIDs | [optional] 
+**attributes** | [**List[TemplateResponseAttributesInner]**](TemplateResponseAttributesInner.md) | Template attributes with their per-template default values. | [optional] 
+**groups** | [**List[TemplateGroupResponse]**](TemplateGroupResponse.md) | Ordered attribute groups for organizing template fields into visual UI sections. | [optional] 
+**created_at** | **datetime** | Creation timestamp | [optional] 
+**updated_at** | **datetime** | Last update timestamp | [optional] 
+**deleted_at** | **datetime** | Deletion timestamp if soft-deleted | [optional] 
 
 ## Example
 

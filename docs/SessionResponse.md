@@ -1,23 +1,23 @@
 # SessionResponse
 
-Login session details
+Detailed metadata describing a user login session and token status
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** |  | [optional] 
-**user_id** | **UUID** |  | [optional] 
-**email** | **str** |  | [optional] 
-**role_id** | **UUID** |  | [optional] 
-**ip_address** | **str** |  | [optional] 
-**user_agent** | **str** |  | [optional] 
-**created_at** | **datetime** |  | [optional] 
-**expires_at** | **datetime** |  | [optional] 
-**revoked_at** | **datetime** |  | [optional] 
-**revoked_by** | **UUID** |  | [optional] 
-**revoked_reason** | **str** |  | [optional] 
-**status** | **str** |  | [optional] 
+**id** | **UUID** | Unique UUID identifier of the session | [optional] 
+**user_id** | **UUID** | UUID of the authenticated user | [optional] 
+**email** | **str** | Email address of the session owner | [optional] 
+**role_id** | **UUID** | Active role UUID under this session | [optional] 
+**ip_address** | **str** | Client IP address from which the session was established | [optional] 
+**user_agent** | **str** | User-Agent header string of the client browser/application | [optional] 
+**created_at** | **datetime** | Timestamp when the session was created | [optional] 
+**expires_at** | **datetime** | Expiration timestamp after which the session becomes invalid | [optional] 
+**revoked_at** | **datetime** | Timestamp when the session was explicitly revoked | [optional] 
+**revoked_by** | **UUID** | User UUID who revoked the session | [optional] 
+**revoked_reason** | **str** | Reason note provided upon session revocation | [optional] 
+**status** | **str** | Current session status state | [optional] 
 
 ## Example
 

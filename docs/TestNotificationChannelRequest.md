@@ -5,9 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**chat_id** | **str** | Telegram chat ID (required for Telegram channels) | [optional] 
-**message** | **str** |  | [optional] 
-**title** | **str** | Notification title (used for push notifications) | [optional] 
+**chat_id** | **str** | Target Telegram chat ID or channel username (required when testing Telegram channels) | [optional] 
+**message** | **str** | Test notification body text content | [optional] 
+**title** | **str** | Optional notification title header (used for mobile push notifications) | [optional] 
 
 ## Example
 

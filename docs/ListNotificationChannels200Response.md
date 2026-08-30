@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**data** | [**List[NotificationChannelResponse]**](NotificationChannelResponse.md) |  | [optional] 
+**data** | [**List[NotificationChannelResponse]**](NotificationChannelResponse.md) | Array of notification channels | [optional] 
 
 ## Example
 

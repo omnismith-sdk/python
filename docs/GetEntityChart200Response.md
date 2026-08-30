@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**series** | [**List[GetEntityChart200ResponseSeriesInner]**](GetEntityChart200ResponseSeriesInner.md) |  | [optional] 
+**series** | [**List[GetEntityChart200ResponseSeriesInner]**](GetEntityChart200ResponseSeriesInner.md) | List of aggregated metric series | [optional] 
 
 ## Example
 

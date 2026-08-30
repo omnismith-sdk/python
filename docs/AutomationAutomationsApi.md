@@ -4,19 +4,21 @@ All URIs are relative to *https://api.omnismith.io/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_automation**](AutomationAutomationsApi.md#create_automation) | **POST** /automation/automations | Create a new automation
+[**create_automation**](AutomationAutomationsApi.md#create_automation) | **POST** /automation/automations | Create an automation rule
 [**delete_automation**](AutomationAutomationsApi.md#delete_automation) | **DELETE** /automation/automations/{id} | Delete an automation
 [**get_automation**](AutomationAutomationsApi.md#get_automation) | **GET** /automation/automations/{id} | Get an automation by ID
-[**list_automation_executions**](AutomationAutomationsApi.md#list_automation_executions) | **GET** /automation/automations/{id}/executions | List automation executions
-[**list_automations**](AutomationAutomationsApi.md#list_automations) | **GET** /automation/automations | List automations
+[**list_automation_executions**](AutomationAutomationsApi.md#list_automation_executions) | **GET** /automation/automations/{id}/executions | List automation execution logs
+[**list_automations**](AutomationAutomationsApi.md#list_automations) | **GET** /automation/automations | List project automations
 [**toggle_automation**](AutomationAutomationsApi.md#toggle_automation) | **PATCH** /automation/automations/{id}/toggle | Toggle automation enabled status
 [**update_automation**](AutomationAutomationsApi.md#update_automation) | **PUT** /automation/automations/{id} | Update an automation
 
 
 # **create_automation**
-> CreateAttributeItem201Response create_automation(create_automation_request)
+> CreateAutomation201Response create_automation(create_automation_request)
 
-Create a new automation
+Create an automation rule
+
+Creates a new event-driven automation rule within the current project. Configures event trigger criteria (such as `on_entity_created`, `on_entity_updated`, or `on_attribute_changed`), multi-condition filters evaluating attribute values (using operators `eq`, `neq`, `gt`, `gte`, `lt`, `lte`, `contains`, `not_contains`, `is_empty`, `is_not_empty` across current value or delta modes), automated action targets (`telegram`, `webhook`, `push`), and an optional cooldown window in seconds to throttle repeated firings for the same entity.
 
 ### Example
 
@@ -24,7 +26,7 @@ Create a new automation
 
 ```python
 import omnismith_sdk
-from omnismith_sdk.models.create_attribute_item201_response import CreateAttributeItem201Response
+from omnismith_sdk.models.create_automation201_response import CreateAutomation201Response
 from omnismith_sdk.models.create_automation_request import CreateAutomationRequest
 from omnismith_sdk.rest import ApiException
 from pprint import pprint
@@ -52,7 +54,7 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
     create_automation_request = omnismith_sdk.CreateAutomationRequest() # CreateAutomationRequest | 
 
     try:
-        # Create a new automation
+        # Create an automation rule
         api_response = api_instance.create_automation(create_automation_request)
         print("The response of AutomationAutomationsApi->create_automation:\n")
         pprint(api_response)
@@ -71,7 +73,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateAttributeItem201Response**](CreateAttributeItem201Response.md)
+[**CreateAutomation201Response**](CreateAutomation201Response.md)
 
 ### Authorization
 
@@ -86,7 +88,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**201** | Automation created |  -  |
+**201** | Automation successfully created |  -  |
 **400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **402** | Tier quota exceeded |  -  |
@@ -98,6 +100,8 @@ Name | Type | Description  | Notes
 > delete_automation(id)
 
 Delete an automation
+
+Permanently deletes an automation rule by UUID, unbinding event listeners and stopping all future evaluations and action dispatches for that rule.
 
 ### Example
 
@@ -128,7 +132,7 @@ configuration = omnismith_sdk.Configuration(
 with omnismith_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = omnismith_sdk.AutomationAutomationsApi(api_client)
-    id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
+    id = UUID('01912ecb-4654-7890-a1b2-c3d4e5f60001') # UUID | Unique automation UUID to delete
 
     try:
         # Delete an automation
@@ -144,7 +148,7 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **UUID**|  | 
+ **id** | **UUID**| Unique automation UUID to delete | 
 
 ### Return type
 
@@ -163,7 +167,7 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**204** | Automation deleted |  -  |
+**204** | Automation successfully deleted |  -  |
 **401** | Unauthorized |  -  |
 **404** | Automation not found |  -  |
 
@@ -173,6 +177,8 @@ void (empty response body)
 > AutomationResponse get_automation(id)
 
 Get an automation by ID
+
+Retrieves the complete configuration of a specific automation rule by its UUID, including trigger event types, template/attribute references, condition comparison expressions, action payloads, execution cooldown interval, and the timestamp of its last execution.
 
 ### Example
 
@@ -204,7 +210,7 @@ configuration = omnismith_sdk.Configuration(
 with omnismith_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = omnismith_sdk.AutomationAutomationsApi(api_client)
-    id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
+    id = UUID('01912ecb-4654-7890-a1b2-c3d4e5f60001') # UUID | Unique automation UUID
 
     try:
         # Get an automation by ID
@@ -222,7 +228,7 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **UUID**|  | 
+ **id** | **UUID**| Unique automation UUID | 
 
 ### Return type
 
@@ -250,7 +256,9 @@ Name | Type | Description  | Notes
 # **list_automation_executions**
 > ListAutomationExecutions200Response list_automation_executions(id, limit=limit, offset=offset, status=status)
 
-List automation executions
+List automation execution logs
+
+Retrieves paginated execution logs and audit history for a specific automation rule. Each execution log records the triggering entity ID, trigger timestamp, execution completion time, final status (`pending`, `success`, `partial_failure`, `failed`), detailed action dispatch outcomes with error messages, and top-level execution errors.
 
 ### Example
 
@@ -282,13 +290,13 @@ configuration = omnismith_sdk.Configuration(
 with omnismith_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = omnismith_sdk.AutomationAutomationsApi(api_client)
-    id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Automation ID
-    limit = 20 # int | Number of results (optional) (default to 20)
-    offset = 0 # int | Pagination offset (optional) (default to 0)
-    status = 'status_example' # str | Filter by status (optional)
+    id = UUID('01912ecb-4654-7890-a1b2-c3d4e5f60001') # UUID | Automation UUID to fetch execution history for
+    limit = 20 # int | Maximum number of execution log entries to return per page (optional) (default to 20)
+    offset = 0 # int | Number of execution log records to skip for pagination (optional) (default to 0)
+    status = 'success' # str | Filter execution logs by execution outcome status (optional)
 
     try:
-        # List automation executions
+        # List automation execution logs
         api_response = api_instance.list_automation_executions(id, limit=limit, offset=offset, status=status)
         print("The response of AutomationAutomationsApi->list_automation_executions:\n")
         pprint(api_response)
@@ -303,10 +311,10 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **UUID**| Automation ID | 
- **limit** | **int**| Number of results | [optional] [default to 20]
- **offset** | **int**| Pagination offset | [optional] [default to 0]
- **status** | **str**| Filter by status | [optional] 
+ **id** | **UUID**| Automation UUID to fetch execution history for | 
+ **limit** | **int**| Maximum number of execution log entries to return per page | [optional] [default to 20]
+ **offset** | **int**| Number of execution log records to skip for pagination | [optional] [default to 0]
+ **status** | **str**| Filter execution logs by execution outcome status | [optional] 
 
 ### Return type
 
@@ -325,7 +333,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | List of executions |  -  |
+**200** | Paginated list of execution logs |  -  |
 **401** | Unauthorized |  -  |
 **404** | Automation not found |  -  |
 
@@ -334,7 +342,9 @@ Name | Type | Description  | Notes
 # **list_automations**
 > List[AutomationResponse] list_automations(template_id=template_id, is_enabled=is_enabled)
 
-List automations
+List project automations
+
+Retrieves all automation rules configured within the current project context. Automations define event-driven workflows triggered by entity lifecycle events (such as entity creation, attribute updates, or metric threshold changes), evaluated against multi-attribute conditions, and dispatched to configured action channels (Telegram, webhooks, mobile push). Results can be filtered by entity template or active status.
 
 ### Example
 
@@ -366,11 +376,11 @@ configuration = omnismith_sdk.Configuration(
 with omnismith_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = omnismith_sdk.AutomationAutomationsApi(api_client)
-    template_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Filter by template ID (optional)
-    is_enabled = True # bool | Filter by enabled status (optional)
+    template_id = UUID('01912ecb-4654-7890-a1b2-c3d4e5f60088') # UUID | Filter automations scoped to a specific entity template UUID (optional)
+    is_enabled = true # bool | Filter automations by active enabled status (true for active rules, false for paused rules) (optional)
 
     try:
-        # List automations
+        # List project automations
         api_response = api_instance.list_automations(template_id=template_id, is_enabled=is_enabled)
         print("The response of AutomationAutomationsApi->list_automations:\n")
         pprint(api_response)
@@ -385,8 +395,8 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **template_id** | **UUID**| Filter by template ID | [optional] 
- **is_enabled** | **bool**| Filter by enabled status | [optional] 
+ **template_id** | **UUID**| Filter automations scoped to a specific entity template UUID | [optional] 
+ **is_enabled** | **bool**| Filter automations by active enabled status (true for active rules, false for paused rules) | [optional] 
 
 ### Return type
 
@@ -405,7 +415,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | List of automations |  -  |
+**200** | List of automation rules |  -  |
 **401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -414,6 +424,8 @@ Name | Type | Description  | Notes
 > AutomationResponse toggle_automation(id, toggle_automation_request)
 
 Toggle automation enabled status
+
+Enables or pauses an automation rule without altering its trigger definitions, condition criteria, or action configurations. Paused automations are ignored during event processing.
 
 ### Example
 
@@ -446,7 +458,7 @@ configuration = omnismith_sdk.Configuration(
 with omnismith_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = omnismith_sdk.AutomationAutomationsApi(api_client)
-    id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
+    id = UUID('01912ecb-4654-7890-a1b2-c3d4e5f60001') # UUID | Unique automation UUID to toggle
     toggle_automation_request = omnismith_sdk.ToggleAutomationRequest() # ToggleAutomationRequest | 
 
     try:
@@ -465,7 +477,7 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **UUID**|  | 
+ **id** | **UUID**| Unique automation UUID to toggle | 
  **toggle_automation_request** | [**ToggleAutomationRequest**](ToggleAutomationRequest.md)|  | 
 
 ### Return type
@@ -485,11 +497,11 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Automation toggled |  -  |
+**200** | Automation status successfully toggled |  -  |
 **400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
-**422** | Validation Error |  -  |
 **404** | Not Found |  -  |
+**422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -497,6 +509,8 @@ Name | Type | Description  | Notes
 > update_automation(id, update_automation_request)
 
 Update an automation
+
+Updates an existing automation rule by UUID. Supports modifying rule name, description, trigger event definitions, condition filter criteria, action dispatches, and cooldown throttle settings.
 
 ### Example
 
@@ -528,7 +542,7 @@ configuration = omnismith_sdk.Configuration(
 with omnismith_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = omnismith_sdk.AutomationAutomationsApi(api_client)
-    id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
+    id = UUID('01912ecb-4654-7890-a1b2-c3d4e5f60001') # UUID | Unique automation UUID to update
     update_automation_request = omnismith_sdk.UpdateAutomationRequest() # UpdateAutomationRequest | 
 
     try:
@@ -545,7 +559,7 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **UUID**|  | 
+ **id** | **UUID**| Unique automation UUID to update | 
  **update_automation_request** | [**UpdateAutomationRequest**](UpdateAutomationRequest.md)|  | 
 
 ### Return type
@@ -565,7 +579,7 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**204** | Automation updated |  -  |
+**204** | Automation successfully updated |  -  |
 **400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **404** | Automation not found |  -  |

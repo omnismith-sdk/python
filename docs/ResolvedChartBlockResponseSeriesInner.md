@@ -5,9 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**entity_id** | **UUID** |  | [optional] 
-**entity_name** | **str** |  | [optional] 
-**data_points** | [**List[GetEntityChart200ResponseSeriesInnerDataInner]**](GetEntityChart200ResponseSeriesInnerDataInner.md) |  | [optional] 
+**entity_id** | **UUID** | Entity unique identifier | [optional] 
+**entity_name** | **str** | Resolved display name of the entity | [optional] 
+**data_points** | [**List[ResolvedChartBlockResponseSeriesInnerDataPointsInner]**](ResolvedChartBlockResponseSeriesInnerDataPointsInner.md) | Ordered array of time-bucketed metric points | [optional] 
 
 ## Example
 

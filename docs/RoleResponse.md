@@ -1,15 +1,15 @@
 # RoleResponse
 
-Role details
+Metadata describing a system or custom user role
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** |  | [optional] 
-**name** | **str** |  | [optional] 
-**is_owner** | **bool** |  | [optional] 
-**created_at** | **datetime** |  | [optional] 
+**id** | **UUID** | Unique UUIDv7 identifier of the role | [optional] 
+**name** | **str** | Display name of the role | [optional] 
+**is_owner** | **bool** | Whether this is the root project owner role with full administrative privileges | [optional] 
+**created_at** | **datetime** | Timestamp when the role was created | [optional] 
 
 ## Example
 

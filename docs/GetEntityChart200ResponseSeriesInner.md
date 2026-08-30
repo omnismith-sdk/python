@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**attribute_id** | **str** |  | [optional] 
-**data** | [**List[GetEntityChart200ResponseSeriesInnerDataInner]**](GetEntityChart200ResponseSeriesInnerDataInner.md) |  | [optional] 
+**attribute_id** | **UUID** | Metric attribute UUID | [optional] 
+**data** | [**List[GetEntityChart200ResponseSeriesInnerDataInner]**](GetEntityChart200ResponseSeriesInnerDataInner.md) | Chronological time-series data points | [optional] 
 
 ## Example
 

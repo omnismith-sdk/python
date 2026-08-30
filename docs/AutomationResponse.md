@@ -5,17 +5,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** |  | [optional] 
-**name** | **str** |  | [optional] 
-**description** | **str** |  | [optional] 
-**is_enabled** | **bool** |  | [optional] 
+**id** | **UUID** | Unique automation UUID | [optional] 
+**name** | **str** | Name of the automation rule | [optional] 
+**description** | **str** | Optional description of the automation rule | [optional] 
+**is_enabled** | **bool** | Whether the automation is currently active and listening for events | [optional] 
 **trigger** | [**AutomationResponseTrigger**](AutomationResponseTrigger.md) |  | [optional] 
-**conditions** | [**List[AutomationResponseConditionsInner]**](AutomationResponseConditionsInner.md) |  | [optional] 
-**actions** | [**List[AutomationResponseActionsInner]**](AutomationResponseActionsInner.md) |  | [optional] 
-**cooldown_seconds** | **int** |  | [optional] 
-**last_triggered_at** | **datetime** |  | [optional] 
-**created_at** | **datetime** |  | [optional] 
-**updated_at** | **datetime** |  | [optional] 
+**conditions** | [**List[AutomationResponseConditionsInner]**](AutomationResponseConditionsInner.md) | Condition expressions that must all evaluate to true to execute actions | [optional] 
+**actions** | [**List[AutomationResponseActionsInner]**](AutomationResponseActionsInner.md) | Actions dispatched when conditions evaluate to true | [optional] 
+**cooldown_seconds** | **int** | Minimum cooldown seconds between trigger firings for the same entity | [optional] 
+**last_triggered_at** | **datetime** | Timestamp when this automation last fired | [optional] 
+**created_at** | **datetime** | Creation timestamp | [optional] 
+**updated_at** | **datetime** | Last update timestamp | [optional] 
 
 ## Example
 

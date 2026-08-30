@@ -1,12 +1,18 @@
 # CreateNotificationChannelRequestCredentials
 
-Type-specific credentials
+Type-specific credentials payload (e.g. `bot_token` for Telegram; `url`, `auth_type`, `token`, `username`, `password`, `headers` for webhook)
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**bot_token** | **str** |  | [optional] 
+**bot_token** | **str** | Telegram bot token from BotFather | [optional] 
+**url** | **str** | Webhook destination URL | [optional] 
+**auth_type** | **str** | Webhook HTTP authorization scheme | [optional] 
+**token** | **str** | Bearer authentication token for webhook | [optional] 
+**username** | **str** | Basic auth username for webhook | [optional] 
+**password** | **str** | Basic auth password for webhook | [optional] 
+**headers** | **Dict[str, str]** | Custom HTTP header key-value pairs to send with webhook POST requests | [optional] 
 
 ## Example
 

@@ -5,11 +5,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**created_at** | **datetime** |  | [optional] 
-**attribute_id** | **str** |  | [optional] 
-**value** | **str** |  | [optional] 
-**entity_id** | **str** |  | [optional] 
-**author_email** | **str** |  | [optional] 
+**created_at** | **datetime** | Mutation timestamp in ISO 8601 format | [optional] 
+**attribute_id** | **UUID** | Mutated attribute UUID | [optional] 
+**old_value** | **str** | Previous serialized attribute value | [optional] 
+**value** | **str** | New serialized attribute value | [optional] 
+**entity_id** | **UUID** | Target entity UUID | [optional] 
+**author_email** | **str** | Actor email who performed the change | [optional] 
 
 ## Example
 

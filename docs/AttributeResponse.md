@@ -1,21 +1,22 @@
 # AttributeResponse
 
-Attribute details
+Complete schema attribute metadata and configuration.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** |  | [optional] 
-**name** | **str** |  | [optional] 
-**description** | **str** |  | [optional] 
+**id** | **UUID** | Attribute UUID | [optional] 
+**slug** | **str** | Unique slug identifier within the project | [optional] 
+**name** | **str** | Human-readable attribute name | [optional] 
+**description** | **str** | Attribute description | [optional] 
 **attribute_type** | **int** | 0: Dimension, 1: Metric, 2: List, 3: Reference | [optional] 
-**data_type** | **int** | 0: String, 1: Number, 2: Boolean, 3: Datetime, 4: Date, 5: File, 6: Image | [optional] 
-**template_ids** | **List[UUID]** |  | [optional] 
+**data_type** | **int** | 0: String, 1: Number, 2: Boolean, 3: Datetime, 4: Date, 5: File, 6: Image, 7: Markdown | [optional] 
+**template_ids** | **List[UUID]** | Array of template UUIDs associated with this attribute | [optional] 
 **reference_config** | [**AttributeResponseReferenceConfig**](AttributeResponseReferenceConfig.md) |  | [optional] 
-**created_at** | **datetime** |  | [optional] 
-**updated_at** | **datetime** |  | [optional] 
-**deleted_at** | **datetime** |  | [optional] 
+**created_at** | **datetime** | Creation timestamp | [optional] 
+**updated_at** | **datetime** | Last update timestamp | [optional] 
+**deleted_at** | **datetime** | Deletion timestamp if soft-deleted | [optional] 
 
 ## Example
 

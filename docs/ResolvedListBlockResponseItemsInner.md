@@ -5,8 +5,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**entity_id** | **UUID** |  | [optional] 
-**attributes** | **object** |  | [optional] 
+**entity_id** | **UUID** | Entity unique identifier | [optional] 
+**created_at** | **datetime** | ISO 8601 creation timestamp | [optional] 
+**updated_at** | **datetime** | ISO 8601 last update timestamp | [optional] 
+**attributes** | **object** | Key-value map of resolved entity attributes | [optional] 
 
 ## Example
 

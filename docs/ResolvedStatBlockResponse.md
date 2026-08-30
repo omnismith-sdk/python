@@ -1,14 +1,15 @@
 # ResolvedStatBlockResponse
 
+Computed result for a stat KPI counter block
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**block_id** | **UUID** |  | [optional] 
-**title** | **str** |  | [optional] 
-**type** | **str** |  | [optional] 
-**count** | **int** |  | [optional] 
+**block_id** | **UUID** | Dashboard block unique identifier | [optional] 
+**title** | **str** | Block header title | [optional] 
+**type** | **str** | Block type discriminator | [optional] 
+**count** | **int** | Total count of entities matching template and active filter rules | [optional] 
 
 ## Example
 

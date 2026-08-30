@@ -5,11 +5,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**title** | **str** | Blueprint title | 
-**description** | **str** | Blueprint description | [optional] 
-**keywords** | **List[str]** | Keywords for search/filtering | [optional] 
-**template_ids** | **List[UUID]** | Selected template IDs to snapshot into the marketplace blueprint | 
-**id** | **UUID** | Existing blueprint ID for updates | [optional] 
+**title** | **str** | Public display title of the blueprint | 
+**description** | **str** | Detailed markdown description explaining what schemas, attributes, and relationships are included in the blueprint | [optional] 
+**keywords** | **List[str]** | List of categorization tags and keywords for search indexing | [optional] 
+**template_ids** | **List[UUID]** | Array of entity template UUIDs from the current project to snapshot into the blueprint package | 
+**id** | **UUID** | Optional blueprint UUID when updating an existing published blueprint owned by the user | [optional] 
 
 ## Example
 

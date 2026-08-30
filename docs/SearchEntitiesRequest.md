@@ -1,12 +1,14 @@
 # SearchEntitiesRequest
 
+Filter and global search criteria for querying template entities
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**global_search** | **str** |  | [optional] 
-**filters** | [**List[ExportEntitiesRequestFiltersInner]**](ExportEntitiesRequestFiltersInner.md) |  | [optional] 
+**global_search** | **str** | Full-text query string searched across all string and text dimension attributes of the template | [optional] 
+**filters** | [**List[SearchEntitiesRequestFiltersInner]**](SearchEntitiesRequestFiltersInner.md) | List of structured attribute and metadata filter conditions | [optional] 
+**attribute_key** | **str** | Format for attribute_values dictionary keys: \&quot;id\&quot; for UUIDs or \&quot;slug\&quot; for attribute slugs | [optional] 
 
 ## Example
 

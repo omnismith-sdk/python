@@ -1,14 +1,15 @@
 # ListItemResponse
 
+Selectable choice option item for a List-type attribute.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** |  | [optional] 
-**attribute_id** | **UUID** |  | [optional] 
-**value** | **str** |  | [optional] 
-**sort_order** | **int** |  | [optional] 
+**id** | **UUID** | Unique identifier for the list item | [optional] 
+**attribute_id** | **UUID** | UUID of the parent List attribute | [optional] 
+**value** | **str** | Display label / choice value | [optional] 
+**sort_order** | **int** | Display sorting rank (lower numbers first) | [optional] 
 
 ## Example
 

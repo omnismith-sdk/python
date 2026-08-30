@@ -5,10 +5,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**data** | [**List[EntityResponse]**](EntityResponse.md) |  | [optional] 
-**total** | **int** |  | [optional] 
-**limit** | **int** |  | [optional] 
-**offset** | **int** |  | [optional] 
+**data** | [**List[EntityResponse]**](EntityResponse.md) | List of matching hydrated entity records | [optional] 
+**total** | **int** | Total count of entities matching filter criteria | [optional] 
+**limit** | **int** | Applied page limit | [optional] 
+**offset** | **int** | Applied pagination offset | [optional] 
 
 ## Example
 

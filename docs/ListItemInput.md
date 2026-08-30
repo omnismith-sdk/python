@@ -1,13 +1,14 @@
 # ListItemInput
 
+Specification for an individual list item option.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**value** | **str** |  | 
-**sort_order** | **int** |  | [optional] 
-**id** | **UUID** |  | [optional] 
+**value** | **str** | Display label / value for this choice option. | 
+**sort_order** | **int** | Sorting rank for displaying this option in selection lists (lower numbers appear first). | [optional] [default to 0]
+**id** | **UUID** | Optional explicit UUID for the list item. Generated automatically if omitted. | [optional] 
 
 ## Example
 

@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**data** | **object** | Full detail response including the blueprint JSONB structure. | [optional] 
+**data** | [**MarketplaceBlueprintDetailResponse**](MarketplaceBlueprintDetailResponse.md) |  | [optional] 
 
 ## Example
 

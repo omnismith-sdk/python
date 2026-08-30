@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**items** | [**List[GetEntityHistory200ResponseItemsInner]**](GetEntityHistory200ResponseItemsInner.md) |  | [optional] 
-**total** | **int** |  | [optional] 
+**items** | [**List[GetEntityHistory200ResponseItemsInner]**](GetEntityHistory200ResponseItemsInner.md) | List of historical dimension mutation records | [optional] 
+**total** | **int** | Total count of history records matching filters | [optional] 
 
 ## Example
 

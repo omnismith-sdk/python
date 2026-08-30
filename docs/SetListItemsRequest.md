@@ -1,11 +1,12 @@
 # SetListItemsRequest
 
+Payload containing the full replacement set of choice option items for a List-type attribute.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**items** | [**List[ListItemInput]**](ListItemInput.md) |  | 
+**items** | [**List[ListItemInput]**](ListItemInput.md) | Array of list item specifications to set. | 
 
 ## Example
 

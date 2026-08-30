@@ -5,10 +5,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**access_token** | **str** | New JWT access token | [optional] 
-**expires_at** | **int** | Access token expiration timestamp | [optional] 
-**refresh_token** | **str** | New refresh token (rotation) | [optional] 
-**refresh_expires_at** | **int** | Refresh token expiration timestamp | [optional] 
+**access_token** | **str** | New JWT access token for authenticating Bearer requests | [optional] 
+**expires_at** | **int** | Unix timestamp when the access token expires | [optional] 
+**refresh_token** | **str** | New rotated refresh token for future refreshes | [optional] 
+**refresh_expires_at** | **int** | Unix timestamp when the new refresh token expires | [optional] 
 
 ## Example
 

@@ -1,14 +1,14 @@
 # RoleResourceAccessResponse
 
-Resource access entry for a role
+Resource-level access restriction or override rule assigned to a role
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**resource_type** | **str** |  | [optional] 
-**resource_id** | **UUID** |  | [optional] 
-**access_level** | **str** |  | [optional] 
+**resource_type** | **str** | Type of resource: template or attribute | [optional] 
+**resource_id** | **UUID** | UUID identifier of the restricted template or attribute | [optional] 
+**access_level** | **str** | Granted access level for this specific resource | [optional] 
 
 ## Example
 

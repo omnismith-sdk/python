@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **email** | **str** | User email address | 
 **password** | **str** | User password (min 8 chars) | 
+**captcha_token** | **str** | CAPTCHA response token (required for anonymous/public signups) | [optional] 
 
 ## Example
 

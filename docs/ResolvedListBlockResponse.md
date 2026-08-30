@@ -1,15 +1,16 @@
 # ResolvedListBlockResponse
 
+Computed result for a filtered entity list block
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**block_id** | **UUID** |  | [optional] 
-**title** | **str** |  | [optional] 
-**type** | **str** |  | [optional] 
-**items** | [**List[ResolvedListBlockResponseItemsInner]**](ResolvedListBlockResponseItemsInner.md) |  | [optional] 
-**total_count** | **int** |  | [optional] 
+**block_id** | **UUID** | Dashboard block unique identifier | [optional] 
+**title** | **str** | Block header title | [optional] 
+**type** | **str** | Block type discriminator | [optional] 
+**items** | [**List[ResolvedListBlockResponseItemsInner]**](ResolvedListBlockResponseItemsInner.md) | List of matching entity records with hydrated attributes | [optional] 
+**total_count** | **int** | Total number of items matching filters | [optional] 
 
 ## Example
 

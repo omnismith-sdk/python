@@ -1,15 +1,16 @@
 # PushDeviceResponse
 
+Registered mobile push notification device token record
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** |  | [optional] 
-**token** | **str** | FCM device token (masked) | [optional] 
-**device_name** | **str** |  | [optional] 
-**created_at** | **datetime** |  | [optional] 
-**updated_at** | **datetime** |  | [optional] 
+**id** | **UUID** | Unique device token record UUID | [optional] 
+**token** | **str** | FCM device registration token (masked for security) | [optional] 
+**device_name** | **str** | Optional user-assigned or hardware device name | [optional] 
+**created_at** | **datetime** | Registration timestamp | [optional] 
+**updated_at** | **datetime** | Last update timestamp | [optional] 
 
 ## Example
 

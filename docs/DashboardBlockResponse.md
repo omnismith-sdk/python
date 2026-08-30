@@ -1,18 +1,18 @@
 # DashboardBlockResponse
 
-Dashboard block details
+Dashboard visualization block details including type, title, grid placement, and query configurations
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** |  | [optional] 
-**dashboard_id** | **UUID** |  | [optional] 
-**type** | **str** |  | [optional] 
-**title** | **str** |  | [optional] 
-**config** | **object** |  | [optional] 
-**created_at** | **datetime** |  | [optional] 
-**updated_at** | **datetime** |  | [optional] 
+**id** | **UUID** | Dashboard block unique identifier | [optional] 
+**dashboard_id** | **UUID** | Parent dashboard unique identifier | [optional] 
+**type** | **str** | Visualization widget type | [optional] 
+**title** | **str** | Display title for the block widget header | [optional] 
+**config** | **object** | Block layout (x, y, cols, rows) and query configuration object | [optional] 
+**created_at** | **datetime** | ISO 8601 creation timestamp | [optional] 
+**updated_at** | **datetime** | ISO 8601 last update timestamp | [optional] 
 
 ## Example
 

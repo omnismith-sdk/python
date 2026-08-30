@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**type** | **str** | Channel type: telegram, webhook or push | 
-**name** | **str** |  | 
+**type** | **str** | Channel delivery type (telegram, webhook, push) | 
+**name** | **str** | Display name of the notification channel | 
 **credentials** | [**CreateNotificationChannelRequestCredentials**](CreateNotificationChannelRequestCredentials.md) |  | 
 
 ## Example

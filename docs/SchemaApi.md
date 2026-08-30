@@ -4,15 +4,15 @@ All URIs are relative to *https://api.omnismith.io/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_project_schema**](SchemaApi.md#get_project_schema) | **GET** /discovery/project-schema | Get complete project schema
+[**get_project_schema**](SchemaApi.md#get_project_schema) | **GET** /discovery/project-schema | Get complete project schema graph
 
 
 # **get_project_schema**
 > ProjectSchemaResponse get_project_schema()
 
-Get complete project schema
+Get complete project schema graph
 
-Returns all attributes, templates, list items, and reference configs in a single response
+Retrieves the complete consolidated schema graph for the active project in a single payload. Includes all active attributes, templates (with attribute bindings and UI layout groups), list choice items, and foreign entity reference configurations. Ideal for AI agents, client initialization, metadata caching, and schema introspection.
 
 ### Example
 
@@ -46,7 +46,7 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
     api_instance = omnismith_sdk.SchemaApi(api_client)
 
     try:
-        # Get complete project schema
+        # Get complete project schema graph
         api_response = api_instance.get_project_schema()
         print("The response of SchemaApi->get_project_schema:\n")
         pprint(api_response)
@@ -77,7 +77,7 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Project schema |  -  |
+**200** | Consolidated project schema definition |  -  |
 **401** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**project_id** | **UUID** | Target project ID | 
-**include_demo_data** | **bool** | Whether to install sample entities included in the blueprint | [optional] [default to False]
+**project_id** | **UUID** | Target project UUID where templates and attributes will be provisioned | 
+**include_demo_data** | **bool** | Whether to install sample entities and records included in the blueprint package | [optional] [default to False]
 
 ## Example
 

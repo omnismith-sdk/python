@@ -1,13 +1,14 @@
 # UpdateAutomationRequestTrigger
 
+Updated event trigger criteria
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**type** | **str** |  | [optional] 
-**template_id** | **UUID** |  | [optional] 
-**attribute_id** | **UUID** |  | [optional] 
+**type** | **str** | Trigger event type | [optional] 
+**template_id** | **UUID** | Template UUID | [optional] 
+**attribute_id** | **UUID** | Attribute UUID for attribute change triggers | [optional] 
 
 ## Example
 

@@ -5,14 +5,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** |  | [optional] 
-**automation_id** | **UUID** |  | [optional] 
-**entity_id** | **UUID** |  | [optional] 
-**triggered_at** | **datetime** |  | [optional] 
-**completed_at** | **datetime** |  | [optional] 
-**status** | **str** |  | [optional] 
-**action_results** | [**List[AutomationExecutionResponseActionResultsInner]**](AutomationExecutionResponseActionResultsInner.md) |  | [optional] 
-**error_message** | **str** |  | [optional] 
+**id** | **UUID** | Unique execution record UUID | [optional] 
+**automation_id** | **UUID** | Associated automation rule UUID | [optional] 
+**entity_id** | **UUID** | UUID of the entity that triggered the execution | [optional] 
+**triggered_at** | **datetime** | Timestamp when the trigger event was evaluated | [optional] 
+**completed_at** | **datetime** | Timestamp when all actions completed execution | [optional] 
+**status** | **str** | Overall execution outcome status | [optional] 
+**action_results** | [**List[AutomationExecutionResponseActionResultsInner]**](AutomationExecutionResponseActionResultsInner.md) | Individual action execution outcomes | [optional] 
+**error_message** | **str** | Top-level error message if execution failed | [optional] 
 
 ## Example
 

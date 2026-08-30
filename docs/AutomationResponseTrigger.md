@@ -1,13 +1,14 @@
 # AutomationResponseTrigger
 
+Event trigger configuration defining when this automation fires
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**type** | **str** |  | [optional] 
-**template_id** | **UUID** |  | [optional] 
-**attribute_id** | **UUID** |  | [optional] 
+**type** | **str** | Trigger event type | [optional] 
+**template_id** | **UUID** | Target template UUID | [optional] 
+**attribute_id** | **UUID** | Target attribute UUID for attribute change triggers | [optional] 
 
 ## Example
 

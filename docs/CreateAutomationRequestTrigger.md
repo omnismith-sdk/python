@@ -1,13 +1,14 @@
 # CreateAutomationRequestTrigger
 
+Event trigger defining the lifecycle condition that fires this automation
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**type** | **str** |  | 
-**template_id** | **UUID** |  | [optional] 
-**attribute_id** | **UUID** |  | [optional] 
+**type** | **str** | Trigger event type | 
+**template_id** | **UUID** | Template UUID to listen for events on | [optional] 
+**attribute_id** | **UUID** | Attribute UUID for attribute change triggers | [optional] 
 
 ## Example
 

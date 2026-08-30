@@ -1,11 +1,12 @@
 # UpdateEntityRequest
 
+Payload containing attribute value mutations for an existing entity
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**attribute_values** | [**List[CreateEntityRequestAttributeValuesInner]**](CreateEntityRequestAttributeValuesInner.md) |  | [optional] 
+**attribute_values** | [**List[UpdateEntityRequestAttributeValuesInner]**](UpdateEntityRequestAttributeValuesInner.md) | List of attribute value mutations to apply | [optional] 
 
 ## Example
 

@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**type** | **str** |  | [optional] 
-**config** | **object** |  | [optional] 
+**type** | **str** | Action dispatch type | [optional] 
+**config** | **object** | Action-specific payload and routing configuration | [optional] 
 
 ## Example
 

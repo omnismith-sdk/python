@@ -1,15 +1,17 @@
 # EntityResponse
 
+Hydrated dynamic entity record conforming to a template schema, including all dimension and metric attribute values
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** |  | [optional] 
-**template_id** | **str** |  | [optional] 
-**created_at** | **str** |  | [optional] 
-**updated_at** | **str** |  | [optional] 
-**attribute_values** | [**Dict[str, EntityAttributeValue]**](EntityAttributeValue.md) |  | [optional] 
+**id** | **UUID** | Unique entity identifier (UUIDv7) | [optional] 
+**template_id** | **UUID** | UUID of the template schema to which this entity conforms | [optional] 
+**template_slug** | **str** | Human-readable slug of the template schema | [optional] 
+**created_at** | **datetime** | Record creation timestamp in ISO 8601 format | [optional] 
+**updated_at** | **datetime** | Last modification timestamp in ISO 8601 format | [optional] 
+**attribute_values** | [**Dict[str, EntityAttributeValue]**](EntityAttributeValue.md) | Dictionary of attribute values keyed by attribute UUID or attribute slug (controlled by the attribute_key query parameter) | [optional] 
 
 ## Example
 

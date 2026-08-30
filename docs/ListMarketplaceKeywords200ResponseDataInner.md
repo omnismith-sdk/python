@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**keyword** | **str** |  | [optional] 
-**count** | **int** |  | [optional] 
+**keyword** | **str** | Keyword tag name | [optional] 
+**count** | **int** | Number of blueprints tagged with this keyword | [optional] 
 
 ## Example
 

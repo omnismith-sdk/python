@@ -21,6 +21,8 @@ Method | HTTP request | Description
 
 Assign user to project
 
+Assigns a user to a project with a specific role ID. Both the project and user must exist. Requires the caller to have project administration permissions.
+
 ### Example
 
 * Bearer (JWT) Authentication (bearerAuth):
@@ -51,7 +53,7 @@ configuration = omnismith_sdk.Configuration(
 with omnismith_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = omnismith_sdk.ProjectsApi(api_client)
-    id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
+    id = UUID('018b2f1b-8c1a-75b3-8000-7f0000010000') # UUID | Project ID
     assign_user_to_project_request = omnismith_sdk.AssignUserToProjectRequest() # AssignUserToProjectRequest | 
 
     try:
@@ -68,7 +70,7 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **UUID**|  | 
+ **id** | **UUID**| Project ID | 
  **assign_user_to_project_request** | [**AssignUserToProjectRequest**](AssignUserToProjectRequest.md)|  | 
 
 ### Return type
@@ -95,9 +97,11 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_project**
-> CreateAttributeItem201Response create_project(create_project_request)
+> CreateProject201Response create_project(create_project_request)
 
 Create a new project
+
+Creates a new workspace project. A project is an isolated multi-tenant boundary grouping templates, attributes, entities, dashboards, and automations. An optional client-generated UUIDv7 `id` can be supplied.
 
 ### Example
 
@@ -105,7 +109,7 @@ Create a new project
 
 ```python
 import omnismith_sdk
-from omnismith_sdk.models.create_attribute_item201_response import CreateAttributeItem201Response
+from omnismith_sdk.models.create_project201_response import CreateProject201Response
 from omnismith_sdk.models.create_project_request import CreateProjectRequest
 from omnismith_sdk.rest import ApiException
 from pprint import pprint
@@ -152,7 +156,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateAttributeItem201Response**](CreateAttributeItem201Response.md)
+[**CreateProject201Response**](CreateProject201Response.md)
 
 ### Authorization
 
@@ -177,6 +181,8 @@ Name | Type | Description  | Notes
 > delete_project(id)
 
 Delete a project
+
+Soft-deletes a project and archives all associated entities, templates, attributes, and dashboards. Requires project owner permissions.
 
 ### Example
 
@@ -207,7 +213,7 @@ configuration = omnismith_sdk.Configuration(
 with omnismith_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = omnismith_sdk.ProjectsApi(api_client)
-    id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
+    id = UUID('018b2f1b-8c1a-75b3-8000-7f0000010000') # UUID | Project ID to delete
 
     try:
         # Delete a project
@@ -223,7 +229,7 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **UUID**|  | 
+ **id** | **UUID**| Project ID to delete | 
 
 ### Return type
 
@@ -283,7 +289,7 @@ configuration = omnismith_sdk.Configuration(
 with omnismith_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = omnismith_sdk.ProjectsApi(api_client)
-    id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
+    id = UUID('018b2f1b-8c1a-75b3-8000-7f0000010000') # UUID | Unique UUID identifier of the project
 
     try:
         # Dismiss the interactive tour for a project
@@ -299,7 +305,7 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **UUID**|  | 
+ **id** | **UUID**| Unique UUID identifier of the project | 
 
 ### Return type
 
@@ -327,6 +333,8 @@ void (empty response body)
 > ProjectResponse get_project(id)
 
 Get a project by ID
+
+Retrieves details for a specific project by its UUID, including name, description, tour status, owner email, and timestamps.
 
 ### Example
 
@@ -358,7 +366,7 @@ configuration = omnismith_sdk.Configuration(
 with omnismith_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = omnismith_sdk.ProjectsApi(api_client)
-    id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
+    id = UUID('018b2f1b-8c1a-75b3-8000-7f0000010000') # UUID | Project ID
 
     try:
         # Get a project by ID
@@ -376,7 +384,7 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **UUID**|  | 
+ **id** | **UUID**| Project ID | 
 
 ### Return type
 
@@ -485,6 +493,8 @@ void (empty response body)
 
 List users in project
 
+Returns all users assigned to the specified project along with their roles (Admin, Editor, Viewer, etc.), email addresses, and join dates.
+
 ### Example
 
 * Bearer (JWT) Authentication (bearerAuth):
@@ -515,7 +525,7 @@ configuration = omnismith_sdk.Configuration(
 with omnismith_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = omnismith_sdk.ProjectsApi(api_client)
-    id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
+    id = UUID('018b2f1b-8c1a-75b3-8000-7f0000010000') # UUID | Project ID
 
     try:
         # List users in project
@@ -533,7 +543,7 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **UUID**|  | 
+ **id** | **UUID**| Project ID | 
 
 ### Return type
 
@@ -560,6 +570,8 @@ Name | Type | Description  | Notes
 > ListProjects200Response list_projects()
 
 List all projects
+
+Returns all projects accessible to the authenticated user, including their assigned role and owner information.
 
 ### Example
 
@@ -633,6 +645,8 @@ This endpoint does not need any parameter.
 
 Remove user from project
 
+Removes a user membership from the project. The user will immediately lose access to the project's data.
+
 ### Example
 
 * Bearer (JWT) Authentication (bearerAuth):
@@ -662,8 +676,8 @@ configuration = omnismith_sdk.Configuration(
 with omnismith_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = omnismith_sdk.ProjectsApi(api_client)
-    id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
-    user_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
+    id = UUID('018b2f1b-8c1a-75b3-8000-7f0000010000') # UUID | Project ID
+    user_id = UUID('018b2f1b-8c1a-75b3-8000-7f0000010000') # UUID | User ID to remove from project
 
     try:
         # Remove user from project
@@ -679,8 +693,8 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **UUID**|  | 
- **user_id** | **UUID**|  | 
+ **id** | **UUID**| Project ID | 
+ **user_id** | **UUID**| User ID to remove from project | 
 
 ### Return type
 
@@ -708,6 +722,8 @@ void (empty response body)
 > update_project(id, update_project_request)
 
 Update a project
+
+Updates project metadata such as name and description. Requires project administrator permissions.
 
 ### Example
 
@@ -739,7 +755,7 @@ configuration = omnismith_sdk.Configuration(
 with omnismith_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = omnismith_sdk.ProjectsApi(api_client)
-    id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
+    id = UUID('018b2f1b-8c1a-75b3-8000-7f0000010000') # UUID | Project ID
     update_project_request = omnismith_sdk.UpdateProjectRequest() # UpdateProjectRequest | 
 
     try:
@@ -756,7 +772,7 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **UUID**|  | 
+ **id** | **UUID**| Project ID | 
  **update_project_request** | [**UpdateProjectRequest**](UpdateProjectRequest.md)|  | 
 
 ### Return type

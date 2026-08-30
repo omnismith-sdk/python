@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** |  | [optional] 
+**id** | **UUID** | UUID of the newly created list item | [optional] 
 
 ## Example
 

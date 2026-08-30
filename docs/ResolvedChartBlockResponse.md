@@ -1,15 +1,16 @@
 # ResolvedChartBlockResponse
 
+Computed result for a time-series telemetry chart block aggregated across query intervals
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**block_id** | **UUID** |  | [optional] 
-**title** | **str** |  | [optional] 
-**type** | **str** |  | [optional] 
-**bucket_width** | **str** |  | [optional] 
-**series** | [**List[ResolvedChartBlockResponseSeriesInner]**](ResolvedChartBlockResponseSeriesInner.md) |  | [optional] 
+**block_id** | **UUID** | Dashboard block unique identifier | [optional] 
+**title** | **str** | Block header title | [optional] 
+**type** | **str** | Block type discriminator | [optional] 
+**bucket_width** | **str** | Time-bucket aggregation interval applied to telemetry metrics | [optional] 
+**series** | [**List[ResolvedChartBlockResponseSeriesInner]**](ResolvedChartBlockResponseSeriesInner.md) | Time-series data grouped per entity | [optional] 
 
 ## Example
 

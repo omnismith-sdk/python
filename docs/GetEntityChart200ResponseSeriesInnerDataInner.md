@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**time** | **datetime** |  | [optional] 
-**value** | **float** |  | [optional] 
+**time** | **datetime** | Bucket start timestamp in ISO 8601 format | [optional] 
+**value** | **float** | Aggregated numeric metric value | [optional] 
 
 ## Example
 

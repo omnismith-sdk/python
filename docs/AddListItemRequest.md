@@ -1,13 +1,14 @@
 # AddListItemRequest
 
+Payload for adding a new item to a List attribute.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**value** | **str** |  | 
-**sort_order** | **int** |  | [optional] 
-**id** | **UUID** |  | [optional] 
+**value** | **str** | Display value / label for the new choice option. | 
+**sort_order** | **int** | Sorting rank for display ordering (lower numbers appear first). | [optional] [default to 0]
+**id** | **UUID** | Optional explicit UUID for the item. Generated automatically if omitted. | [optional] 
 
 ## Example
 

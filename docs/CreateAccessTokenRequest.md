@@ -1,12 +1,13 @@
 # CreateAccessTokenRequest
 
+Payload for generating a new programmatic API access token
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** | A label for the access token | 
-**expires_at** | **datetime** | Expiration date in ISO 8601 format | 
+**name** | **str** | Friendly human-readable label to identify the token purpose | 
+**expires_at** | **datetime** | Expiration timestamp in ISO 8601 UTC format (e.g. 2026-12-31T23:59:59Z) | 
 
 ## Example
 

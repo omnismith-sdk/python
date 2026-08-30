@@ -1,17 +1,17 @@
 # DashboardResponse
 
-Dashboard details
+Dashboard configuration and metadata
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** |  | [optional] 
-**name** | **str** |  | [optional] 
-**description** | **str** |  | [optional] 
-**config** | **object** |  | [optional] 
-**created_at** | **datetime** |  | [optional] 
-**updated_at** | **datetime** |  | [optional] 
+**id** | **UUID** | Dashboard unique identifier | [optional] 
+**name** | **str** | Display name of the dashboard | [optional] 
+**description** | **str** | Detailed description of the dashboard purpose | [optional] 
+**config** | **object** | Dashboard canvas and refresh configuration | [optional] 
+**created_at** | **datetime** | ISO 8601 creation timestamp | [optional] 
+**updated_at** | **datetime** | ISO 8601 last update timestamp | [optional] 
 
 ## Example
 

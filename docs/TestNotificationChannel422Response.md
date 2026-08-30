@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**success** | **bool** |  | [optional] 
-**error** | **str** |  | [optional] 
+**success** | **bool** | Indicates test delivery failed | [optional] 
+**error** | **str** | Failure error message | [optional] 
 
 ## Example
 

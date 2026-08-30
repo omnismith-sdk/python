@@ -1,14 +1,16 @@
 # EntityAttributeValue
 
-Structured attribute value including display/custom value for references
+Structured attribute value representation including raw serialized value, resolved display value for references and list items, and attribute metadata
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**value** | **str** |  | [optional] 
-**custom_value** | **str** |  | [optional] 
-**reference_entity_id** | **UUID** |  | [optional] 
+**value** | **str** | Raw serialized attribute value (string, numeric string, ISO date, or UUID) | [optional] 
+**custom_value** | **str** | Resolved display label or custom representation (for list options, reference entities, or formatted values) | [optional] 
+**reference_entity_id** | **UUID** | Target entity UUID when the attribute kind is reference | [optional] 
+**attribute_id** | **UUID** | Canonical attribute definition UUID | [optional] 
+**attribute_slug** | **str** | Human-readable attribute slug identifier | [optional] 
 
 ## Example
 

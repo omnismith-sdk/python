@@ -1,13 +1,17 @@
 # UpdateAttributeRequest
 
+Payload for full attribute update.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** |  | 
-**template_ids** | **List[UUID]** |  | [optional] 
-**reference_config** | [**UpdateAttributeRequestReferenceConfig**](UpdateAttributeRequestReferenceConfig.md) |  | [optional] 
+**name** | **str** | Updated human-readable name of the attribute. | 
+**template_ids** | **List[UUID]** | Complete list of template UUIDs associated with this attribute. Replaces current template associations while preserving restricted templates. | [optional] 
+**description** | **str** | Updated description of the attribute. | [optional] 
+**reference_config** | [**PatchAttributeRequestReferenceConfig**](PatchAttributeRequestReferenceConfig.md) |  | [optional] 
+**data_type** | **int** | Target data type for lossless transition on Dimension (0) attributes: Number(1)-&gt;String(0), Boolean(2)-&gt;String(0), Date(4)&lt;-&gt;Datetime(3), Date/Datetime-&gt;String(0), String(0)&lt;-&gt;Markdown(7). | [optional] 
+**slug** | **str** | Updated unique slug identifier within the project. | [optional] 
 
 ## Example
 

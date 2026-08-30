@@ -1,17 +1,18 @@
 # ResolvedGaugeBlockResponse
 
+Computed result for a gauge meter block
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**block_id** | **UUID** |  | [optional] 
-**title** | **str** |  | [optional] 
-**type** | **str** |  | [optional] 
-**value** | **float** |  | [optional] 
-**min** | **float** |  | [optional] 
-**max** | **float** |  | [optional] 
-**percentage** | **float** |  | [optional] 
+**block_id** | **UUID** | Dashboard block unique identifier | [optional] 
+**title** | **str** | Block header title | [optional] 
+**type** | **str** | Block type discriminator | [optional] 
+**value** | **float** | Current aggregated metric value | [optional] 
+**min** | **float** | Configured minimum gauge scale bound | [optional] 
+**max** | **float** | Configured maximum gauge scale bound | [optional] 
+**percentage** | **float** | Computed progress percentage within [min, max] bounds | [optional] 
 
 ## Example
 

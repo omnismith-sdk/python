@@ -1,12 +1,13 @@
 # SetReferenceConfigRequest
 
+Payload specifying target template and display attribute for a reference relationship.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**target_template_id** | **UUID** | Target template UUID | 
-**target_attribute_id** | **UUID** | Target attribute UUID (display attribute) | 
+**target_template_id** | **UUID** | UUID of the target template whose entities can be referenced. | 
+**target_attribute_id** | **UUID** | UUID of the attribute on the target template to display as reference label. | 
 
 ## Example
 

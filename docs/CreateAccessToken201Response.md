@@ -5,11 +5,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** |  | [optional] 
-**name** | **str** |  | [optional] 
-**api_key** | **str** | The raw API key. Shown once only. | [optional] 
-**expires_at** | **datetime** |  | [optional] 
-**created_at** | **datetime** |  | [optional] 
+**id** | **UUID** | Unique UUIDv7 identifier of the created access token | [optional] 
+**name** | **str** | Friendly human-readable label assigned to the access token | [optional] 
+**api_key** | **str** | The raw secret API key starting with &#x60;omni_&#x60;. Displayed once only upon creation. | [optional] 
+**expires_at** | **datetime** | Expiration timestamp in ISO 8601 UTC format | [optional] 
+**created_at** | **datetime** | Creation timestamp in ISO 8601 UTC format | [optional] 
 
 ## Example
 

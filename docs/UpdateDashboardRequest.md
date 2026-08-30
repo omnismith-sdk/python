@@ -1,13 +1,14 @@
 # UpdateDashboardRequest
 
+Payload for updating dashboard metadata, 12-column canvas parameters, and auto-refresh settings
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** |  | [optional] 
-**description** | **str** |  | [optional] 
-**config** | **object** |  | [optional] 
+**name** | **str** | Updated display name of the dashboard | [optional] 
+**description** | **str** | Updated description of the dashboard purpose and telemetry scope | [optional] 
+**config** | [**UpdateDashboardRequestConfig**](UpdateDashboardRequestConfig.md) |  | [optional] 
 
 ## Example
 

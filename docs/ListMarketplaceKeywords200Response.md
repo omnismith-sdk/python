@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**data** | [**List[ListMarketplaceKeywords200ResponseDataInner]**](ListMarketplaceKeywords200ResponseDataInner.md) |  | [optional] 
+**data** | [**List[ListMarketplaceKeywords200ResponseDataInner]**](ListMarketplaceKeywords200ResponseDataInner.md) | List of keyword counts | [optional] 
 
 ## Example
 

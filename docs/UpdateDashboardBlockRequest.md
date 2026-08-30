@@ -1,12 +1,13 @@
 # UpdateDashboardBlockRequest
 
+Payload for updating a dashboard block configuration, query parameters, or 12-column grid placement
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**title** | **str** |  | [optional] 
-**config** | **object** | Block-specific configuration | [optional] 
+**title** | **str** | Updated display title for the widget card header | [optional] 
+**config** | [**UpdateDashboardBlockRequestConfig**](UpdateDashboardBlockRequestConfig.md) |  | [optional] 
 
 ## Example
 

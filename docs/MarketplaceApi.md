@@ -7,7 +7,7 @@ Method | HTTP request | Description
 [**delete_marketplace_blueprint**](MarketplaceApi.md#delete_marketplace_blueprint) | **DELETE** /marketplace/blueprints/{id} | Delete a marketplace blueprint
 [**get_marketplace_blueprint**](MarketplaceApi.md#get_marketplace_blueprint) | **GET** /marketplace/blueprints/{id} | Get marketplace blueprint details
 [**install_marketplace_blueprint**](MarketplaceApi.md#install_marketplace_blueprint) | **POST** /marketplace/blueprints/{id}/install | Install a marketplace blueprint into a project
-[**list_marketplace_keywords**](MarketplaceApi.md#list_marketplace_keywords) | **GET** /marketplace/keywords | List all marketplace keywords with blueprint counts
+[**list_marketplace_keywords**](MarketplaceApi.md#list_marketplace_keywords) | **GET** /marketplace/keywords | List marketplace keywords
 [**publish_marketplace_blueprint**](MarketplaceApi.md#publish_marketplace_blueprint) | **POST** /marketplace/blueprints | Publish or update a marketplace blueprint
 [**search_marketplace_blueprints**](MarketplaceApi.md#search_marketplace_blueprints) | **GET** /marketplace/blueprints | Search marketplace blueprints
 
@@ -16,6 +16,8 @@ Method | HTTP request | Description
 > delete_marketplace_blueprint(id)
 
 Delete a marketplace blueprint
+
+Permanently removes a published blueprint from the marketplace catalog. Only the author who published the blueprint or a system administrator has permission to delete it.
 
 ### Example
 
@@ -46,7 +48,7 @@ configuration = omnismith_sdk.Configuration(
 with omnismith_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = omnismith_sdk.MarketplaceApi(api_client)
-    id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Blueprint ID
+    id = UUID('01912ecb-4654-7890-a1b2-c3d4e5f60003') # UUID | Unique blueprint UUID to delete
 
     try:
         # Delete a marketplace blueprint
@@ -62,7 +64,7 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **UUID**| Blueprint ID | 
+ **id** | **UUID**| Unique blueprint UUID to delete | 
 
 ### Return type
 
@@ -81,10 +83,10 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**204** | Blueprint deleted |  -  |
+**204** | Blueprint successfully deleted |  -  |
 **401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**404** | Not Found |  -  |
+**403** | Forbidden - Not the owner of the blueprint |  -  |
+**404** | Blueprint not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -92,6 +94,8 @@ void (empty response body)
 > GetMarketplaceBlueprint200Response get_marketplace_blueprint(id)
 
 Get marketplace blueprint details
+
+Retrieves complete information for a specific marketplace blueprint by its UUID. Returns full blueprint metadata, publisher details, popularity metrics, and packaged blueprint schema definition containing template schemas, attribute configurations, and optional demo entities.
 
 ### Example
 
@@ -113,7 +117,7 @@ configuration = omnismith_sdk.Configuration(
 with omnismith_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = omnismith_sdk.MarketplaceApi(api_client)
-    id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Blueprint ID
+    id = UUID('01912ecb-4654-7890-a1b2-c3d4e5f60003') # UUID | Unique marketplace blueprint UUID
 
     try:
         # Get marketplace blueprint details
@@ -131,7 +135,7 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **UUID**| Blueprint ID | 
+ **id** | **UUID**| Unique marketplace blueprint UUID | 
 
 ### Return type
 
@@ -150,8 +154,8 @@ No authorization required
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Blueprint detail |  -  |
-**404** | Not Found |  -  |
+**200** | Marketplace blueprint details |  -  |
+**404** | Blueprint not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -159,6 +163,8 @@ No authorization required
 > install_marketplace_blueprint(id, install_marketplace_blueprint_request)
 
 Install a marketplace blueprint into a project
+
+Installs a marketplace blueprint into the specified project context. Provisions all packaged templates, attributes, and relationships defined in the blueprint schema, and optionally populates sample demo entities. Automatically increments the installation count for the blueprint.
 
 ### Example
 
@@ -190,7 +196,7 @@ configuration = omnismith_sdk.Configuration(
 with omnismith_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = omnismith_sdk.MarketplaceApi(api_client)
-    id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Blueprint ID
+    id = UUID('01912ecb-4654-7890-a1b2-c3d4e5f60003') # UUID | Unique UUID of the blueprint to install
     install_marketplace_blueprint_request = omnismith_sdk.InstallMarketplaceBlueprintRequest() # InstallMarketplaceBlueprintRequest | 
 
     try:
@@ -207,7 +213,7 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **UUID**| Blueprint ID | 
+ **id** | **UUID**| Unique UUID of the blueprint to install | 
  **install_marketplace_blueprint_request** | [**InstallMarketplaceBlueprintRequest**](InstallMarketplaceBlueprintRequest.md)|  | 
 
 ### Return type
@@ -227,9 +233,9 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**204** | Blueprint installed successfully |  -  |
+**204** | Blueprint successfully installed into the target project |  -  |
 **401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
+**403** | Forbidden - Insufficient project permissions |  -  |
 **404** | Blueprint not found |  -  |
 **422** | Validation Error |  -  |
 
@@ -238,7 +244,9 @@ void (empty response body)
 # **list_marketplace_keywords**
 > ListMarketplaceKeywords200Response list_marketplace_keywords()
 
-List all marketplace keywords with blueprint counts
+List marketplace keywords
+
+Retrieves all distinct categorization keywords and tags associated with published blueprints along with their total occurrence count, ordered by popularity descending. Useful for populating discovery tags, filters, and keyword clouds.
 
 ### Example
 
@@ -262,7 +270,7 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
     api_instance = omnismith_sdk.MarketplaceApi(api_client)
 
     try:
-        # List all marketplace keywords with blueprint counts
+        # List marketplace keywords
         api_response = api_instance.list_marketplace_keywords()
         print("The response of MarketplaceApi->list_marketplace_keywords:\n")
         pprint(api_response)
@@ -301,6 +309,8 @@ No authorization required
 > GetMarketplaceBlueprint200Response publish_marketplace_blueprint(publish_marketplace_blueprint_request)
 
 Publish or update a marketplace blueprint
+
+Publishes a new blueprint to the public marketplace or updates an existing blueprint owned by the authenticated user. Snapshots selected templates, attributes, and optional sample entities into an exportable blueprint package with title, description, and searchable keywords.
 
 ### Example
 
@@ -370,10 +380,10 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**201** | Blueprint created |  -  |
-**200** | Blueprint updated |  -  |
+**201** | Blueprint successfully published |  -  |
+**200** | Blueprint successfully updated |  -  |
 **401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
+**403** | Forbidden - Not the owner of the blueprint |  -  |
 **422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -382,6 +392,8 @@ Name | Type | Description  | Notes
 > SearchMarketplaceBlueprints200Response search_marketplace_blueprints(search=search, keywords=keywords, limit=limit, offset=offset, sort_by=sort_by, sort_direction=sort_direction, featured=featured)
 
 Search marketplace blueprints
+
+Searches and lists public blueprints available in the marketplace catalog. Blueprints package reusable template schemas, attribute definitions, and sample data that users can install directly into their projects. Supports full-text search across titles and descriptions, keyword tag filtering, filtering by featured status, and sorting by creation date, install counts, or title.
 
 ### Example
 
@@ -403,13 +415,13 @@ configuration = omnismith_sdk.Configuration(
 with omnismith_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = omnismith_sdk.MarketplaceApi(api_client)
-    search = 'search_example' # str | Free-text search on title and description (optional)
-    keywords = 'keywords_example' # str | Comma-separated keywords to filter by (optional)
-    limit = 20 # int | Number of results per page (optional) (default to 20)
-    offset = 0 # int | Pagination offset (optional) (default to 0)
-    sort_by = created_at # str | Sort field (optional) (default to created_at)
-    sort_direction = desc # str | Sort direction (optional) (default to desc)
-    featured = True # bool | Filter by featured status (optional)
+    search = 'crm pipeline' # str | Free-text search filter across blueprint title and description (optional)
+    keywords = 'crm,sales,leads' # str | Comma-separated keywords or tags to filter blueprints (optional)
+    limit = 20 # int | Number of blueprint records to return per page (max 100) (optional) (default to 20)
+    offset = 0 # int | Number of blueprint records to skip for pagination (optional) (default to 0)
+    sort_by = created_at # str | Field to sort blueprint results by (optional) (default to created_at)
+    sort_direction = desc # str | Sort direction order (ascending or descending) (optional) (default to desc)
+    featured = true # bool | Filter to return only curated and featured marketplace blueprints (optional)
 
     try:
         # Search marketplace blueprints
@@ -427,13 +439,13 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **search** | **str**| Free-text search on title and description | [optional] 
- **keywords** | **str**| Comma-separated keywords to filter by | [optional] 
- **limit** | **int**| Number of results per page | [optional] [default to 20]
- **offset** | **int**| Pagination offset | [optional] [default to 0]
- **sort_by** | **str**| Sort field | [optional] [default to created_at]
- **sort_direction** | **str**| Sort direction | [optional] [default to desc]
- **featured** | **bool**| Filter by featured status | [optional] 
+ **search** | **str**| Free-text search filter across blueprint title and description | [optional] 
+ **keywords** | **str**| Comma-separated keywords or tags to filter blueprints | [optional] 
+ **limit** | **int**| Number of blueprint records to return per page (max 100) | [optional] [default to 20]
+ **offset** | **int**| Number of blueprint records to skip for pagination | [optional] [default to 0]
+ **sort_by** | **str**| Field to sort blueprint results by | [optional] [default to created_at]
+ **sort_direction** | **str**| Sort direction order (ascending or descending) | [optional] [default to desc]
+ **featured** | **bool**| Filter to return only curated and featured marketplace blueprints | [optional] 
 
 ### Return type
 
@@ -452,7 +464,7 @@ No authorization required
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Marketplace blueprints list |  -  |
+**200** | Paginated list of marketplace blueprints |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

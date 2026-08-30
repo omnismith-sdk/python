@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**is_enabled** | **bool** |  | 
+**is_enabled** | **bool** | Whether the automation rule should be active (true) or paused (false) | 
 
 ## Example
 

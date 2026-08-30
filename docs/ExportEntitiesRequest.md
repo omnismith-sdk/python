@@ -1,12 +1,13 @@
 # ExportEntitiesRequest
 
+Filter and search criteria for scoping entity CSV export
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**global_search** | **str** |  | [optional] 
-**filters** | [**List[ExportEntitiesRequestFiltersInner]**](ExportEntitiesRequestFiltersInner.md) |  | [optional] 
+**global_search** | **str** | Full-text search query string across all string dimension attributes | [optional] 
+**filters** | [**List[ExportEntitiesRequestFiltersInner]**](ExportEntitiesRequestFiltersInner.md) | List of structured attribute and metadata filter conditions | [optional] 
 
 ## Example
 

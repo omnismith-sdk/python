@@ -1,13 +1,13 @@
 # LoginRequest
 
-Payload for user login
+Payload for authenticating a user with email and password
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**email** | **str** | User email address | 
-**password** | **str** | User password | 
+**email** | **str** | Registered user email address | 
+**password** | **str** | User account password | 
 
 ## Example
 

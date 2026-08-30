@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **updated** | **int** | Number of entities updated | [optional] 
 **skipped** | **int** | Number of rows skipped (no changes) | [optional] 
 **failed** | **int** | Number of rows that failed | [optional] 
+**affected_entities** | [**List[ImportEntities200ResponseAffectedEntitiesInner]**](ImportEntities200ResponseAffectedEntitiesInner.md) | Created or updated entities that may require background indexing before they appear in search results | [optional] 
 **errors** | [**List[ImportEntities200ResponseErrorsInner]**](ImportEntities200ResponseErrorsInner.md) |  | [optional] 
 
 ## Example

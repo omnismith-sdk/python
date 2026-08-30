@@ -1,12 +1,13 @@
 # UpdateListItemRequest
 
+Payload for updating an existing list item.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**value** | **str** |  | 
-**sort_order** | **int** |  | [optional] 
+**value** | **str** | Updated display value / label for this list item. | 
+**sort_order** | **int** | Updated display sorting rank (lower numbers appear first). | [optional] [default to 0]
 
 ## Example
 

@@ -1,15 +1,16 @@
 # AccessTokenResponse
 
+Metadata describing an API access token (raw secret key is omitted for security)
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** |  | [optional] 
-**name** | **str** |  | [optional] 
-**expires_at** | **datetime** |  | [optional] 
-**created_at** | **datetime** |  | [optional] 
-**last_used_at** | **datetime** |  | [optional] 
+**id** | **UUID** | Unique UUIDv7 identifier of the access token | [optional] 
+**name** | **str** | Friendly human-readable label identifying the access token | [optional] 
+**expires_at** | **datetime** | Expiration timestamp in ISO 8601 UTC format | [optional] 
+**created_at** | **datetime** | Creation timestamp in ISO 8601 UTC format | [optional] 
+**last_used_at** | **datetime** | Timestamp when this token was last used to authenticate an API request | [optional] 
 
 ## Example
 

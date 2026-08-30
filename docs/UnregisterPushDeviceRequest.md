@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**token** | **str** | FCM device registration token to remove | 
+**token** | **str** | Firebase Cloud Messaging (FCM) device registration token to remove | 
 
 ## Example
 

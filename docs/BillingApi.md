@@ -99,6 +99,8 @@ Name | Type | Description  | Notes
 
 List all available tiers
 
+Returns the full catalog of subscription tiers (Free, Starter, Pro, etc.) with their resource limits including max attributes, templates, entities, dashboards, automations, notification channels, metric ingestions, dimension updates, disk storage, and AI credits. Does not require authentication.
+
 ### Example
 
 
@@ -237,6 +239,8 @@ This endpoint does not need any parameter.
 
 Get current tier usage insights
 
+Returns current resource consumption vs. tier limits for the authenticated user. Includes usage counts (attributes, templates, entities, dashboards, automations, channels, monthly metric ingestions, monthly dimension updates, disk usage, AI credits), corresponding tier limits, and percentage utilization for each resource category. Use this to check quota availability before performing operations.
+
 ### Example
 
 * Bearer (JWT) Authentication (bearerAuth):
@@ -310,6 +314,8 @@ This endpoint does not need any parameter.
 
 Get current user tier
 
+Returns the authenticated user's active subscription tier, including tier name, level, and all associated resource limits (max entities, attributes, templates, metric ingestions, AI credits, etc.).
+
 ### Example
 
 * Bearer (JWT) Authentication (bearerAuth):
@@ -382,6 +388,8 @@ This endpoint does not need any parameter.
 > LogAiUsage200Response log_ai_usage(log_ai_usage_request)
 
 Log AI usage credits
+
+Records AI credit consumption for the authenticated user. Accepts model name, input/output token counts, and computed credits to deduct. Used internally by the AI service to track per-request LLM costs against the user's monthly AI credit quota.
 
 ### Example
 

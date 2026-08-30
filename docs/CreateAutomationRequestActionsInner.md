@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**type** | **str** |  | 
-**config** | **object** |  | 
+**type** | **str** | Action delivery channel type | 
+**config** | **object** | Action payload and channel routing configuration | 
 
 ## Example
 

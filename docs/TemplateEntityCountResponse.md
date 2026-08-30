@@ -1,13 +1,13 @@
 # TemplateEntityCountResponse
 
-Entity count for a template
+Total entity record count for a template.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**template_id** | **UUID** |  | [optional] 
-**entity_count** | **int** |  | [optional] 
+**template_id** | **UUID** | Template UUID | [optional] 
+**entity_count** | **int** | Total count of active entities conforming to this template | [optional] 
 
 ## Example
 

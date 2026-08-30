@@ -16,6 +16,8 @@ Method | HTTP request | Description
 
 Delete a file attachment
 
+Permanently deletes a file attachment and its stored content from disk. If the file is referenced by entity attribute values (file or image data type), those references will become stale. Returns 204 on success.
+
 ### Example
 
 * Bearer (JWT) Authentication (bearerAuth):
@@ -45,7 +47,7 @@ configuration = omnismith_sdk.Configuration(
 with omnismith_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = omnismith_sdk.FileAttachmentApi(api_client)
-    id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
+    id = UUID('018b2f1b-8c1a-75b3-8000-7f0000010000') # UUID | File attachment UUID to delete
 
     try:
         # Delete a file attachment
@@ -61,7 +63,7 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **UUID**|  | 
+ **id** | **UUID**| File attachment UUID to delete | 
 
 ### Return type
 
@@ -90,6 +92,8 @@ void (empty response body)
 
 Download a file attachment
 
+Returns the raw binary file content for a given file attachment ID. The response Content-Type header matches the original uploaded file MIME type. The file must belong to the authenticated user's project.
+
 ### Example
 
 * Bearer (JWT) Authentication (bearerAuth):
@@ -119,7 +123,7 @@ configuration = omnismith_sdk.Configuration(
 with omnismith_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = omnismith_sdk.FileAttachmentApi(api_client)
-    id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
+    id = UUID('018b2f1b-8c1a-75b3-8000-7f0000010000') # UUID | Unique UUID identifier of the file attachment to download
 
     try:
         # Download a file attachment
@@ -135,7 +139,7 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **UUID**|  | 
+ **id** | **UUID**| Unique UUID identifier of the file attachment to download | 
 
 ### Return type
 
@@ -163,6 +167,8 @@ void (empty response body)
 > FileAttachmentResponse get_file_attachment_metadata(id)
 
 Get file metadata without downloading content
+
+Returns metadata for a file attachment (original filename, MIME type, file size in bytes, upload timestamp, context) without streaming the binary content. Use this to inspect file properties before deciding whether to download.
 
 ### Example
 
@@ -194,7 +200,7 @@ configuration = omnismith_sdk.Configuration(
 with omnismith_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = omnismith_sdk.FileAttachmentApi(api_client)
-    id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
+    id = UUID('018b2f1b-8c1a-75b3-8000-7f0000010000') # UUID | Unique UUID identifier of the file attachment
 
     try:
         # Get file metadata without downloading content
@@ -212,7 +218,7 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **UUID**|  | 
+ **id** | **UUID**| Unique UUID identifier of the file attachment | 
 
 ### Return type
 
@@ -240,6 +246,8 @@ Name | Type | Description  | Notes
 > get_file_attachment_thumbnail(id, width=width, height=height)
 
 Get image thumbnail
+
+Generates and returns a resized thumbnail for image-type file attachments (JPEG, PNG, WebP, GIF). Optional `width` and `height` query parameters control output dimensions (range 50–1000px, default 200×200). Returns 400 if the file is not an image type. The thumbnail is returned as JPEG binary.
 
 ### Example
 
@@ -270,9 +278,9 @@ configuration = omnismith_sdk.Configuration(
 with omnismith_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = omnismith_sdk.FileAttachmentApi(api_client)
-    id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
-    width = 200 # int |  (optional) (default to 200)
-    height = 200 # int |  (optional) (default to 200)
+    id = UUID('018b2f1b-8c1a-75b3-8000-7f0000010000') # UUID | Unique UUID identifier of the image file attachment
+    width = 200 # int | Target thumbnail width in pixels (range 50 to 1000, default 200) (optional) (default to 200)
+    height = 200 # int | Target thumbnail height in pixels (range 50 to 1000, default 200) (optional) (default to 200)
 
     try:
         # Get image thumbnail
@@ -288,9 +296,9 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **UUID**|  | 
- **width** | **int**|  | [optional] [default to 200]
- **height** | **int**|  | [optional] [default to 200]
+ **id** | **UUID**| Unique UUID identifier of the image file attachment | 
+ **width** | **int**| Target thumbnail width in pixels (range 50 to 1000, default 200) | [optional] [default to 200]
+ **height** | **int**| Target thumbnail height in pixels (range 50 to 1000, default 200) | [optional] [default to 200]
 
 ### Return type
 
@@ -316,9 +324,11 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **upload_file_attachment**
-> FileAttachmentResponse upload_file_attachment(file, id=id)
+> FileAttachmentResponse upload_file_attachment(file, id=id, context=context, ttl_hours=ttl_hours)
 
 Upload a file attachment
+
+Uploads a file as a multipart/form-data request. Supported MIME types include images (JPEG, PNG, WebP, GIF, SVG), documents (PDF), spreadsheets (CSV, XLSX), and structured data (JSON, YAML). An optional pre-generated UUIDv7 `id` can be supplied; otherwise the server generates one. The `context` field controls storage lifecycle: "entity" files are permanent, "chat" files are temporary with configurable `ttl_hours` (default 48h). Returns the file metadata including the assigned ID for use in entity attribute values.
 
 ### Example
 
@@ -352,10 +362,12 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
     api_instance = omnismith_sdk.FileAttachmentApi(api_client)
     file = None # bytes | 
     id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID |  (optional)
+    context = entity # str |  (optional) (default to entity)
+    ttl_hours = 56 # int |  (optional)
 
     try:
         # Upload a file attachment
-        api_response = api_instance.upload_file_attachment(file, id=id)
+        api_response = api_instance.upload_file_attachment(file, id=id, context=context, ttl_hours=ttl_hours)
         print("The response of FileAttachmentApi->upload_file_attachment:\n")
         pprint(api_response)
     except Exception as e:
@@ -371,6 +383,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **file** | **bytes**|  | 
  **id** | **UUID**|  | [optional] 
+ **context** | **str**|  | [optional] [default to entity]
+ **ttl_hours** | **int**|  | [optional] 
 
 ### Return type
 

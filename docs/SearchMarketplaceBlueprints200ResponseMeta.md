@@ -1,11 +1,12 @@
 # SearchMarketplaceBlueprints200ResponseMeta
 
+Pagination metadata
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**total** | **int** |  | [optional] 
+**total** | **int** | Total number of matching blueprints | [optional] 
 
 ## Example
 

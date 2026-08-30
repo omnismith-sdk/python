@@ -14,6 +14,8 @@ Method | HTTP request | Description
 
 Confirm a user's email address using a confirmation token
 
+Validates an email confirmation token sent to a newly registered user's email address and activates the account upon success. If the token is valid, returns a success confirmation message.
+
 ### Example
 
 
@@ -34,7 +36,7 @@ configuration = omnismith_sdk.Configuration(
 with omnismith_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = omnismith_sdk.UserApi(api_client)
-    token = 'token_example' # str | The email confirmation token
+    token = 'cf_token_abc123xyz' # str | The email confirmation token received via email
 
     try:
         # Confirm a user's email address using a confirmation token
@@ -52,7 +54,7 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **token** | **str**| The email confirmation token | 
+ **token** | **str**| The email confirmation token received via email | 
 
 ### Return type
 
@@ -78,16 +80,18 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **register_user**
-> CreateAttributeItem201Response register_user(register_user_request)
+> CreateProject201Response register_user(register_user_request)
 
 Register a new user
+
+Registers a new user account with email and password. For unauthenticated / public signups, a Cloudflare Turnstile `captchaToken` is required to prevent bot abuse. Sends a confirmation link to the provided email address upon creation.
 
 ### Example
 
 
 ```python
 import omnismith_sdk
-from omnismith_sdk.models.create_attribute_item201_response import CreateAttributeItem201Response
+from omnismith_sdk.models.create_project201_response import CreateProject201Response
 from omnismith_sdk.models.register_user_request import RegisterUserRequest
 from omnismith_sdk.rest import ApiException
 from pprint import pprint
@@ -125,7 +129,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateAttributeItem201Response**](CreateAttributeItem201Response.md)
+[**CreateProject201Response**](CreateProject201Response.md)
 
 ### Authorization
 
@@ -151,6 +155,8 @@ No authorization required
 > ResendConfirmationEmail200Response resend_confirmation_email(resend_confirmation_email_request)
 
 Resend the email confirmation link
+
+Resends the account verification email with an activation link for unconfirmed accounts. Rate-limited to prevent abuse. Silently succeeds if the email is not registered for security.
 
 ### Example
 

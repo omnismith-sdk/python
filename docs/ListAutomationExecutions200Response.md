@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**data** | [**List[AutomationExecutionResponse]**](AutomationExecutionResponse.md) |  | [optional] 
-**total** | **int** |  | [optional] 
+**data** | [**List[AutomationExecutionResponse]**](AutomationExecutionResponse.md) | Array of execution records | [optional] 
+**total** | **int** | Total count of execution records matching filters | [optional] 
 
 ## Example
 

@@ -5,12 +5,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** |  | [optional] 
-**description** | **str** |  | [optional] 
+**name** | **str** | Updated display name of the automation rule | [optional] 
+**description** | **str** | Updated description of the automation rule | [optional] 
 **trigger** | [**UpdateAutomationRequestTrigger**](UpdateAutomationRequestTrigger.md) |  | [optional] 
-**conditions** | [**List[AutomationResponseConditionsInner]**](AutomationResponseConditionsInner.md) |  | [optional] 
-**actions** | [**List[AutomationResponseActionsInner]**](AutomationResponseActionsInner.md) |  | [optional] 
-**cooldown_seconds** | **int** |  | [optional] 
+**conditions** | [**List[UpdateAutomationRequestConditionsInner]**](UpdateAutomationRequestConditionsInner.md) | Updated array of condition criteria evaluated against entity state | [optional] 
+**actions** | [**List[UpdateAutomationRequestActionsInner]**](UpdateAutomationRequestActionsInner.md) | Updated list of dispatch actions | [optional] 
+**cooldown_seconds** | **int** | Updated cooldown throttle duration in seconds | [optional] 
 
 ## Example
 

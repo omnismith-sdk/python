@@ -5,9 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**var_field** | **str** |  | [optional] 
-**operator** | **str** |  | [optional] 
-**value** | **str** |  | [optional] 
+**var_field** | **str** | Attribute UUID, attribute slug, or standard field (id, created_at, updated_at) | [optional] 
+**operator** | **str** | Filter comparison operator: eq, neq, gt, lt, like, not-like, empty, not-empty | [optional] 
+**value** | **str** | Comparison value serialized as string | [optional] 
 
 ## Example
 

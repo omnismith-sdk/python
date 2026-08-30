@@ -1,13 +1,13 @@
 # CreateAttributeRequestReferenceConfig
 
-Optional reference configuration
+Required when attribute_type is 3 (Reference). Configures foreign entity relationship target template and display attribute.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**target_template_id** | **UUID** |  | [optional] 
-**target_attribute_id** | **UUID** |  | [optional] 
+**target_template_id** | **UUID** | UUID of the target template whose entities can be referenced. | [optional] 
+**target_attribute_id** | **UUID** | UUID of the attribute on the target template to use for entity display label resolution. | [optional] 
 
 ## Example
 

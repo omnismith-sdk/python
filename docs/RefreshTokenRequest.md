@@ -1,12 +1,12 @@
 # RefreshTokenRequest
 
-Payload for refreshing an access token
+Payload for rotating a refresh token and obtaining a new JWT access token
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**refresh_token** | **str** | The refresh token obtained from login or previous refresh | 
+**refresh_token** | **str** | The active refresh token string to rotate | 
 
 ## Example
 

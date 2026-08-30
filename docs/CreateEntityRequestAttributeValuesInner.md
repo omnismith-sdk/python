@@ -5,9 +5,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**attribute_id** | **UUID** |  | [optional] 
-**value** | **str** |  | [optional] 
-**updated_at** | **datetime** |  | [optional] 
+**attribute_id** | **UUID** | Target attribute UUID (provide either attribute_id or attribute_slug) | [optional] 
+**attribute_slug** | **str** | Target attribute slug identifier (provide either attribute_id or attribute_slug) | [optional] 
+**value** | **str** | Serialized attribute value. Formats: String (\&quot;Sample\&quot;), Number (\&quot;123.45\&quot;), Boolean (\&quot;true\&quot;|\&quot;false\&quot;), Date (\&quot;YYYY-MM-DD\&quot;), Datetime (\&quot;YYYY-MM-DD HH:MM:SS\&quot;), List (ListItem UUID), Reference (target Entity UUID) | [optional] 
+**updated_at** | **datetime** | Observation or creation timestamp in ISO 8601 or YYYY-MM-DD HH:MM:SS format. Defaults to current UTC time if omitted. | [optional] 
 
 ## Example
 
