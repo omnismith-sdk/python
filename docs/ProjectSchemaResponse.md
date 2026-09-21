@@ -1,15 +1,15 @@
 # ProjectSchemaResponse
 
-Complete project schema graph containing all active attributes, templates, list choice items, and reference configurations.
+Consolidated schema graph containing templates, attributes, choice options, references, business rules, and actions in a concise, token-efficient shape.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**attributes** | [**List[AttributeResponse]**](AttributeResponse.md) | All active attributes in the project schema | [optional] 
-**templates** | [**List[TemplateResponse]**](TemplateResponse.md) | All active templates and their attribute layout configurations | [optional] 
-**list_items** | [**List[ListItemResponse]**](ListItemResponse.md) | All selectable choice items for List-type attributes | [optional] 
-**reference_configs** | [**List[ReferenceConfigResponse]**](ReferenceConfigResponse.md) | All entity relationship configurations for Reference-type attributes | [optional] 
+**project_id** | **UUID** | Unique identifier of the active project | [optional] 
+**project_name** | **str** | Human-readable name of the active project | [optional] 
+**templates** | [**List[TemplateOverviewResponse]**](TemplateOverviewResponse.md) | All active templates with bound attributes, business rules, and executable actions | 
+**attributes** | [**List[AttributeOverviewResponse]**](AttributeOverviewResponse.md) | All active attributes with semantic types, list options, and foreign entity references | 
 
 ## Example
 

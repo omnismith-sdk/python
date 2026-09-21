@@ -20,11 +20,11 @@ Method | HTTP request | Description
 
 
 # **create_workspace**
-> CreateDashboard201Response create_workspace(create_workspace_request)
+> CreateDashboard201Response create_workspace(create_workspace_request, x_omnismith_project_id=x_omnismith_project_id)
 
 Create a new workspace
 
-Creates a new workspace in the current project context with a specified multi-pane layout (single, split-v, split-h, quad), optional default workspace status, and initial template view bindings to automatically generate panes.
+Creates a top-level operational workspace (workbench) in the current project context grouping related views for a specific workflow (e.g. "Editorial & Content Calendar", "Guidelines & Strategy", "Media Studio"). Workspaces appear in the top-level workspace switcher and support multi-pane layouts (single, split-v, split-h, quad) and default workspace indicators.
 
 ### Example
 
@@ -58,10 +58,11 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = omnismith_sdk.WorkspacesApi(api_client)
     create_workspace_request = omnismith_sdk.CreateWorkspaceRequest() # CreateWorkspaceRequest | Workspace creation payload
+    x_omnismith_project_id = UUID('018b2f1b-7c3a-7d2e-8f1a-2b3c4d5e6f7d') # UUID | The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential's `projects` claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code `stale_project_grant`; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 `no_project_selected`. Two clients holding the same credential may send different values at the same time. (optional)
 
     try:
         # Create a new workspace
-        api_response = api_instance.create_workspace(create_workspace_request)
+        api_response = api_instance.create_workspace(create_workspace_request, x_omnismith_project_id=x_omnismith_project_id)
         print("The response of WorkspacesApi->create_workspace:\n")
         pprint(api_response)
     except Exception as e:
@@ -76,6 +77,7 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **create_workspace_request** | [**CreateWorkspaceRequest**](CreateWorkspaceRequest.md)| Workspace creation payload | 
+ **x_omnismith_project_id** | **UUID**| The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential&#39;s &#x60;projects&#x60; claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code &#x60;stale_project_grant&#x60;; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 &#x60;no_project_selected&#x60;. Two clients holding the same credential may send different values at the same time. | [optional] 
 
 ### Return type
 
@@ -96,17 +98,19 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **201** | Workspace created successfully |  -  |
 **401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
 **422** | Validation Error |  -  |
 **500** | Internal Server Error |  -  |
+**409** | No project is selected. The caller is authenticated but the request is tenant-scoped, so a project must be selected before it can be answered. The response body carries &#x60;\&quot;code\&quot;: \&quot;no_project_selected\&quot;&#x60;, which clients branch on to offer a project picker rather than an access-denied message. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_workspace_view**
-> CreateDashboardBlock201Response create_workspace_view(id, create_workspace_view_request)
+> CreateDashboardBlock201Response create_workspace_view(id, create_workspace_view_request, x_omnismith_project_id=x_omnismith_project_id)
 
 Add a new view / pane to a workspace
 
-Creates and mounts a new view pane within an existing workspace bound to a specific entity schema template, configuring presentation mode (table, grid), visible columns, filter criteria, search queries (keyword or semantic), sorting preferences, and pane order.
+Creates and mounts a new view pane within an existing workspace bound to a specific entity schema template, configuring presentation mode (table, grid), visible columns, filter criteria, search queries (keyword or semantic), sorting preferences, and pane order. A workspace view represents a specialized filtered lens (e.g. "Telegram Channel Hub" filtered for platform=telegram) inside an operational workspace.
 
 ### Example
 
@@ -141,10 +145,11 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
     api_instance = omnismith_sdk.WorkspacesApi(api_client)
     id = UUID('0190a1b2-c3d4-7e8f-9a0b-1c2d3e4f5a6b') # UUID | Target workspace unique identifier (UUID)
     create_workspace_view_request = omnismith_sdk.CreateWorkspaceViewRequest() # CreateWorkspaceViewRequest | Workspace view creation payload
+    x_omnismith_project_id = UUID('018b2f1b-7c3a-7d2e-8f1a-2b3c4d5e6f7d') # UUID | The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential's `projects` claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code `stale_project_grant`; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 `no_project_selected`. Two clients holding the same credential may send different values at the same time. (optional)
 
     try:
         # Add a new view / pane to a workspace
-        api_response = api_instance.create_workspace_view(id, create_workspace_view_request)
+        api_response = api_instance.create_workspace_view(id, create_workspace_view_request, x_omnismith_project_id=x_omnismith_project_id)
         print("The response of WorkspacesApi->create_workspace_view:\n")
         pprint(api_response)
     except Exception as e:
@@ -160,6 +165,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **UUID**| Target workspace unique identifier (UUID) | 
  **create_workspace_view_request** | [**CreateWorkspaceViewRequest**](CreateWorkspaceViewRequest.md)| Workspace view creation payload | 
+ **x_omnismith_project_id** | **UUID**| The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential&#39;s &#x60;projects&#x60; claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code &#x60;stale_project_grant&#x60;; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 &#x60;no_project_selected&#x60;. Two clients holding the same credential may send different values at the same time. | [optional] 
 
 ### Return type
 
@@ -180,14 +186,16 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **201** | Workspace view created successfully |  -  |
 **401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
 **404** | Not Found |  -  |
 **422** | Validation Error |  -  |
 **500** | Internal Server Error |  -  |
+**409** | No project is selected. The caller is authenticated but the request is tenant-scoped, so a project must be selected before it can be answered. The response body carries &#x60;\&quot;code\&quot;: \&quot;no_project_selected\&quot;&#x60;, which clients branch on to offer a project picker rather than an access-denied message. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_workspace**
-> delete_workspace(id)
+> delete_workspace(id, x_omnismith_project_id=x_omnismith_project_id)
 
 Delete a workspace and its views
 
@@ -223,10 +231,11 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = omnismith_sdk.WorkspacesApi(api_client)
     id = UUID('0190a1b2-c3d4-7e8f-9a0b-1c2d3e4f5a6b') # UUID | Workspace unique identifier (UUID) to delete
+    x_omnismith_project_id = UUID('018b2f1b-7c3a-7d2e-8f1a-2b3c4d5e6f7d') # UUID | The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential's `projects` claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code `stale_project_grant`; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 `no_project_selected`. Two clients holding the same credential may send different values at the same time. (optional)
 
     try:
         # Delete a workspace and its views
-        api_instance.delete_workspace(id)
+        api_instance.delete_workspace(id, x_omnismith_project_id=x_omnismith_project_id)
     except Exception as e:
         print("Exception when calling WorkspacesApi->delete_workspace: %s\n" % e)
 ```
@@ -239,6 +248,7 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **UUID**| Workspace unique identifier (UUID) to delete | 
+ **x_omnismith_project_id** | **UUID**| The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential&#39;s &#x60;projects&#x60; claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code &#x60;stale_project_grant&#x60;; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 &#x60;no_project_selected&#x60;. Two clients holding the same credential may send different values at the same time. | [optional] 
 
 ### Return type
 
@@ -261,11 +271,12 @@ void (empty response body)
 **401** | Unauthorized |  -  |
 **404** | Not Found |  -  |
 **500** | Internal Server Error |  -  |
+**409** | No project is selected. The caller is authenticated but the request is tenant-scoped, so a project must be selected before it can be answered. The response body carries &#x60;\&quot;code\&quot;: \&quot;no_project_selected\&quot;&#x60;, which clients branch on to offer a project picker rather than an access-denied message. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_workspace_view**
-> delete_workspace_view(id, view_id)
+> delete_workspace_view(id, view_id, x_omnismith_project_id=x_omnismith_project_id)
 
 Delete a view / pane from a workspace
 
@@ -302,10 +313,11 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
     api_instance = omnismith_sdk.WorkspacesApi(api_client)
     id = UUID('0190a1b2-c3d4-7e8f-9a0b-1c2d3e4f5a6b') # UUID | Workspace unique identifier (UUID)
     view_id = UUID('0190a1b2-c3d4-7e8f-9a0b-1c2d3e4f5a6c') # UUID | Workspace view unique identifier (UUID) to delete
+    x_omnismith_project_id = UUID('018b2f1b-7c3a-7d2e-8f1a-2b3c4d5e6f7d') # UUID | The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential's `projects` claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code `stale_project_grant`; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 `no_project_selected`. Two clients holding the same credential may send different values at the same time. (optional)
 
     try:
         # Delete a view / pane from a workspace
-        api_instance.delete_workspace_view(id, view_id)
+        api_instance.delete_workspace_view(id, view_id, x_omnismith_project_id=x_omnismith_project_id)
     except Exception as e:
         print("Exception when calling WorkspacesApi->delete_workspace_view: %s\n" % e)
 ```
@@ -319,6 +331,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **UUID**| Workspace unique identifier (UUID) | 
  **view_id** | **UUID**| Workspace view unique identifier (UUID) to delete | 
+ **x_omnismith_project_id** | **UUID**| The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential&#39;s &#x60;projects&#x60; claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code &#x60;stale_project_grant&#x60;; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 &#x60;no_project_selected&#x60;. Two clients holding the same credential may send different values at the same time. | [optional] 
 
 ### Return type
 
@@ -341,11 +354,12 @@ void (empty response body)
 **401** | Unauthorized |  -  |
 **404** | Not Found |  -  |
 **500** | Internal Server Error |  -  |
+**409** | No project is selected. The caller is authenticated but the request is tenant-scoped, so a project must be selected before it can be answered. The response body carries &#x60;\&quot;code\&quot;: \&quot;no_project_selected\&quot;&#x60;, which clients branch on to offer a project picker rather than an access-denied message. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **duplicate_workspace**
-> DuplicateWorkspace201Response duplicate_workspace(id, duplicate_workspace_request=duplicate_workspace_request)
+> DuplicateWorkspace201Response duplicate_workspace(id, x_omnismith_project_id=x_omnismith_project_id, duplicate_workspace_request=duplicate_workspace_request)
 
 Duplicate an existing workspace and its views
 
@@ -383,11 +397,12 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = omnismith_sdk.WorkspacesApi(api_client)
     id = UUID('0190a1b2-c3d4-7e8f-9a0b-1c2d3e4f5a6b') # UUID | Source workspace unique identifier (UUID) to clone
+    x_omnismith_project_id = UUID('018b2f1b-7c3a-7d2e-8f1a-2b3c4d5e6f7d') # UUID | The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential's `projects` claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code `stale_project_grant`; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 `no_project_selected`. Two clients holding the same credential may send different values at the same time. (optional)
     duplicate_workspace_request = omnismith_sdk.DuplicateWorkspaceRequest() # DuplicateWorkspaceRequest | Optional configuration for the duplicated workspace (optional)
 
     try:
         # Duplicate an existing workspace and its views
-        api_response = api_instance.duplicate_workspace(id, duplicate_workspace_request=duplicate_workspace_request)
+        api_response = api_instance.duplicate_workspace(id, x_omnismith_project_id=x_omnismith_project_id, duplicate_workspace_request=duplicate_workspace_request)
         print("The response of WorkspacesApi->duplicate_workspace:\n")
         pprint(api_response)
     except Exception as e:
@@ -402,6 +417,7 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **UUID**| Source workspace unique identifier (UUID) to clone | 
+ **x_omnismith_project_id** | **UUID**| The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential&#39;s &#x60;projects&#x60; claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code &#x60;stale_project_grant&#x60;; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 &#x60;no_project_selected&#x60;. Two clients holding the same credential may send different values at the same time. | [optional] 
  **duplicate_workspace_request** | [**DuplicateWorkspaceRequest**](DuplicateWorkspaceRequest.md)| Optional configuration for the duplicated workspace | [optional] 
 
 ### Return type
@@ -423,14 +439,16 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **201** | Workspace duplicated successfully |  -  |
 **401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
 **404** | Not Found |  -  |
 **422** | Validation Error |  -  |
 **500** | Internal Server Error |  -  |
+**409** | No project is selected. The caller is authenticated but the request is tenant-scoped, so a project must be selected before it can be answered. The response body carries &#x60;\&quot;code\&quot;: \&quot;no_project_selected\&quot;&#x60;, which clients branch on to offer a project picker rather than an access-denied message. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_workspace**
-> WorkspaceDetailsResponse get_workspace(id)
+> WorkspaceDetailsResponse get_workspace(id, x_omnismith_project_id=x_omnismith_project_id)
 
 Get workspace details and its views
 
@@ -467,10 +485,11 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = omnismith_sdk.WorkspacesApi(api_client)
     id = UUID('0190a1b2-c3d4-7e8f-9a0b-1c2d3e4f5a6b') # UUID | Workspace unique identifier (UUID)
+    x_omnismith_project_id = UUID('018b2f1b-7c3a-7d2e-8f1a-2b3c4d5e6f7d') # UUID | The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential's `projects` claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code `stale_project_grant`; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 `no_project_selected`. Two clients holding the same credential may send different values at the same time. (optional)
 
     try:
         # Get workspace details and its views
-        api_response = api_instance.get_workspace(id)
+        api_response = api_instance.get_workspace(id, x_omnismith_project_id=x_omnismith_project_id)
         print("The response of WorkspacesApi->get_workspace:\n")
         pprint(api_response)
     except Exception as e:
@@ -485,6 +504,7 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **UUID**| Workspace unique identifier (UUID) | 
+ **x_omnismith_project_id** | **UUID**| The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential&#39;s &#x60;projects&#x60; claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code &#x60;stale_project_grant&#x60;; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 &#x60;no_project_selected&#x60;. Two clients holding the same credential may send different values at the same time. | [optional] 
 
 ### Return type
 
@@ -505,13 +525,15 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Workspace details with hydrated views |  -  |
 **401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
 **404** | Not Found |  -  |
 **500** | Internal Server Error |  -  |
+**409** | No project is selected. The caller is authenticated but the request is tenant-scoped, so a project must be selected before it can be answered. The response body carries &#x60;\&quot;code\&quot;: \&quot;no_project_selected\&quot;&#x60;, which clients branch on to offer a project picker rather than an access-denied message. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_workspace_view**
-> WorkspaceViewResponse get_workspace_view(id, view_id)
+> WorkspaceViewResponse get_workspace_view(id, view_id, x_omnismith_project_id=x_omnismith_project_id)
 
 Get details of a workspace view / pane
 
@@ -549,10 +571,11 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
     api_instance = omnismith_sdk.WorkspacesApi(api_client)
     id = UUID('0190a1b2-c3d4-7e8f-9a0b-1c2d3e4f5a6b') # UUID | Workspace unique identifier (UUID)
     view_id = UUID('0190a1b2-c3d4-7e8f-9a0b-1c2d3e4f5a6c') # UUID | Workspace view unique identifier (UUID)
+    x_omnismith_project_id = UUID('018b2f1b-7c3a-7d2e-8f1a-2b3c4d5e6f7d') # UUID | The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential's `projects` claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code `stale_project_grant`; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 `no_project_selected`. Two clients holding the same credential may send different values at the same time. (optional)
 
     try:
         # Get details of a workspace view / pane
-        api_response = api_instance.get_workspace_view(id, view_id)
+        api_response = api_instance.get_workspace_view(id, view_id, x_omnismith_project_id=x_omnismith_project_id)
         print("The response of WorkspacesApi->get_workspace_view:\n")
         pprint(api_response)
     except Exception as e:
@@ -568,6 +591,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **UUID**| Workspace unique identifier (UUID) | 
  **view_id** | **UUID**| Workspace view unique identifier (UUID) | 
+ **x_omnismith_project_id** | **UUID**| The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential&#39;s &#x60;projects&#x60; claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code &#x60;stale_project_grant&#x60;; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 &#x60;no_project_selected&#x60;. Two clients holding the same credential may send different values at the same time. | [optional] 
 
 ### Return type
 
@@ -588,13 +612,15 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Workspace view details |  -  |
 **401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
 **404** | Not Found |  -  |
 **500** | Internal Server Error |  -  |
+**409** | No project is selected. The caller is authenticated but the request is tenant-scoped, so a project must be selected before it can be answered. The response body carries &#x60;\&quot;code\&quot;: \&quot;no_project_selected\&quot;&#x60;, which clients branch on to offer a project picker rather than an access-denied message. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_template_views**
-> ListTemplateViews200Response list_template_views(template_id)
+> ListTemplateViews200Response list_template_views(template_id, x_omnismith_project_id=x_omnismith_project_id)
 
 List saved views for a specific template across workspaces
 
@@ -631,10 +657,11 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = omnismith_sdk.WorkspacesApi(api_client)
     template_id = UUID('0190a1b2-c3d4-7e8f-9a0b-1c2d3e4f5a6b') # UUID | Schema template unique identifier (UUID)
+    x_omnismith_project_id = UUID('018b2f1b-7c3a-7d2e-8f1a-2b3c4d5e6f7d') # UUID | The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential's `projects` claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code `stale_project_grant`; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 `no_project_selected`. Two clients holding the same credential may send different values at the same time. (optional)
 
     try:
         # List saved views for a specific template across workspaces
-        api_response = api_instance.list_template_views(template_id)
+        api_response = api_instance.list_template_views(template_id, x_omnismith_project_id=x_omnismith_project_id)
         print("The response of WorkspacesApi->list_template_views:\n")
         pprint(api_response)
     except Exception as e:
@@ -649,6 +676,7 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **template_id** | **UUID**| Schema template unique identifier (UUID) | 
+ **x_omnismith_project_id** | **UUID**| The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential&#39;s &#x60;projects&#x60; claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code &#x60;stale_project_grant&#x60;; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 &#x60;no_project_selected&#x60;. Two clients holding the same credential may send different values at the same time. | [optional] 
 
 ### Return type
 
@@ -669,16 +697,18 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | List of saved views for template |  -  |
 **401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
 **500** | Internal Server Error |  -  |
+**409** | No project is selected. The caller is authenticated but the request is tenant-scoped, so a project must be selected before it can be answered. The response body carries &#x60;\&quot;code\&quot;: \&quot;no_project_selected\&quot;&#x60;, which clients branch on to offer a project picker rather than an access-denied message. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_workspaces**
-> ListWorkspaces200Response list_workspaces()
+> ListWorkspaces200Response list_workspaces(x_omnismith_project_id=x_omnismith_project_id)
 
 List all workspaces for current project
 
-Retrieves all workspaces configured within the authenticated project context, including multi-pane layout structures (single, split-v, split-h, quad), view pane counts, sort ordering, and default workspace indicators for workbench navigation.
+Retrieves all top-level operational workspaces configured within the authenticated project context, including multi-pane layout structures (single, split-v, split-h, quad), view pane counts, sort ordering, and default workspace indicators for workbench navigation.
 
 ### Example
 
@@ -710,10 +740,11 @@ configuration = omnismith_sdk.Configuration(
 with omnismith_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = omnismith_sdk.WorkspacesApi(api_client)
+    x_omnismith_project_id = UUID('018b2f1b-7c3a-7d2e-8f1a-2b3c4d5e6f7d') # UUID | The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential's `projects` claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code `stale_project_grant`; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 `no_project_selected`. Two clients holding the same credential may send different values at the same time. (optional)
 
     try:
         # List all workspaces for current project
-        api_response = api_instance.list_workspaces()
+        api_response = api_instance.list_workspaces(x_omnismith_project_id=x_omnismith_project_id)
         print("The response of WorkspacesApi->list_workspaces:\n")
         pprint(api_response)
     except Exception as e:
@@ -724,7 +755,10 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **x_omnismith_project_id** | **UUID**| The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential&#39;s &#x60;projects&#x60; claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code &#x60;stale_project_grant&#x60;; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 &#x60;no_project_selected&#x60;. Two clients holding the same credential may send different values at the same time. | [optional] 
 
 ### Return type
 
@@ -746,11 +780,12 @@ This endpoint does not need any parameter.
 **200** | List of workspaces |  -  |
 **401** | Unauthorized |  -  |
 **500** | Internal Server Error |  -  |
+**409** | No project is selected. The caller is authenticated but the request is tenant-scoped, so a project must be selected before it can be answered. The response body carries &#x60;\&quot;code\&quot;: \&quot;no_project_selected\&quot;&#x60;, which clients branch on to offer a project picker rather than an access-denied message. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **reorder_workspace_views**
-> reorder_workspace_views(id, reorder_workspace_views_request)
+> reorder_workspace_views(id, reorder_workspace_views_request, x_omnismith_project_id=x_omnismith_project_id)
 
 Reorder views inside a workspace
 
@@ -788,10 +823,11 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
     api_instance = omnismith_sdk.WorkspacesApi(api_client)
     id = UUID('0190a1b2-c3d4-7e8f-9a0b-1c2d3e4f5a6b') # UUID | Workspace unique identifier (UUID)
     reorder_workspace_views_request = omnismith_sdk.ReorderWorkspaceViewsRequest() # ReorderWorkspaceViewsRequest | Payload containing ordered view IDs
+    x_omnismith_project_id = UUID('018b2f1b-7c3a-7d2e-8f1a-2b3c4d5e6f7d') # UUID | The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential's `projects` claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code `stale_project_grant`; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 `no_project_selected`. Two clients holding the same credential may send different values at the same time. (optional)
 
     try:
         # Reorder views inside a workspace
-        api_instance.reorder_workspace_views(id, reorder_workspace_views_request)
+        api_instance.reorder_workspace_views(id, reorder_workspace_views_request, x_omnismith_project_id=x_omnismith_project_id)
     except Exception as e:
         print("Exception when calling WorkspacesApi->reorder_workspace_views: %s\n" % e)
 ```
@@ -805,6 +841,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **UUID**| Workspace unique identifier (UUID) | 
  **reorder_workspace_views_request** | [**ReorderWorkspaceViewsRequest**](ReorderWorkspaceViewsRequest.md)| Payload containing ordered view IDs | 
+ **x_omnismith_project_id** | **UUID**| The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential&#39;s &#x60;projects&#x60; claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code &#x60;stale_project_grant&#x60;; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 &#x60;no_project_selected&#x60;. Two clients holding the same credential may send different values at the same time. | [optional] 
 
 ### Return type
 
@@ -828,11 +865,12 @@ void (empty response body)
 **404** | Not Found |  -  |
 **422** | Validation Error |  -  |
 **500** | Internal Server Error |  -  |
+**409** | No project is selected. The caller is authenticated but the request is tenant-scoped, so a project must be selected before it can be answered. The response body carries &#x60;\&quot;code\&quot;: \&quot;no_project_selected\&quot;&#x60;, which clients branch on to offer a project picker rather than an access-denied message. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **set_default_workspace**
-> set_default_workspace(id)
+> set_default_workspace(id, x_omnismith_project_id=x_omnismith_project_id)
 
 Set workspace as the default workspace
 
@@ -868,10 +906,11 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = omnismith_sdk.WorkspacesApi(api_client)
     id = UUID('0190a1b2-c3d4-7e8f-9a0b-1c2d3e4f5a6b') # UUID | Workspace unique identifier (UUID) to designate as default
+    x_omnismith_project_id = UUID('018b2f1b-7c3a-7d2e-8f1a-2b3c4d5e6f7d') # UUID | The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential's `projects` claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code `stale_project_grant`; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 `no_project_selected`. Two clients holding the same credential may send different values at the same time. (optional)
 
     try:
         # Set workspace as the default workspace
-        api_instance.set_default_workspace(id)
+        api_instance.set_default_workspace(id, x_omnismith_project_id=x_omnismith_project_id)
     except Exception as e:
         print("Exception when calling WorkspacesApi->set_default_workspace: %s\n" % e)
 ```
@@ -884,6 +923,7 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **UUID**| Workspace unique identifier (UUID) to designate as default | 
+ **x_omnismith_project_id** | **UUID**| The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential&#39;s &#x60;projects&#x60; claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code &#x60;stale_project_grant&#x60;; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 &#x60;no_project_selected&#x60;. Two clients holding the same credential may send different values at the same time. | [optional] 
 
 ### Return type
 
@@ -904,13 +944,15 @@ void (empty response body)
 |-------------|-------------|------------------|
 **204** | Workspace designated as default successfully |  -  |
 **401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
 **404** | Not Found |  -  |
 **500** | Internal Server Error |  -  |
+**409** | No project is selected. The caller is authenticated but the request is tenant-scoped, so a project must be selected before it can be answered. The response body carries &#x60;\&quot;code\&quot;: \&quot;no_project_selected\&quot;&#x60;, which clients branch on to offer a project picker rather than an access-denied message. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_workspace**
-> update_workspace(id, update_workspace_request)
+> update_workspace(id, update_workspace_request, x_omnismith_project_id=x_omnismith_project_id)
 
 Update workspace metadata and layout
 
@@ -948,10 +990,11 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
     api_instance = omnismith_sdk.WorkspacesApi(api_client)
     id = UUID('0190a1b2-c3d4-7e8f-9a0b-1c2d3e4f5a6b') # UUID | Workspace unique identifier (UUID) to update
     update_workspace_request = omnismith_sdk.UpdateWorkspaceRequest() # UpdateWorkspaceRequest | Workspace update payload
+    x_omnismith_project_id = UUID('018b2f1b-7c3a-7d2e-8f1a-2b3c4d5e6f7d') # UUID | The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential's `projects` claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code `stale_project_grant`; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 `no_project_selected`. Two clients holding the same credential may send different values at the same time. (optional)
 
     try:
         # Update workspace metadata and layout
-        api_instance.update_workspace(id, update_workspace_request)
+        api_instance.update_workspace(id, update_workspace_request, x_omnismith_project_id=x_omnismith_project_id)
     except Exception as e:
         print("Exception when calling WorkspacesApi->update_workspace: %s\n" % e)
 ```
@@ -965,6 +1008,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **UUID**| Workspace unique identifier (UUID) to update | 
  **update_workspace_request** | [**UpdateWorkspaceRequest**](UpdateWorkspaceRequest.md)| Workspace update payload | 
+ **x_omnismith_project_id** | **UUID**| The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential&#39;s &#x60;projects&#x60; claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code &#x60;stale_project_grant&#x60;; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 &#x60;no_project_selected&#x60;. Two clients holding the same credential may send different values at the same time. | [optional] 
 
 ### Return type
 
@@ -988,15 +1032,16 @@ void (empty response body)
 **404** | Not Found |  -  |
 **422** | Validation Error |  -  |
 **500** | Internal Server Error |  -  |
+**409** | No project is selected. The caller is authenticated but the request is tenant-scoped, so a project must be selected before it can be answered. The response body carries &#x60;\&quot;code\&quot;: \&quot;no_project_selected\&quot;&#x60;, which clients branch on to offer a project picker rather than an access-denied message. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_workspace_view**
-> update_workspace_view(id, view_id, update_workspace_view_request)
+> update_workspace_view(id, view_id, update_workspace_view_request, x_omnismith_project_id=x_omnismith_project_id)
 
 Update workspace view / pane filters, sort, display mode, or columns
 
-Updates the configuration of a specific workspace view pane, modifying its title, filtering rules, search query and mode, sorting preferences, presentation display mode (table or grid), column visibility lists, or pane display sequence.
+Updates the configuration of a specific workspace view pane, modifying its title, filtering rules, search query and mode, sorting preferences, presentation display mode (table or grid), column visibility lists, or pane display sequence. A workspace view represents a specialized filtered lens (e.g. "Telegram Channel Hub") inside an operational workspace.
 
 ### Example
 
@@ -1031,10 +1076,11 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
     id = UUID('0190a1b2-c3d4-7e8f-9a0b-1c2d3e4f5a6b') # UUID | Workspace unique identifier (UUID)
     view_id = UUID('0190a1b2-c3d4-7e8f-9a0b-1c2d3e4f5a6c') # UUID | Workspace view unique identifier (UUID) to update
     update_workspace_view_request = omnismith_sdk.UpdateWorkspaceViewRequest() # UpdateWorkspaceViewRequest | Workspace view update payload
+    x_omnismith_project_id = UUID('018b2f1b-7c3a-7d2e-8f1a-2b3c4d5e6f7d') # UUID | The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential's `projects` claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code `stale_project_grant`; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 `no_project_selected`. Two clients holding the same credential may send different values at the same time. (optional)
 
     try:
         # Update workspace view / pane filters, sort, display mode, or columns
-        api_instance.update_workspace_view(id, view_id, update_workspace_view_request)
+        api_instance.update_workspace_view(id, view_id, update_workspace_view_request, x_omnismith_project_id=x_omnismith_project_id)
     except Exception as e:
         print("Exception when calling WorkspacesApi->update_workspace_view: %s\n" % e)
 ```
@@ -1049,6 +1095,7 @@ Name | Type | Description  | Notes
  **id** | **UUID**| Workspace unique identifier (UUID) | 
  **view_id** | **UUID**| Workspace view unique identifier (UUID) to update | 
  **update_workspace_view_request** | [**UpdateWorkspaceViewRequest**](UpdateWorkspaceViewRequest.md)| Workspace view update payload | 
+ **x_omnismith_project_id** | **UUID**| The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential&#39;s &#x60;projects&#x60; claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code &#x60;stale_project_grant&#x60;; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 &#x60;no_project_selected&#x60;. Two clients holding the same credential may send different values at the same time. | [optional] 
 
 ### Return type
 
@@ -1069,9 +1116,11 @@ void (empty response body)
 |-------------|-------------|------------------|
 **204** | Workspace view updated successfully |  -  |
 **401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
 **404** | Not Found |  -  |
 **422** | Validation Error |  -  |
 **500** | Internal Server Error |  -  |
+**409** | No project is selected. The caller is authenticated but the request is tenant-scoped, so a project must be selected before it can be answered. The response body carries &#x60;\&quot;code\&quot;: \&quot;no_project_selected\&quot;&#x60;, which clients branch on to offer a project picker rather than an access-denied message. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

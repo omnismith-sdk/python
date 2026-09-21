@@ -1,16 +1,16 @@
 # EntityAttributeValue
 
-Structured attribute value representation including raw serialized value, resolved display value for references and list items, and attribute metadata
+Verbose attribute value item returned when `verbose=true`: raw serialized value, resolved display label for references and list items, and the attribute identity
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**value** | **str** | Raw serialized attribute value (string, numeric string, ISO date, or UUID) | [optional] 
-**custom_value** | **str** | Resolved display label or custom representation (for list options, reference entities, or formatted values) | [optional] 
-**reference_entity_id** | **UUID** | Target entity UUID when the attribute kind is reference | [optional] 
-**attribute_id** | **UUID** | Canonical attribute definition UUID | [optional] 
-**attribute_slug** | **str** | Human-readable attribute slug identifier | [optional] 
+**id** | **UUID** | Canonical attribute definition UUID | 
+**slug** | **str** | Human-readable attribute slug identifier; null when the attribute has no slug | 
+**value** | **str** | Raw serialized attribute value (string, numeric string, ISO date, or UUID); empty string when unset | 
+**custom_value** | **str** | Resolved display label (list option label, referenced entity display value, original filename) or the raw value for scalars | 
+**reference_entity_id** | **UUID** | Target entity UUID when the attribute kind is reference | 
 
 ## Example
 

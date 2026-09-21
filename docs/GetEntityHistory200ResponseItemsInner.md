@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **value** | **str** | New serialized attribute value | [optional] 
 **entity_id** | **UUID** | Target entity UUID | [optional] 
 **author_email** | **str** | Actor email who performed the change | [optional] 
+**action_slug** | **str** | Slug of the entity action that produced this change, when the write was an action execution rather than a plain update | [optional] 
 
 ## Example
 

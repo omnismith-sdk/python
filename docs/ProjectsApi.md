@@ -13,7 +13,7 @@ Method | HTTP request | Description
 [**list_project_users**](ProjectsApi.md#list_project_users) | **GET** /projects/{id}/users | List users in project
 [**list_projects**](ProjectsApi.md#list_projects) | **GET** /projects | List all projects
 [**remove_user_from_project**](ProjectsApi.md#remove_user_from_project) | **DELETE** /projects/{id}/users/{userId} | Remove user from project
-[**update_project**](ProjectsApi.md#update_project) | **PUT** /projects/{id} | Update a project
+[**update_project**](ProjectsApi.md#update_project) | **PUT** /projects/{id} | Update project metadata
 
 
 # **assign_user_to_project**
@@ -721,9 +721,9 @@ void (empty response body)
 # **update_project**
 > update_project(id, update_project_request)
 
-Update a project
+Update project metadata
 
-Updates project metadata such as name and description. Requires project administrator permissions.
+Updates project metadata including display name and description (context, guidelines, or instructions). Requires project administrator permissions.
 
 ### Example
 
@@ -759,7 +759,7 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
     update_project_request = omnismith_sdk.UpdateProjectRequest() # UpdateProjectRequest | 
 
     try:
-        # Update a project
+        # Update project metadata
         api_instance.update_project(id, update_project_request)
     except Exception as e:
         print("Exception when calling ProjectsApi->update_project: %s\n" % e)

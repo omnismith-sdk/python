@@ -7,7 +7,7 @@ Filter and search criteria for scoping entity CSV export
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **global_search** | **str** | Full-text search query string across all string dimension attributes | [optional] 
-**filters** | [**List[ExportEntitiesRequestFiltersInner]**](ExportEntitiesRequestFiltersInner.md) | List of structured attribute and metadata filter conditions | [optional] 
+**filter_groups** | **List[List[EntityFilter]]** | Filter groups: clauses inside a group are AND-ed, groups are OR-ed. &#x60;[]&#x60; applies no filter, &#x60;[[a, b]]&#x60; is &#x60;a AND b&#x60;, &#x60;[[a], [b, c]]&#x60; is &#x60;a OR (b AND c)&#x60;. | [optional] 
 
 ## Example
 

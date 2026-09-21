@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 
 # **delete_file_attachment**
-> delete_file_attachment(id)
+> delete_file_attachment(id, x_omnismith_project_id=x_omnismith_project_id)
 
 Delete a file attachment
 
@@ -48,10 +48,11 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = omnismith_sdk.FileAttachmentApi(api_client)
     id = UUID('018b2f1b-8c1a-75b3-8000-7f0000010000') # UUID | File attachment UUID to delete
+    x_omnismith_project_id = UUID('018b2f1b-7c3a-7d2e-8f1a-2b3c4d5e6f7d') # UUID | The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential's `projects` claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code `stale_project_grant`; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 `no_project_selected`. Two clients holding the same credential may send different values at the same time. (optional)
 
     try:
         # Delete a file attachment
-        api_instance.delete_file_attachment(id)
+        api_instance.delete_file_attachment(id, x_omnismith_project_id=x_omnismith_project_id)
     except Exception as e:
         print("Exception when calling FileAttachmentApi->delete_file_attachment: %s\n" % e)
 ```
@@ -64,6 +65,7 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **UUID**| File attachment UUID to delete | 
+ **x_omnismith_project_id** | **UUID**| The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential&#39;s &#x60;projects&#x60; claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code &#x60;stale_project_grant&#x60;; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 &#x60;no_project_selected&#x60;. Two clients holding the same credential may send different values at the same time. | [optional] 
 
 ### Return type
 
@@ -76,7 +78,7 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
@@ -84,11 +86,12 @@ void (empty response body)
 |-------------|-------------|------------------|
 **204** | File deleted |  -  |
 **404** | File not found |  -  |
+**409** | No project is selected. The caller is authenticated but the request is tenant-scoped, so a project must be selected before it can be answered. The response body carries &#x60;\&quot;code\&quot;: \&quot;no_project_selected\&quot;&#x60;, which clients branch on to offer a project picker rather than an access-denied message. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **download_file_attachment**
-> download_file_attachment(id)
+> download_file_attachment(id, x_omnismith_project_id=x_omnismith_project_id)
 
 Download a file attachment
 
@@ -124,10 +127,11 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = omnismith_sdk.FileAttachmentApi(api_client)
     id = UUID('018b2f1b-8c1a-75b3-8000-7f0000010000') # UUID | Unique UUID identifier of the file attachment to download
+    x_omnismith_project_id = UUID('018b2f1b-7c3a-7d2e-8f1a-2b3c4d5e6f7d') # UUID | The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential's `projects` claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code `stale_project_grant`; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 `no_project_selected`. Two clients holding the same credential may send different values at the same time. (optional)
 
     try:
         # Download a file attachment
-        api_instance.download_file_attachment(id)
+        api_instance.download_file_attachment(id, x_omnismith_project_id=x_omnismith_project_id)
     except Exception as e:
         print("Exception when calling FileAttachmentApi->download_file_attachment: %s\n" % e)
 ```
@@ -140,6 +144,7 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **UUID**| Unique UUID identifier of the file attachment to download | 
+ **x_omnismith_project_id** | **UUID**| The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential&#39;s &#x60;projects&#x60; claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code &#x60;stale_project_grant&#x60;; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 &#x60;no_project_selected&#x60;. Two clients holding the same credential may send different values at the same time. | [optional] 
 
 ### Return type
 
@@ -152,7 +157,7 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/octet-stream
+ - **Accept**: application/octet-stream, application/json
 
 ### HTTP response details
 
@@ -160,11 +165,12 @@ void (empty response body)
 |-------------|-------------|------------------|
 **200** | File content |  -  |
 **404** | File not found |  -  |
+**409** | No project is selected. The caller is authenticated but the request is tenant-scoped, so a project must be selected before it can be answered. The response body carries &#x60;\&quot;code\&quot;: \&quot;no_project_selected\&quot;&#x60;, which clients branch on to offer a project picker rather than an access-denied message. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_file_attachment_metadata**
-> FileAttachmentResponse get_file_attachment_metadata(id)
+> FileAttachmentResponse get_file_attachment_metadata(id, x_omnismith_project_id=x_omnismith_project_id)
 
 Get file metadata without downloading content
 
@@ -201,10 +207,11 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = omnismith_sdk.FileAttachmentApi(api_client)
     id = UUID('018b2f1b-8c1a-75b3-8000-7f0000010000') # UUID | Unique UUID identifier of the file attachment
+    x_omnismith_project_id = UUID('018b2f1b-7c3a-7d2e-8f1a-2b3c4d5e6f7d') # UUID | The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential's `projects` claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code `stale_project_grant`; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 `no_project_selected`. Two clients holding the same credential may send different values at the same time. (optional)
 
     try:
         # Get file metadata without downloading content
-        api_response = api_instance.get_file_attachment_metadata(id)
+        api_response = api_instance.get_file_attachment_metadata(id, x_omnismith_project_id=x_omnismith_project_id)
         print("The response of FileAttachmentApi->get_file_attachment_metadata:\n")
         pprint(api_response)
     except Exception as e:
@@ -219,6 +226,7 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **UUID**| Unique UUID identifier of the file attachment | 
+ **x_omnismith_project_id** | **UUID**| The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential&#39;s &#x60;projects&#x60; claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code &#x60;stale_project_grant&#x60;; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 &#x60;no_project_selected&#x60;. Two clients holding the same credential may send different values at the same time. | [optional] 
 
 ### Return type
 
@@ -239,11 +247,12 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | File metadata |  -  |
 **404** | File not found |  -  |
+**409** | No project is selected. The caller is authenticated but the request is tenant-scoped, so a project must be selected before it can be answered. The response body carries &#x60;\&quot;code\&quot;: \&quot;no_project_selected\&quot;&#x60;, which clients branch on to offer a project picker rather than an access-denied message. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_file_attachment_thumbnail**
-> get_file_attachment_thumbnail(id, width=width, height=height)
+> get_file_attachment_thumbnail(id, x_omnismith_project_id=x_omnismith_project_id, width=width, height=height)
 
 Get image thumbnail
 
@@ -279,12 +288,13 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = omnismith_sdk.FileAttachmentApi(api_client)
     id = UUID('018b2f1b-8c1a-75b3-8000-7f0000010000') # UUID | Unique UUID identifier of the image file attachment
+    x_omnismith_project_id = UUID('018b2f1b-7c3a-7d2e-8f1a-2b3c4d5e6f7d') # UUID | The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential's `projects` claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code `stale_project_grant`; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 `no_project_selected`. Two clients holding the same credential may send different values at the same time. (optional)
     width = 200 # int | Target thumbnail width in pixels (range 50 to 1000, default 200) (optional) (default to 200)
     height = 200 # int | Target thumbnail height in pixels (range 50 to 1000, default 200) (optional) (default to 200)
 
     try:
         # Get image thumbnail
-        api_instance.get_file_attachment_thumbnail(id, width=width, height=height)
+        api_instance.get_file_attachment_thumbnail(id, x_omnismith_project_id=x_omnismith_project_id, width=width, height=height)
     except Exception as e:
         print("Exception when calling FileAttachmentApi->get_file_attachment_thumbnail: %s\n" % e)
 ```
@@ -297,6 +307,7 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **UUID**| Unique UUID identifier of the image file attachment | 
+ **x_omnismith_project_id** | **UUID**| The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential&#39;s &#x60;projects&#x60; claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code &#x60;stale_project_grant&#x60;; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 &#x60;no_project_selected&#x60;. Two clients holding the same credential may send different values at the same time. | [optional] 
  **width** | **int**| Target thumbnail width in pixels (range 50 to 1000, default 200) | [optional] [default to 200]
  **height** | **int**| Target thumbnail height in pixels (range 50 to 1000, default 200) | [optional] [default to 200]
 
@@ -311,7 +322,7 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: image/jpeg
+ - **Accept**: image/jpeg, application/json
 
 ### HTTP response details
 
@@ -320,11 +331,12 @@ void (empty response body)
 **200** | Thumbnail image |  -  |
 **400** | Not an image or invalid dimensions |  -  |
 **404** | File not found |  -  |
+**409** | No project is selected. The caller is authenticated but the request is tenant-scoped, so a project must be selected before it can be answered. The response body carries &#x60;\&quot;code\&quot;: \&quot;no_project_selected\&quot;&#x60;, which clients branch on to offer a project picker rather than an access-denied message. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **upload_file_attachment**
-> FileAttachmentResponse upload_file_attachment(file, id=id, context=context, ttl_hours=ttl_hours)
+> FileAttachmentResponse upload_file_attachment(file, x_omnismith_project_id=x_omnismith_project_id, id=id, context=context, ttl_hours=ttl_hours)
 
 Upload a file attachment
 
@@ -361,13 +373,14 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = omnismith_sdk.FileAttachmentApi(api_client)
     file = None # bytes | 
+    x_omnismith_project_id = UUID('018b2f1b-7c3a-7d2e-8f1a-2b3c4d5e6f7d') # UUID | The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential's `projects` claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code `stale_project_grant`; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 `no_project_selected`. Two clients holding the same credential may send different values at the same time. (optional)
     id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID |  (optional)
     context = entity # str |  (optional) (default to entity)
     ttl_hours = 56 # int |  (optional)
 
     try:
         # Upload a file attachment
-        api_response = api_instance.upload_file_attachment(file, id=id, context=context, ttl_hours=ttl_hours)
+        api_response = api_instance.upload_file_attachment(file, x_omnismith_project_id=x_omnismith_project_id, id=id, context=context, ttl_hours=ttl_hours)
         print("The response of FileAttachmentApi->upload_file_attachment:\n")
         pprint(api_response)
     except Exception as e:
@@ -382,6 +395,7 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **file** | **bytes**|  | 
+ **x_omnismith_project_id** | **UUID**| The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential&#39;s &#x60;projects&#x60; claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code &#x60;stale_project_grant&#x60;; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 &#x60;no_project_selected&#x60;. Two clients holding the same credential may send different values at the same time. | [optional] 
  **id** | **UUID**|  | [optional] 
  **context** | **str**|  | [optional] [default to entity]
  **ttl_hours** | **int**|  | [optional] 
@@ -406,6 +420,7 @@ Name | Type | Description  | Notes
 **201** | File uploaded |  -  |
 **400** | Bad request |  -  |
 **422** | Validation Error |  -  |
+**409** | No project is selected. The caller is authenticated but the request is tenant-scoped, so a project must be selected before it can be answered. The response body carries &#x60;\&quot;code\&quot;: \&quot;no_project_selected\&quot;&#x60;, which clients branch on to offer a project picker rather than an access-denied message. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

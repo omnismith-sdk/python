@@ -18,6 +18,9 @@ Name | Type | Description | Notes
 **series** | [**List[ResolvedChartBlockResponseSeriesInner]**](ResolvedChartBlockResponseSeriesInner.md) | Time-series data grouped per entity | [optional] 
 **items** | [**List[ResolvedListBlockResponseItemsInner]**](ResolvedListBlockResponseItemsInner.md) | List of matching entity records with hydrated attributes | [optional] 
 **total_count** | **int** | Total number of items matching filters | [optional] 
+**limit** | **int** | Maximum number of groups returned, as configured on the block | [optional] 
+**truncated** | **bool** | Whether more groups exist beyond &#x60;limit&#x60; | [optional] 
+**groups** | [**List[ResolvedAggregateBlockResponseGroupsInner]**](ResolvedAggregateBlockResponseGroupsInner.md) | One row per group, in the order configured on the block | [optional] 
 
 ## Example
 

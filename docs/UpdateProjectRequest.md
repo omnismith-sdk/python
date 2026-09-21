@@ -1,12 +1,13 @@
 # UpdateProjectRequest
 
+Payload for updating project metadata. Name and description are optional; omitted fields are preserved.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** |  | 
-**description** | **str** |  | [optional] 
+**name** | **str** | Updated display name of the project | [optional] 
+**description** | **str** | Updated description or context guidelines for the project. Pass null to clear. | [optional] 
 
 ## Example
 

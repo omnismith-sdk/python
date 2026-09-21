@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **list_audit_logs**
-> ListAuditLogs200Response list_audit_logs(page=page, limit=limit, sort_by=sort_by, sort_direction=sort_direction, search=search, event_type=event_type, resource_type=resource_type, resource_id=resource_id, author_email=author_email, start=start, end=end)
+> ListAuditLogs200Response list_audit_logs(x_omnismith_project_id=x_omnismith_project_id, page=page, limit=limit, sort_by=sort_by, sort_direction=sort_direction, search=search, event_type=event_type, resource_type=resource_type, resource_id=resource_id, author_email=author_email, start=start, end=end)
 
 List project audit logs
 
@@ -58,6 +58,7 @@ configuration = omnismith_sdk.Configuration(
 with omnismith_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = omnismith_sdk.AuditLogApi(api_client)
+    x_omnismith_project_id = UUID('018b2f1b-7c3a-7d2e-8f1a-2b3c4d5e6f7d') # UUID | The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential's `projects` claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code `stale_project_grant`; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 `no_project_selected`. Two clients holding the same credential may send different values at the same time. (optional)
     page = 1 # int | 1-based page number for pagination (optional) (default to 1)
     limit = 20 # int | Number of audit log records per page (1-100) (optional) (default to 20)
     sort_by = occurred_at # str | Field to sort audit log entries by (optional) (default to occurred_at)
@@ -72,7 +73,7 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
 
     try:
         # List project audit logs
-        api_response = api_instance.list_audit_logs(page=page, limit=limit, sort_by=sort_by, sort_direction=sort_direction, search=search, event_type=event_type, resource_type=resource_type, resource_id=resource_id, author_email=author_email, start=start, end=end)
+        api_response = api_instance.list_audit_logs(x_omnismith_project_id=x_omnismith_project_id, page=page, limit=limit, sort_by=sort_by, sort_direction=sort_direction, search=search, event_type=event_type, resource_type=resource_type, resource_id=resource_id, author_email=author_email, start=start, end=end)
         print("The response of AuditLogApi->list_audit_logs:\n")
         pprint(api_response)
     except Exception as e:
@@ -86,6 +87,7 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **x_omnismith_project_id** | **UUID**| The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential&#39;s &#x60;projects&#x60; claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code &#x60;stale_project_grant&#x60;; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 &#x60;no_project_selected&#x60;. Two clients holding the same credential may send different values at the same time. | [optional] 
  **page** | **int**| 1-based page number for pagination | [optional] [default to 1]
  **limit** | **int**| Number of audit log records per page (1-100) | [optional] [default to 20]
  **sort_by** | **str**| Field to sort audit log entries by | [optional] [default to occurred_at]
@@ -118,6 +120,7 @@ Name | Type | Description  | Notes
 **200** | Paginated list of audit log records |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
+**409** | No project is selected. The caller is authenticated but the request is tenant-scoped, so a project must be selected before it can be answered. The response body carries &#x60;\&quot;code\&quot;: \&quot;no_project_selected\&quot;&#x60;, which clients branch on to offer a project picker rather than an access-denied message. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

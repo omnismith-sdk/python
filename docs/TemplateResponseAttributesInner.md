@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **attribute_id** | **UUID** | Attribute UUID | 
-**default_value** | **str** | Per-template default value for newly created entities (or null) | [optional] 
+**default_value** | **str** | Per-template default value for newly created entities (or null). For List attributes, stores the list item UUID. | [optional] 
 
 ## Example
 

@@ -6,9 +6,10 @@ Updated event trigger criteria
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**type** | **str** | Trigger event type | [optional] 
+**type** | **str** | Trigger event type. &#x60;on_action_executed&#x60; fires when the named entity action runs on a record, whether or not the write changed anything. | [optional] 
 **template_id** | **UUID** | Template UUID | [optional] 
 **attribute_id** | **UUID** | Attribute UUID for attribute change triggers | [optional] 
+**action_id** | **UUID** | Entity action UUID; required for &#x60;on_action_executed&#x60;, must be null otherwise | [optional] 
 
 ## Example
 

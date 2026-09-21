@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **title** | **str** |  | [optional] 
 **status** | **int** |  | [optional] 
 **detail** | **str** |  | [optional] 
+**code** | **str** |  | [optional] 
 
 ## Example
 

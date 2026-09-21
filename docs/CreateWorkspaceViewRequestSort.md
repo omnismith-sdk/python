@@ -6,7 +6,7 @@ Active sort configuration defining target field and direction
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**active** | **str** | Attribute key or system column to sort by | [optional] 
+**active** | **str** | Attribute key (UUID or slug) or system column to sort by | [optional] 
 **direction** | **str** | Sort ordering direction | [optional] 
 
 ## Example

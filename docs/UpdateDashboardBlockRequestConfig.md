@@ -21,6 +21,8 @@ Name | Type | Description | Notes
 **limit** | **int** | Entity limit for list blocks | [optional] 
 **sort** | **object** | Sort config object for list blocks | [optional] 
 **visible_attributes** | **List[str]** | List block visible attribute IDs | [optional] 
+**group_by** | **List[str]** | Aggregate block group-by fields, at most 3 | [optional] 
+**aggregations** | [**List[UpdateDashboardBlockRequestConfigAggregationsInner]**](UpdateDashboardBlockRequestConfigAggregationsInner.md) | Aggregate block reduces (1-10 entries) | [optional] 
 **filters** | **List[object]** | Entity filter rules | [optional] 
 **x** | **int** | Horizontal grid column (0..11 on 12-column grid) | [optional] 
 **y** | **int** | Vertical grid row (0..N) | [optional] 

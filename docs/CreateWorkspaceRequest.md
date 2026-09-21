@@ -1,16 +1,16 @@
 # CreateWorkspaceRequest
 
-Payload for creating a new workspace workbench
+Payload for creating a new top-level operational workspace workbench
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** | Human-readable display name of the workspace | 
-**description** | **str** | Detailed description of the workspace purpose and workflow | [optional] 
-**layout** | **str** | Multi-pane grid layout arrangement | [optional] [default to 'split-v']
+**name** | **str** | Human-readable display name of the workspace (e.g. \&quot;Editorial &amp; Content Calendar\&quot;, \&quot;Guidelines &amp; Strategy\&quot;, \&quot;Media Studio\&quot;) | 
+**description** | **str** | Detailed description of the workspace purpose and operational domain | [optional] 
+**layout** | **str** | Multi-pane grid layout arrangement (single, split-v, split-h, quad) | [optional] [default to 'single']
 **is_default** | **bool** | Whether this workspace serves as the default landing view for the project | [optional] [default to False]
-**initial_template_ids** | **List[UUID]** | Optional list of entity template IDs to automatically create and mount as initial view panes | [optional] 
+**initial_template_ids** | **List[str]** | Optional list of entity template UUIDs or slugs to automatically create and mount as initial view panes in this workspace | [optional] 
 
 ## Example
 

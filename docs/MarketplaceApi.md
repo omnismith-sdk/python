@@ -95,7 +95,7 @@ void (empty response body)
 
 Get marketplace blueprint details
 
-Retrieves complete information for a specific marketplace blueprint by its UUID. Returns full blueprint metadata, publisher details, popularity metrics, and packaged blueprint schema definition containing template schemas, attribute configurations, and optional demo entities.
+Retrieves complete information for a specific marketplace blueprint by its UUID. Returns full blueprint metadata, publisher details, popularity metrics, and packaged blueprint schema definition containing template schemas, attribute configurations, the rules and actions of those templates, and optional demo entities.
 
 ### Example
 
@@ -160,11 +160,11 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **install_marketplace_blueprint**
-> install_marketplace_blueprint(id, install_marketplace_blueprint_request)
+> install_marketplace_blueprint(id, x_omnismith_project_id=x_omnismith_project_id, install_marketplace_blueprint_request=install_marketplace_blueprint_request)
 
 Install a marketplace blueprint into a project
 
-Installs a marketplace blueprint into the specified project context. Provisions all packaged templates, attributes, and relationships defined in the blueprint schema, and optionally populates sample demo entities. Automatically increments the installation count for the blueprint.
+Installs a marketplace blueprint into the project the request acts on. Provisions all packaged templates, attributes, relationships, rules and actions defined in the blueprint schema, and optionally populates sample demo entities. Automatically increments the installation count for the blueprint.
 
 ### Example
 
@@ -197,11 +197,12 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = omnismith_sdk.MarketplaceApi(api_client)
     id = UUID('01912ecb-4654-7890-a1b2-c3d4e5f60003') # UUID | Unique UUID of the blueprint to install
-    install_marketplace_blueprint_request = omnismith_sdk.InstallMarketplaceBlueprintRequest() # InstallMarketplaceBlueprintRequest | 
+    x_omnismith_project_id = UUID('018b2f1b-7c3a-7d2e-8f1a-2b3c4d5e6f7d') # UUID | The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential's `projects` claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code `stale_project_grant`; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 `no_project_selected`. Two clients holding the same credential may send different values at the same time. (optional)
+    install_marketplace_blueprint_request = omnismith_sdk.InstallMarketplaceBlueprintRequest() # InstallMarketplaceBlueprintRequest |  (optional)
 
     try:
         # Install a marketplace blueprint into a project
-        api_instance.install_marketplace_blueprint(id, install_marketplace_blueprint_request)
+        api_instance.install_marketplace_blueprint(id, x_omnismith_project_id=x_omnismith_project_id, install_marketplace_blueprint_request=install_marketplace_blueprint_request)
     except Exception as e:
         print("Exception when calling MarketplaceApi->install_marketplace_blueprint: %s\n" % e)
 ```
@@ -214,7 +215,8 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **UUID**| Unique UUID of the blueprint to install | 
- **install_marketplace_blueprint_request** | [**InstallMarketplaceBlueprintRequest**](InstallMarketplaceBlueprintRequest.md)|  | 
+ **x_omnismith_project_id** | **UUID**| The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential&#39;s &#x60;projects&#x60; claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code &#x60;stale_project_grant&#x60;; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 &#x60;no_project_selected&#x60;. Two clients holding the same credential may send different values at the same time. | [optional] 
+ **install_marketplace_blueprint_request** | [**InstallMarketplaceBlueprintRequest**](InstallMarketplaceBlueprintRequest.md)|  | [optional] 
 
 ### Return type
 
@@ -235,9 +237,10 @@ void (empty response body)
 |-------------|-------------|------------------|
 **204** | Blueprint successfully installed into the target project |  -  |
 **401** | Unauthorized |  -  |
-**403** | Forbidden - Insufficient project permissions |  -  |
+**403** | Forbidden - insufficient permissions, or the selected project is not one the credential may act in |  -  |
 **404** | Blueprint not found |  -  |
 **422** | Validation Error |  -  |
+**409** | No project is selected. The caller is authenticated but the request is tenant-scoped, so a project must be selected before it can be answered. The response body carries &#x60;\&quot;code\&quot;: \&quot;no_project_selected\&quot;&#x60;, which clients branch on to offer a project picker rather than an access-denied message. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -306,11 +309,11 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **publish_marketplace_blueprint**
-> GetMarketplaceBlueprint200Response publish_marketplace_blueprint(publish_marketplace_blueprint_request)
+> GetMarketplaceBlueprint200Response publish_marketplace_blueprint(publish_marketplace_blueprint_request, x_omnismith_project_id=x_omnismith_project_id)
 
 Publish or update a marketplace blueprint
 
-Publishes a new blueprint to the public marketplace or updates an existing blueprint owned by the authenticated user. Snapshots selected templates, attributes, and optional sample entities into an exportable blueprint package with title, description, and searchable keywords.
+Publishes a new blueprint to the public marketplace or updates an existing blueprint owned by the authenticated user. Snapshots selected templates, their attributes and list items, and their enabled rules and actions into an exportable blueprint package with title, description, and searchable keywords.
 
 ### Example
 
@@ -344,10 +347,11 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = omnismith_sdk.MarketplaceApi(api_client)
     publish_marketplace_blueprint_request = omnismith_sdk.PublishMarketplaceBlueprintRequest() # PublishMarketplaceBlueprintRequest | 
+    x_omnismith_project_id = UUID('018b2f1b-7c3a-7d2e-8f1a-2b3c4d5e6f7d') # UUID | The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential's `projects` claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code `stale_project_grant`; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 `no_project_selected`. Two clients holding the same credential may send different values at the same time. (optional)
 
     try:
         # Publish or update a marketplace blueprint
-        api_response = api_instance.publish_marketplace_blueprint(publish_marketplace_blueprint_request)
+        api_response = api_instance.publish_marketplace_blueprint(publish_marketplace_blueprint_request, x_omnismith_project_id=x_omnismith_project_id)
         print("The response of MarketplaceApi->publish_marketplace_blueprint:\n")
         pprint(api_response)
     except Exception as e:
@@ -362,6 +366,7 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **publish_marketplace_blueprint_request** | [**PublishMarketplaceBlueprintRequest**](PublishMarketplaceBlueprintRequest.md)|  | 
+ **x_omnismith_project_id** | **UUID**| The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential&#39;s &#x60;projects&#x60; claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code &#x60;stale_project_grant&#x60;; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 &#x60;no_project_selected&#x60;. Two clients holding the same credential may send different values at the same time. | [optional] 
 
 ### Return type
 
@@ -385,6 +390,7 @@ Name | Type | Description  | Notes
 **401** | Unauthorized |  -  |
 **403** | Forbidden - Not the owner of the blueprint |  -  |
 **422** | Validation Error |  -  |
+**409** | No project is selected. The caller is authenticated but the request is tenant-scoped, so a project must be selected before it can be answered. The response body carries &#x60;\&quot;code\&quot;: \&quot;no_project_selected\&quot;&#x60;, which clients branch on to offer a project picker rather than an access-denied message. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

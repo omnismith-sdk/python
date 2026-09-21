@@ -14,6 +14,8 @@ if __import__("typing").TYPE_CHECKING:
     from omnismith_sdk.api.dashboard_blocks_api import DashboardBlocksApi
     from omnismith_sdk.api.dashboards_api import DashboardsApi
     from omnismith_sdk.api.entity_api import EntityApi
+    from omnismith_sdk.api.entity_action_api import EntityActionApi
+    from omnismith_sdk.api.entity_rule_api import EntityRuleApi
     from omnismith_sdk.api.feedback_api import FeedbackApi
     from omnismith_sdk.api.file_attachment_api import FileAttachmentApi
     from omnismith_sdk.api.marketplace_api import MarketplaceApi
@@ -44,6 +46,8 @@ from omnismith_sdk.api.billing_api import BillingApi
 from omnismith_sdk.api.dashboard_blocks_api import DashboardBlocksApi
 from omnismith_sdk.api.dashboards_api import DashboardsApi
 from omnismith_sdk.api.entity_api import EntityApi
+from omnismith_sdk.api.entity_action_api import EntityActionApi
+from omnismith_sdk.api.entity_rule_api import EntityRuleApi
 from omnismith_sdk.api.feedback_api import FeedbackApi
 from omnismith_sdk.api.file_attachment_api import FileAttachmentApi
 from omnismith_sdk.api.marketplace_api import MarketplaceApi

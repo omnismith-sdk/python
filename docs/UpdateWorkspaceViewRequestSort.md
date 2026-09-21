@@ -6,7 +6,7 @@ Updated sort configuration defining target attribute and direction
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**active** | **str** | Attribute key or column to sort by | [optional] 
+**active** | **str** | Attribute key (UUID or slug) or system column to sort by | [optional] 
 **direction** | **str** | Sort direction | [optional] 
 
 ## Example

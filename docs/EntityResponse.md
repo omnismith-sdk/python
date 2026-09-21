@@ -11,7 +11,10 @@ Name | Type | Description | Notes
 **template_slug** | **str** | Human-readable slug of the template schema | [optional] 
 **created_at** | **datetime** | Record creation timestamp in ISO 8601 format | [optional] 
 **updated_at** | **datetime** | Last modification timestamp in ISO 8601 format | [optional] 
-**attribute_values** | [**Dict[str, EntityAttributeValue]**](EntityAttributeValue.md) | Dictionary of attribute values keyed by attribute UUID or attribute slug (controlled by the attribute_key query parameter) | [optional] 
+**attribute_values** | [**EntityResponseAttributeValues**](EntityResponseAttributeValues.md) |  | [optional] 
+**list_item_ids** | **Dict[str, UUID]** | Compact mode only: list option ids behind the labels shown in &#x60;attribute_values&#x60;, keyed like &#x60;attribute_values&#x60;. Use these ids when writing the attribute or filtering by it — writes and filters take ids, not labels. Absent when &#x60;verbose&#x3D;true&#x60; (the items carry &#x60;value&#x60;). | [optional] 
+**reference_entity_ids** | **Dict[str, UUID]** | Compact mode only: referenced entity ids behind the labels shown in &#x60;attribute_values&#x60;, keyed like &#x60;attribute_values&#x60;. Pass one to &#x60;GET /entities/{id}&#x60; to load the referenced record, or use it when writing or filtering the attribute. Absent when &#x60;verbose&#x3D;true&#x60;. | [optional] 
+**file_ids** | **Dict[str, UUID]** | Compact mode only: file attachment ids behind the filenames shown in &#x60;attribute_values&#x60;, keyed like &#x60;attribute_values&#x60;. Absent when &#x60;verbose&#x3D;true&#x60;. | [optional] 
 
 ## Example
 

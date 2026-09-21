@@ -1,6 +1,6 @@
 # ApproveOAuthAuthorizationRequest
 
-Submits user consent approval for an authorized OAuth client and selected project workspace.
+Submits user consent approval for an authorized OAuth client and the set of projects it may reach.
 
 ## Properties
 
@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **client_id** | **str** | Client identifier | 
 **redirect_uri** | **str** | Redirection URI to return the authorization code | 
-**project_id** | **str** | Selected Project UUID that client will be authorized to access | 
+**project_ids** | **List[UUID]** | Every project UUID the client is granted. The first is the project the credential acts on until it selects another, and the set bounds what it can ever reach. There is no wildcard: a grant names its projects explicitly, so it cannot silently widen as the user creates more. | 
 **code_challenge** | **str** | PKCE code challenge string (RFC 7636) | 
 **code_challenge_method** | **str** | PKCE challenge transformation method | [optional] 
 **scopes** | **List[str]** | Authorized scope strings | [optional] 

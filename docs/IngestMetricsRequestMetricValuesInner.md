@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **attribute_id** | **UUID** | Target metric attribute UUID (provide either attribute_id or attribute_slug) | [optional] 
 **attribute_slug** | **str** | Target metric attribute slug (provide either attribute_id or attribute_slug) | [optional] 
 **value** | **str** | Numeric observation value formatted as a string | [optional] 
-**updated_at** | **datetime** | Observation timestamp in ISO 8601 or YYYY-MM-DD HH:MM:SS format. Defaults to current UTC time when omitted. | [optional] 
+**updated_at** | **datetime** | Observation timestamp: RFC 3339 with an explicit offset (&#x60;Z&#x60; or &#x60;±HH:MM&#x60;). Defaults to now when omitted. | [optional] 
 
 ## Example
 

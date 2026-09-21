@@ -4,22 +4,21 @@ All URIs are relative to *https://api.omnismith.io/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_my_permissions**](AuthApi.md#get_my_permissions) | **GET** /auth/me/permissions | Get current user role permissions
+[**get_my_permissions**](AuthApi.md#get_my_permissions) | **GET** /auth/me/permissions | Discover authenticated caller permissions and capabilities
 [**google_login**](AuthApi.md#google_login) | **POST** /auth/google-login | Authenticate or register with Google Sign-In
 [**google_login_redirect**](AuthApi.md#google_login_redirect) | **POST** /auth/google-login-redirect | Google OAuth callback redirect handler
 [**list_sessions**](AuthApi.md#list_sessions) | **GET** /auth/sessions | List active and historical user sessions
 [**login**](AuthApi.md#login) | **POST** /auth/login | Authenticate user with email and password
 [**refresh_token**](AuthApi.md#refresh_token) | **POST** /auth/refresh | Rotate refresh token and issue new access token
 [**revoke_session**](AuthApi.md#revoke_session) | **DELETE** /auth/sessions/{id} | Revoke an active login session
-[**switch_project**](AuthApi.md#switch_project) | **POST** /auth/switch-project | Switch active project context
 
 
 # **get_my_permissions**
-> GetMyPermissions200Response get_my_permissions()
+> GetMyPermissions200Response get_my_permissions(x_omnismith_project_id=x_omnismith_project_id)
 
-Get current user role permissions
+Discover authenticated caller permissions and capabilities
 
-Returns the complete list of permission strings granted to the authenticated user under their active project role. Returns `["*"]` for project owners who possess full root administrative privileges, or an array of granular permission keys (e.g. `entity.view`, `template.create`, `billing.view_usage`) for custom assigned roles. Returns an empty array if no role is currently assigned.
+Returns the complete list of permission keys granted to the authenticated user or agent under their active project role. Call this endpoint before planning or executing multi-step schema modifications, role administration, or entity mutations to verify current operational capabilities. Returns `["*"]` for project owners who possess root administrative privileges, or an array of granular permission keys (e.g. `entity.view`, `entity.create`, `template.create`, `billing.view_usage`) for assigned roles. Returns an empty array if no role is currently assigned.
 
 ### Example
 
@@ -51,10 +50,11 @@ configuration = omnismith_sdk.Configuration(
 with omnismith_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = omnismith_sdk.AuthApi(api_client)
+    x_omnismith_project_id = UUID('018b2f1b-7c3a-7d2e-8f1a-2b3c4d5e6f7d') # UUID | The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential's `projects` claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code `stale_project_grant`; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 `no_project_selected`. Two clients holding the same credential may send different values at the same time. (optional)
 
     try:
-        # Get current user role permissions
-        api_response = api_instance.get_my_permissions()
+        # Discover authenticated caller permissions and capabilities
+        api_response = api_instance.get_my_permissions(x_omnismith_project_id=x_omnismith_project_id)
         print("The response of AuthApi->get_my_permissions:\n")
         pprint(api_response)
     except Exception as e:
@@ -65,7 +65,10 @@ with omnismith_sdk.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **x_omnismith_project_id** | **UUID**| The project this call acts on. A credential proves identity and grants a set of projects; it never selects one, so every tenant-scoped call names its target here. The value must be one of the projects in the credential&#39;s &#x60;projects&#x60; claim and must still be reachable — a project the caller is not a member of, or one that has been deleted, is rejected with 403 rather than silently ignored. A project the caller *is* a member of but which the credential predates is also rejected with 403, carrying the code &#x60;stale_project_grant&#x60;; that one is answered by refreshing the credential once and retrying, and is the only 403 here worth retrying. Omitting the header is not an error: the caller is simply acting with no project selected, and a tenant-scoped operation then answers 409 &#x60;no_project_selected&#x60;. Two clients holding the same credential may send different values at the same time. | [optional] 
 
 ### Return type
 
@@ -383,7 +386,7 @@ No authorization required
 
 Rotate refresh token and issue new access token
 
-Exchanges a valid refresh token for a newly issued JWT access token and a rotated refresh token. Implements strict single-use refresh token rotation: the supplied refresh token is permanently invalidated upon successful exchange. If an expired, already-rotated, or revoked token is presented, the request is rejected.
+Exchanges a valid refresh token for a newly issued JWT access token and a rotated refresh token. Implements strict single-use refresh token rotation: the supplied refresh token is permanently invalidated upon successful exchange. If an expired, already-rotated, or revoked token is presented, the request is rejected. The refresh token alone authenticates the call; no `Authorization` header is required, and one sent alongside is ignored.
 
 ### Example
 
@@ -525,90 +528,6 @@ void (empty response body)
 **400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **404** | Not Found |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **switch_project**
-> SwitchProject200Response switch_project(switch_project_request)
-
-Switch active project context
-
-Switches the active multi-tenancy project context for the authenticated user session. Verifies that the user is an active member or owner of the target project, then issues a new JWT access token and refresh token containing updated claims for the selected project_id and the user's assigned role.
-
-### Example
-
-* Bearer (JWT) Authentication (bearerAuth):
-
-```python
-import omnismith_sdk
-from omnismith_sdk.models.switch_project200_response import SwitchProject200Response
-from omnismith_sdk.models.switch_project_request import SwitchProjectRequest
-from omnismith_sdk.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to https://api.omnismith.io/v1
-# See configuration.py for a list of all supported configuration parameters.
-configuration = omnismith_sdk.Configuration(
-    host = "https://api.omnismith.io/v1"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): bearerAuth
-configuration = omnismith_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with omnismith_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = omnismith_sdk.AuthApi(api_client)
-    switch_project_request = omnismith_sdk.SwitchProjectRequest() # SwitchProjectRequest | 
-
-    try:
-        # Switch active project context
-        api_response = api_instance.switch_project(switch_project_request)
-        print("The response of AuthApi->switch_project:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling AuthApi->switch_project: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **switch_project_request** | [**SwitchProjectRequest**](SwitchProjectRequest.md)|  | 
-
-### Return type
-
-[**SwitchProject200Response**](SwitchProject200Response.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Project switched successfully with issued project-scoped JWT access and refresh tokens |  -  |
-**400** | Bad Request |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**422** | Validation Error |  -  |
-**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

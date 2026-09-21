@@ -6,14 +6,14 @@ Payload for adding a new view / pane to a workspace
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**template_id** | **UUID** | Target template ID defining entity schema bound to this view pane | 
-**name** | **str** | Display label for the view pane tab or header | 
-**filters** | **List[object]** | Dynamic filtering rules applied to entities rendered in this view pane | [optional] 
+**template_id** | **str** | Target template UUID or slug defining entity schema bound to this view pane | 
+**name** | **str** | Display label for the view pane tab or header (e.g. \&quot;Telegram Channel Hub\&quot;, \&quot;All Pipeline\&quot;) | 
+**filters** | **List[object]** | Dynamic filtering rules applied to entities rendered in this view pane. Attribute field can be specified by attribute UUID or attribute slug (e.g. [{\&quot;field\&quot;: \&quot;platform\&quot;, \&quot;operator\&quot;: \&quot;eq\&quot;, \&quot;value\&quot;: \&quot;&lt;list_item_id_or_slug&gt;\&quot;, \&quot;is_active\&quot;: true}]). | [optional] 
 **search_string** | **str** | Initial search query string applied to entities in this view | [optional] 
 **search_mode** | **str** | Search execution mode (keyword text search or semantic vector similarity search) | [optional] [default to 'keyword']
 **sort** | [**CreateWorkspaceViewRequestSort**](CreateWorkspaceViewRequestSort.md) |  | [optional] 
 **display_mode** | **str** | Presentation layout type for entity records (table or card grid) | [optional] [default to 'table']
-**displayed_columns** | **List[str]** | List of attribute slugs or UUIDs to display as columns in table mode | [optional] 
+**displayed_columns** | **List[str]** | List of attribute UUIDs or slugs to display as columns in table mode (e.g. [\&quot;title\&quot;, \&quot;platform\&quot;, \&quot;status\&quot;, \&quot;scheduled_date\&quot;]) | [optional] 
 **pane_order** | **int** | Display sequence index of this pane within the workspace layout | [optional] 
 
 ## Example

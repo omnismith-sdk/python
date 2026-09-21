@@ -6,9 +6,10 @@ Event trigger defining the lifecycle condition that fires this automation
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**type** | **str** | Trigger event type | 
+**type** | **str** | Trigger event type. &#x60;on_action_executed&#x60; fires when the named entity action runs on a record, whether or not the write changed anything. | 
 **template_id** | **UUID** | Template UUID to listen for events on | [optional] 
 **attribute_id** | **UUID** | Attribute UUID for attribute change triggers | [optional] 
+**action_id** | **UUID** | Entity action UUID; required for &#x60;on_action_executed&#x60;, must be null otherwise | [optional] 
 
 ## Example
 

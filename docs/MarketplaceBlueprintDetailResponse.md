@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **title** | **str** | Blueprint display title | [optional] 
 **description** | **str** | Detailed markdown description of the blueprint | [optional] 
 **metadata** | [**MarketplaceBlueprintDetailResponseMetadata**](MarketplaceBlueprintDetailResponseMetadata.md) |  | [optional] 
-**blueprint** | **object** | JSONB serialized blueprint payload containing templates, attributes, and optional demo entities | [optional] 
+**blueprint** | **object** | JSONB serialized blueprint payload containing templates, attributes, list items, the rules and actions of those templates, and optional demo entities | [optional] 
 **is_featured** | **bool** | Whether the blueprint is featured in the marketplace | [optional] 
 **created_at** | **datetime** | Publish timestamp | [optional] 
 **updated_at** | **datetime** | Last update timestamp | [optional] 

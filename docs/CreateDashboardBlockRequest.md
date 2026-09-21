@@ -6,7 +6,7 @@ Payload for adding a visualization widget to a dashboard canvas. Requires a bloc
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**type** | **str** | Block visualization type: stat (single KPI counter of matching entities), chart (time-series telemetry multi-line graph aggregating metric values over time), gauge (radial threshold meter displaying metric aggregate within bounds), list (filtered and sorted entity data table). | 
+**type** | **str** | Block visualization type: stat (single KPI counter of matching entities), chart (time-series telemetry multi-line graph aggregating metric values over time), gauge (radial threshold meter displaying metric aggregate within bounds), list (filtered and sorted entity data table), aggregate (entities grouped by one or more fields and reduced per group — a \&quot;count by status\&quot; or \&quot;sum of MRR by tier\&quot; table). | 
 **title** | **str** | Header title displayed on the dashboard widget card (e.g., \&quot;CPU Utilization — Time Series\&quot;, \&quot;Total Servers\&quot;, \&quot;Peak CPU Utilization\&quot;). | 
 **config** | [**CreateDashboardBlockRequestConfig**](CreateDashboardBlockRequestConfig.md) |  | [optional] 
 
