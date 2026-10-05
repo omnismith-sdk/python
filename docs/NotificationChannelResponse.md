@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **id** | **UUID** | Unique notification channel UUID | [optional] 
 **type** | **str** | Channel delivery type (telegram, webhook, push) | [optional] 
 **name** | **str** | User-friendly display name of the notification channel | [optional] 
+**rate_limit_per_minute** | **int** | Maximum messages the channel sends per clock minute, across all automations and records | [optional] 
 **credentials** | **Dict[str, str]** | Sanitized or configured integration credentials for the channel | [optional] 
 **created_at** | **datetime** | Creation timestamp | [optional] 
 **updated_at** | **datetime** | Last update timestamp | [optional] 

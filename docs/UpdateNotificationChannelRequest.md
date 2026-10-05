@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **str** | Updated display name of the notification channel | [optional] 
 **credentials** | [**UpdateNotificationChannelRequestCredentials**](UpdateNotificationChannelRequestCredentials.md) |  | [optional] 
+**rate_limit_per_minute** | **int** | Maximum messages the channel sends per clock minute, across all automations and records; sends over it fail the action (recorded in the execution history) instead of reaching the destination. Omit to keep the current limit. | [optional] 
 
 ## Example
 
