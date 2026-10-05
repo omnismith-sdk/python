@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **template_id** | **UUID** | Template UUID | 
 **category** | **str** | Template category for UI sidebar grouping | [optional] 
 **groups** | [**List[TemplateGroupResponse]**](TemplateGroupResponse.md) | Ordered attribute groups for organizing fields into form sections | 
+**pinned_metric_ids** | **List[UUID]** | Ordered metric attribute UUIDs summarised on the record details view; empty means the first metrics of the template | [optional] 
 
 ## Example
 

@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**var_field** | **str** | Attribute id or a standard entity field (id, created_at, updated_at) | 
+**var_field** | **str** | Attribute id or a standard entity field (id, created_at, updated_at, external_key) | 
 **operator** | **str** |  | 
 **value** | **str** |  | [optional] 
 

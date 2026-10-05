@@ -117,8 +117,8 @@ A list of groups; clauses inside a group are AND-ed, groups are OR-ed. `[[a, b]]
   [{"field": "priority", "operator": "eq", "value": "018b…0007"}]
 ]
 ```
-- **`field`**: attribute slug or UUID, a standard field (`id`, `created_at`, `updated_at`), or a one-hop path `<reference>.<attribute>` that filters on an attribute of the referenced record (e.g. `customer.tier`). One hop only.
-- **`operator`** and **`value`**: `eq`, `neq`, `gt`, `lt`, `like` (case-insensitive substring), `not-like` take a string; `in`, `not-in` take a non-empty list of strings; `between` takes `[lower, upper]` (inclusive; number, date, datetime attributes and `created_at` / `updated_at`); `empty`, `not-empty` take no value.
+- **`field`**: attribute slug or UUID, a standard field (`id`, `created_at`, `updated_at`, `external_key`), or a one-hop path `<reference>.<attribute>` that filters on an attribute of the referenced record (e.g. `customer.tier`). One hop only.
+- **`operator`** and **`value`**: `eq`, `neq`, `gt`, `lt`, `like` (case-insensitive substring), `not-like` take a string; `in`, `not-in` take a non-empty list of strings; `between` takes `[lower, upper]` (inclusive; number, date, datetime attributes and `created_at` / `updated_at`); `empty`, `not-empty` take no value. `external_key` accepts every operator except `gt`, `lt` and `between`.
 - List and reference attributes compare the stored id (from `list_item_ids` / `reference_entity_ids` or the schema), never the label.
 - Unknown fields, operators that do not fit the field, malformed values and paths that do not traverse a reference are refused with 400 naming the valid fields; a path into a template the caller may not view is 403.
 

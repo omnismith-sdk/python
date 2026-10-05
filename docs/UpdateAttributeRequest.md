@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **description** | **str** | Updated description of the attribute. | [optional] 
 **reference_config** | [**PatchAttributeRequestReferenceConfig**](PatchAttributeRequestReferenceConfig.md) |  | [optional] 
 **data_type** | **int** | Target data type for lossless transition on Dimension (0) attributes: Number(1)-&gt;String(0), Boolean(2)-&gt;String(0), Date(4)&lt;-&gt;Datetime(3), Date/Datetime-&gt;String(0), String(0)&lt;-&gt;Markdown(7). | [optional] 
-**slug** | **str** | Updated unique slug identifier within the project. | [optional] 
+**slug** | **str** | Updated unique slug identifier within the project. Standard record field names (id, template_id, template_slug, created_at, updated_at, deleted_at, external_key) are reserved and rejected with 422. | [optional] 
 
 ## Example
 

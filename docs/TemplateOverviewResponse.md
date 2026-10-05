@@ -1,6 +1,6 @@
 # TemplateOverviewResponse
 
-Template schema definition with bound attributes, validation rules, and executable actions.
+Template schema definition with bound attributes, validation rules, executable actions, and the inbound endpoints that feed it.
 
 ## Properties
 
@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **attributes** | [**List[TemplateAttributeOverviewResponse]**](TemplateAttributeOverviewResponse.md) | Ordered list of attributes belonging to this template | 
 **rules** | [**List[EntityRuleOverviewResponse]**](EntityRuleOverviewResponse.md) | Business validation rules enforced for this template | 
 **actions** | [**List[EntityActionOverviewResponse]**](EntityActionOverviewResponse.md) | Executable workflow actions and transitions for records of this template | 
+**inbound_endpoints** | [**List[InboundEndpointOverviewResponse]**](InboundEndpointOverviewResponse.md) | Public URLs through which outside systems write records into this template. Empty when the caller cannot view inbound endpoints. | 
 
 ## Example
 

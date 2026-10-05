@@ -7,9 +7,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **str** | Updated display name of the automation rule | [optional] 
 **description** | **str** | Updated description of the automation rule | [optional] 
-**trigger** | [**UpdateAutomationRequestTrigger**](UpdateAutomationRequestTrigger.md) |  | [optional] 
+**trigger** | [**AutomationTrigger**](AutomationTrigger.md) |  | [optional] 
 **conditions** | [**List[UpdateAutomationRequestConditionsInner]**](UpdateAutomationRequestConditionsInner.md) | Updated array of condition criteria evaluated against entity state | [optional] 
-**actions** | [**List[UpdateAutomationRequestActionsInner]**](UpdateAutomationRequestActionsInner.md) | Updated list of dispatch actions | [optional] 
+**actions** | [**List[AutomationAction]**](AutomationAction.md) | Updated list of dispatch actions | [optional] 
 **cooldown_seconds** | **int** | Updated cooldown throttle duration in seconds | [optional] 
 
 ## Example

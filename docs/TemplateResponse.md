@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **attribute_ids** | **List[UUID]** | Flat list of associated attribute UUIDs | [optional] 
 **attributes** | [**List[TemplateResponseAttributesInner]**](TemplateResponseAttributesInner.md) | Template attributes with their per-template default values. | [optional] 
 **groups** | [**List[TemplateGroupResponse]**](TemplateGroupResponse.md) | Ordered attribute groups for organizing template fields into visual UI sections. | [optional] 
+**pinned_metric_ids** | **List[UUID]** | Ordered metric attribute UUIDs summarised on the record details view. Empty means the first metrics of the template are shown. | [optional] 
 **created_at** | **datetime** | Creation timestamp | [optional] 
 **updated_at** | **datetime** | Last update timestamp | [optional] 
 **deleted_at** | **datetime** | Deletion timestamp if soft-deleted | [optional] 

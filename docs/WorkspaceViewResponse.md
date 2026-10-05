@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **display_mode** | **str** | Presentation layout mode | [optional] 
 **displayed_columns** | **List[str]** | List of displayed attribute slugs or UUIDs for table view | [optional] 
 **pane_order** | **int** | Display sequence index of this pane within the workspace layout | [optional] 
+**group_by** | **str** | Attribute slug or UUID the records are grouped into sections by; null when the view is a flat list. \&quot;__restricted__\&quot; when the field is hidden from the caller&#39;s role. | [optional] 
 **created_at** | **datetime** | ISO 8601 creation timestamp | [optional] 
 **updated_at** | **datetime** | ISO 8601 last update timestamp | [optional] 
 

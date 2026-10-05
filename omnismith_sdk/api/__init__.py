@@ -18,6 +18,7 @@ if __import__("typing").TYPE_CHECKING:
     from omnismith_sdk.api.entity_rule_api import EntityRuleApi
     from omnismith_sdk.api.feedback_api import FeedbackApi
     from omnismith_sdk.api.file_attachment_api import FileAttachmentApi
+    from omnismith_sdk.api.inbound_api import InboundApi
     from omnismith_sdk.api.marketplace_api import MarketplaceApi
     from omnismith_sdk.api.o_auth_api import OAuthApi
     from omnismith_sdk.api.projects_api import ProjectsApi
@@ -50,6 +51,7 @@ from omnismith_sdk.api.entity_action_api import EntityActionApi
 from omnismith_sdk.api.entity_rule_api import EntityRuleApi
 from omnismith_sdk.api.feedback_api import FeedbackApi
 from omnismith_sdk.api.file_attachment_api import FileAttachmentApi
+from omnismith_sdk.api.inbound_api import InboundApi
 from omnismith_sdk.api.marketplace_api import MarketplaceApi
 from omnismith_sdk.api.o_auth_api import OAuthApi
 from omnismith_sdk.api.projects_api import ProjectsApi

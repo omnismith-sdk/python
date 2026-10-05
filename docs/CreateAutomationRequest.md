@@ -7,9 +7,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **str** | Descriptive display name of the automation rule | 
 **description** | **str** | Optional summary describing the purpose and behavior of the automation | [optional] 
-**trigger** | [**CreateAutomationRequestTrigger**](CreateAutomationRequestTrigger.md) |  | 
+**trigger** | [**AutomationTrigger**](AutomationTrigger.md) |  | 
 **conditions** | [**List[CreateAutomationRequestConditionsInner]**](CreateAutomationRequestConditionsInner.md) | Condition expressions that must all evaluate to true against the entity for actions to run | 
-**actions** | [**List[CreateAutomationRequestActionsInner]**](CreateAutomationRequestActionsInner.md) | List of dispatch actions to execute when trigger and conditions are met | 
+**actions** | [**List[AutomationAction]**](AutomationAction.md) | List of dispatch actions to execute when trigger and conditions are met | 
 **cooldown_seconds** | **int** | Minimum throttle cooldown window in seconds between firings for the same entity | [optional] 
 
 ## Example

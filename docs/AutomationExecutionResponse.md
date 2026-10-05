@@ -7,8 +7,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **UUID** | Unique execution record UUID | [optional] 
 **automation_id** | **UUID** | Associated automation rule UUID | [optional] 
-**entity_id** | **UUID** | UUID of the entity that triggered the execution | [optional] 
+**entity_id** | **UUID** | UUID of the entity the execution ran for; null for a run that has no record (a schedule without a template) | [optional] 
 **triggered_at** | **datetime** | Timestamp when the trigger event was evaluated | [optional] 
+**due_at** | **datetime** | When a time-based trigger was due; null for event-based triggers. &#x60;triggered_at - due_at&#x60; is how late the run fired. | [optional] 
 **completed_at** | **datetime** | Timestamp when all actions completed execution | [optional] 
 **status** | **str** | Overall execution outcome status | [optional] 
 **action_results** | [**List[AutomationExecutionResponseActionResultsInner]**](AutomationExecutionResponseActionResultsInner.md) | Individual action execution outcomes | [optional] 

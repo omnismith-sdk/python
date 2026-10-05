@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **op** | **str** | The operation that was attempted. | [optional] 
 **id** | **UUID** | Entity the operation acted on. For a successful create this is the newly generated identifier. Null when a create failed before an identifier existed. | [optional] 
 **status** | **str** | Outcome of this operation. | [optional] 
+**created** | **bool** | For a successful upsert: true when it created the record, false when it updated the one holding the key. Null for other operations and for failures. | [optional] 
 **error** | [**ErrorResponse**](ErrorResponse.md) |  | [optional] 
 
 ## Example

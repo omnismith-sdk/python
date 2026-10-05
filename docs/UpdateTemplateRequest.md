@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **attributes** | [**List[TemplateAttributeInput]**](TemplateAttributeInput.md) | Structured template attributes with optional per-template default values. Preferred over flat attribute_ids. | [optional] 
 **groups** | [**List[TemplateGroupInput]**](TemplateGroupInput.md) | Ordered attribute groups for organizing template fields into visual UI sections. | [optional] 
+**pinned_metric_ids** | **List[str]** | Ordered list of metric attributes (UUIDs or slugs) summarised on the record details view, at most 8. Each must be a metric attribute of this template. Omit to keep the current pins; send an empty array to clear them. | [optional] 
 **name** | **str** | Updated human-readable name of the template. | 
 **description** | **str** | Updated description of the template. | [optional] 
 **category** | **str** | Updated category tag for grouping in navigation. | [optional] 
